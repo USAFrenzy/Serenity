@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Serenity", "Serenity.vcxproj", "{CA6CFE6D-9359-429F-8D03-16A5982C5D0F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sandbox", "Sandbox\Sandbox.vcxproj", "{C51B0D91-192D-4C44-93BC-7617E0F5CC0C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CA6CFE6D-9359-429F-8D03-16A5982C5D0F} = {CA6CFE6D-9359-429F-8D03-16A5982C5D0F}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA6CFE6D-9359-429F-8D03-16A5982C5D0F}.Debug|x64.ActiveCfg = Debug|x64
+		{CA6CFE6D-9359-429F-8D03-16A5982C5D0F}.Debug|x64.Build.0 = Debug|x64
+		{CA6CFE6D-9359-429F-8D03-16A5982C5D0F}.Release|x64.ActiveCfg = Release|x64
+		{CA6CFE6D-9359-429F-8D03-16A5982C5D0F}.Release|x64.Build.0 = Release|x64
+		{C51B0D91-192D-4C44-93BC-7617E0F5CC0C}.Debug|x64.ActiveCfg = Debug|x64
+		{C51B0D91-192D-4C44-93BC-7617E0F5CC0C}.Debug|x64.Build.0 = Debug|x64
+		{C51B0D91-192D-4C44-93BC-7617E0F5CC0C}.Release|x64.ActiveCfg = Release|x64
+		{C51B0D91-192D-4C44-93BC-7617E0F5CC0C}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {75827209-60F4-4D2D-BB83-A6C70099DE41}
+	EndGlobalSection
+EndGlobal
