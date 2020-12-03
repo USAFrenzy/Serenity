@@ -66,15 +66,21 @@ int main( )
 	serenity::Logger msgLog("Message Logger");
 	msgLog.Init("MessageLog.txt", serenity::details::logger::LogOutput::file);
 	msgLog.Open( ); /*****************************************************************************/
+	msgLog.Log("**********************************************************************************");
+	float simulatedWork = 1;
+	float simulatedEnd  = 225;
+	ProgressBar logProgress;
+	logProgress.SetStatus("Writing To MessageLog.txt");
 
-// ToDo: Not Really Necessary Per Say, But Make Percentage Function Multi-Threadable
-//?      Doing This Would Also Be Practice For Making The Logger Multi-Threaded
-	int limit = 9000;
-	//std::thread progress(log.percentage(limit));
-	for(int i = 1; i <= limit; i++) {
-		msgLog.Log("This Is A Message To The Logger: Message " + std::to_string(i));
-		std::cout << log.percentage(limit);
+	for(simulatedWork; simulatedWork <= simulatedEnd; ++simulatedWork) {
+		logProgress.UpdateProgress(simulatedWork, simulatedEnd);
+		std::this_thread::sleep_for(std::chrono::milliseconds(50));
+		msgLog.Log("Simulated Work Message " + std::to_string(static_cast<int>(simulatedWork)));
 	}
+	ProgressBarManager logManager;
+	std::cout << "**********************************************************************************\n";
+	std::cout << logManager.Size( ) << std::endl;
+
 	msgLog.Log("**********************************************************************************");
 
 	msgLog.Close( ); /****************************************************************************/

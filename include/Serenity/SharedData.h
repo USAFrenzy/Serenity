@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <map>
+#include <Serenity/ProgressManager.h>
 #include <string>
 
 constexpr int SERENITY_TRACE    = 0;

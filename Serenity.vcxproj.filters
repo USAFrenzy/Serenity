@@ -22,5 +22,8 @@
     <ClInclude Include="include\Serenity\SharedData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Serenity\ProgressManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

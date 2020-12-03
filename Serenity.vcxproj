@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Serenity\Logger.h" />
+    <ClInclude Include="include\Serenity\ProgressManager.h" />
     <ClInclude Include="include\Serenity\SharedData.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
