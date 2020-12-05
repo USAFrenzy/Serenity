@@ -2,6 +2,7 @@
 #include <iostream>
 #include <Serenity/Logger.h>
 #include <thread>
+#include <Serenity/Indicators/ProgressManager.h>
 
 //! Note: Take This .clang-format File And Upload For Use In Projects...Ironed
 //! Out The Kinks
@@ -68,18 +69,33 @@ int main( )
 	msgLog.Open( ); /*****************************************************************************/
 	msgLog.Log("**********************************************************************************");
 	float simulatedWork = 1;
-	float simulatedEnd  = 225;
-	ProgressBar logProgress;
-	logProgress.SetStatus("Writing To MessageLog.txt");
+	float simulatedEnd  = 1500;
+	serenity::ProgressBar logProgress, log2, log3;
+	logProgress.SetStatus("Writing First For Loop To MessageLog.txt");
+	log2.SetStatus("Writing Second For Loop To MessageLog.txt");
+	log3.SetStatus("Writing Final For Loop To MessageLog.txt");
 
+	std::cout << "First Version:\n";
 	for(simulatedWork; simulatedWork <= simulatedEnd; ++simulatedWork) {
 		logProgress.UpdateProgress(simulatedWork, simulatedEnd);
 		std::this_thread::sleep_for(std::chrono::milliseconds(50));
-		msgLog.Log("Simulated Work Message " + std::to_string(static_cast<int>(simulatedWork)));
+		msgLog.Log("Simulated Work Message Version 1: " + std::to_string(static_cast<int>(simulatedWork)));
 	}
-	ProgressBarManager logManager;
-	std::cout << "**********************************************************************************\n";
-	std::cout << logManager.Size( ) << std::endl;
+	std::cout << "\nSecond Version:\n";
+	simulatedEnd = 750;
+	for(simulatedWork = 1; simulatedWork <= simulatedEnd; ++simulatedWork) {
+		log2.UpdateProgress(simulatedWork, simulatedEnd);
+		std::this_thread::sleep_for(std::chrono::milliseconds(50));
+		msgLog.Log("Simulated Work Message Version 2: " + std::to_string(static_cast<int>(simulatedWork)));
+	}
+	std::cout << "\nThird Version:\n";
+	simulatedEnd = 100;
+	for(simulatedWork = 1; simulatedWork <= simulatedEnd; ++simulatedWork) {
+		log3.UpdateProgress(simulatedWork, simulatedEnd);
+		std::this_thread::sleep_for(std::chrono::milliseconds(50));
+		msgLog.Log("Simulated Work Message Version 3: " + std::to_string(static_cast<int>(simulatedWork)));
+	}
+	std::cout << "\n\n**********************************************************************************\n";
 
 	msgLog.Log("**********************************************************************************");
 
@@ -87,8 +103,8 @@ int main( )
 
 	// This Next One, I Would Like For Debugging Purposes: Print Out That Logger's Info In Full
 	// std::cout << log << std::endl;
-
-	std::cout << "\nFinished Testing Library Header... \n\n";
+	std::cout << "\n\t\t\tFinished Testing Library Header...\n\n";
+	std::cout << "\n**********************************************************************************\n";
 	system("Pause");
 #endif // Testing
 }

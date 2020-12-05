@@ -91,10 +91,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Serenity\src\Logger.cpp" />
+    <ClCompile Include="Serenity\src\ProgressBar.cpp" />
+    <ClCompile Include="Serenity\src\ProgressManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Serenity\Indicators\ProgressBar.h" />
+    <ClInclude Include="include\Serenity\Indicators\ProgressManager.h" />
     <ClInclude Include="include\Serenity\Logger.h" />
-    <ClInclude Include="include\Serenity\ProgressManager.h" />
     <ClInclude Include="include\Serenity\SharedData.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

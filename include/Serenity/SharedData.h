@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <map>
-#include <Serenity/ProgressManager.h>
 #include <string>
 
 constexpr int SERENITY_TRACE    = 0;
@@ -237,23 +236,6 @@ namespace serenity {
 	  // ****************************************************************************************
 	struct utilities
 	{
-		utilities( ) = default;
-		int percentage(int workload)
-		{
-			int base         = 1;
-			int limit        = workload;
-			int i            = 1;
-			float percentage = (( float ) i / ( float ) limit) * 100;
-			if((i % base) == 0) {
-				std::cout << "\r"
-					  << "Progress: " << i << "/" << limit << " [" << ( int ) percentage
-					  << "]";
-				if(percentage == 100) {
-					std::cout << "\nProcess Finished\n";
-				}
-			}
-			return ( int ) percentage;
-		}
 	}; // struct utilities
 	   // ****************************************************************************************
 } // namespace serenity
