@@ -11,19 +11,25 @@ namespace serenity {
 
 	//? Might be Worth Looking Into Templating Class Named As "ProgressManager" That Will Create And Manage A
 	//? Vector Of Type T And Reference That Vector Through Indices To The Instance Being Observed?
-	class ProgressBarManager : public ProgressBar
+	class ProgressBarManager : private ProgressBar
 	{
-
 	      public:
 		ProgressBarManager( );
 
 		~ProgressBarManager( );
 
-		virtual void RegisterObserver( );		
+		void RegisterObserver(ProgressBar& indicator);
+		void UnregisterObserver( );
 
-		void UpdateProgress(float updateValue, float totalWork, std::ostream& os = std::cout) override;
+		int GetIndex( );
+
+		void SetIndex( );
+
+		//	void virtual UpdateProgress(float updateValue, float totalWork, std::ostream& os = std::cout);
 
 	      private:
+		std::vector<ProgressBar> &m_progressBars{indicator_handle::m_managerHandle};
+		int m_index {0};
 	};
 	// #########################################################################################################
 } // namespace serenity

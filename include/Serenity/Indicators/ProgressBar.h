@@ -2,8 +2,11 @@
 
 #include <iostream>
 #include <mutex> // For ProgressBar Class
+#include <vector>
 
 namespace serenity {
+
+	// ToDo:  Look A ProgressManager.h Note
 
 	//!? FIXME!!!
 	//! Note: Right Now, This Is Suuuppperrr Messy And Unorganized
@@ -15,7 +18,7 @@ namespace serenity {
 	      public:
 		ProgressBar( );
 
-		ProgressBar(ProgressBar&);
+		ProgressBar(ProgressBar& copy);
 
 		~ProgressBar( );
 
@@ -38,6 +41,7 @@ namespace serenity {
 		void FillRemainder(const std::string& symbol);
 
 		void SetStatus(const std::string& statusMessage);
+		static std::vector<ProgressBar> GetHandle( );
 
 	      private:
 		std::mutex m_mutex;
@@ -48,7 +52,8 @@ namespace serenity {
 		float m_progress {0.0f};
 		float m_totalWork {0.0f};
 		// ProgressBar* m_instance;
-		// std::vector<ProgressBar> m_managerHandle { };
 	};
-
+namespace indicator_handle {
+		static std::vector<ProgressBar> m_managerHandle;
+	}
 } // namespace serenity

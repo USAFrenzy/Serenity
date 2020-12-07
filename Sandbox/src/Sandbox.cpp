@@ -1,12 +1,16 @@
 #include <Windows.h> // For Resetting The Console Color For Now
 #include <iostream>
-#include <Serenity/Logger.h>
 #include <thread>
+
+#include <Serenity/Logger.h>
 #include <Serenity/Indicators/ProgressManager.h>
 
 //! Note: Take This .clang-format File And Upload For Use In Projects...Ironed
 //! Out The Kinks
-// This I What I'd Like To Eventually Accomplish Here...
+
+// ToDo:  Look A ProgressManager.h Note
+
+// This Is What I'd Like To Eventually Accomplish Here...
 /*
         Logger log; OR Logger("LoggerName");    
         log.setlevel(LogLevel::lvl); OR [as a global setting] SetLevel(LogLevel::lvl)
@@ -40,8 +44,8 @@ int main( )
 	log.Log("**********************************************************************************");
 
 
-	// ToDo: Fix The Flags And Swap The Mappings For Background vs. Foreground - Fix The Reset Flag In Particular
-	//?                   Possibly Implement Operator Overloading Here For Inc/Dec?
+	// ToDo: Fix The Reset Flag
+	//?      Possibly Implement Operator Overloading Here For Inc/Dec?
 
 	auto handle = GetStdHandle(STD_OUTPUT_HANDLE);
 	log.Log("Testing Message Flag Switches:");
@@ -69,35 +73,22 @@ int main( )
 	msgLog.Open( ); /*****************************************************************************/
 	msgLog.Log("**********************************************************************************");
 	float simulatedWork = 1;
-	float simulatedEnd  = 1500;
-	serenity::ProgressBar logProgress, log2, log3;
-	logProgress.SetStatus("Writing First For Loop To MessageLog.txt");
-	log2.SetStatus("Writing Second For Loop To MessageLog.txt");
-	log3.SetStatus("Writing Final For Loop To MessageLog.txt");
+	float simulatedEnd  = 500;
+	serenity::ProgressBar logProgress;
+	logProgress.SetStatus("Writing For Loop To MessageLog.txt");
+
 
 	std::cout << "First Version:\n";
 	for(simulatedWork; simulatedWork <= simulatedEnd; ++simulatedWork) {
 		logProgress.UpdateProgress(simulatedWork, simulatedEnd);
 		std::this_thread::sleep_for(std::chrono::milliseconds(50));
-		msgLog.Log("Simulated Work Message Version 1: " + std::to_string(static_cast<int>(simulatedWork)));
-	}
-	std::cout << "\nSecond Version:\n";
-	simulatedEnd = 750;
-	for(simulatedWork = 1; simulatedWork <= simulatedEnd; ++simulatedWork) {
-		log2.UpdateProgress(simulatedWork, simulatedEnd);
-		std::this_thread::sleep_for(std::chrono::milliseconds(50));
-		msgLog.Log("Simulated Work Message Version 2: " + std::to_string(static_cast<int>(simulatedWork)));
-	}
-	std::cout << "\nThird Version:\n";
-	simulatedEnd = 100;
-	for(simulatedWork = 1; simulatedWork <= simulatedEnd; ++simulatedWork) {
-		log3.UpdateProgress(simulatedWork, simulatedEnd);
-		std::this_thread::sleep_for(std::chrono::milliseconds(50));
-		msgLog.Log("Simulated Work Message Version 3: " + std::to_string(static_cast<int>(simulatedWork)));
+		msgLog.Log("Simulated Work Message: " + std::to_string(static_cast<int>(simulatedWork)));
 	}
 	std::cout << "\n\n**********************************************************************************\n";
-
 	msgLog.Log("**********************************************************************************");
+
+	//serenity::ProgressBarManager manager;
+	//manager.RegisterObserver(logProgress);
 
 	msgLog.Close( ); /****************************************************************************/
 

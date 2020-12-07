@@ -6,7 +6,7 @@ namespace serenity {
 		// RegisterObserver( );
 	}
 
-	ProgressBar::ProgressBar(ProgressBar&)
+	ProgressBar::ProgressBar(ProgressBar& copy)
 	{
 		// RegisterObserver( );
 	}
@@ -43,6 +43,11 @@ namespace serenity {
 	{
 		std::unique_lock threadLock {m_mutex};
 		m_status = statusMessage;
+	}
+
+	std::vector<ProgressBar> ProgressBar::GetHandle( )
+	{
+		return indicator_handle::m_managerHandle;
 	}
 
 
