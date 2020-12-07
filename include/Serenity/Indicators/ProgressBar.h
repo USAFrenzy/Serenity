@@ -53,7 +53,7 @@ namespace serenity {
 		float m_totalWork {0.0f};
 		// ProgressBar* m_instance;
 	};
-namespace indicator_handle {
+	namespace indicator_handle {
 		static std::vector<ProgressBar> m_managerHandle;
 	}
 } // namespace serenity
