@@ -5,17 +5,28 @@
 
 
 namespace serenity {
+
 	ProgressBar::ProgressBar( )
+	  : m_barFill(""),
+	    m_barRemainder(""),
+	    m_barWidth(50.0f),
+	    m_progress(0.0f),
+	    m_status(""),
+	    m_totalWork(0.0f)
 	{
 		// RegisterObserver( );
 	}
 
 	ProgressBar::ProgressBar(ProgressBar& copy)
+	  : m_barFill(copy.m_barFill),
+	    m_barRemainder(copy.m_barRemainder),
+	    m_barWidth(copy.m_barWidth),
+	    m_progress(copy.m_progress),
+	    m_status(copy.m_status),
+	    m_totalWork(copy.m_totalWork)
 	{
 		// RegisterObserver( );
 	}
-
-	ProgressBar::~ProgressBar( ) { }
 
 	// void ProgressBar::RegisterObserver( ) override
 	//{
@@ -31,6 +42,10 @@ namespace serenity {
 		m_progress = progressValue;
 	}
 
+	void ProgressBar::UpdateProgress(float updateValue, float totalWork, std::ostream& os) { }
+
+	void ProgressBar::OutputProgress(std::ostream& os) { }
+
 	void ProgressBar::SetWorkload(float totalWorkload)
 	{
 		std::unique_lock threadLock {m_mutex};
@@ -43,6 +58,10 @@ namespace serenity {
 		m_barWidth = width;
 	}
 
+	void ProgressBar::FillBar(const std::string& symbol) { }
+
+	void ProgressBar::FillRemainder(const std::string& symbol) { }
+
 	void ProgressBar::SetStatus(const std::string& statusMessage)
 	{
 		std::unique_lock threadLock {m_mutex};
@@ -53,51 +72,5 @@ namespace serenity {
 	{
 		return indicator_handle::m_managerHandle;
 	}
-
-
-	void ProgressBar::UpdateProgress(float updateValue, float totalWork, std::ostream& os)
-	{
-		SetWorkload(totalWork);
-		Progress(updateValue);
-		OutputProgress(os);
-	}
-
-	void ProgressBar::FillBar(const std::string& symbol)
-	{
-		std::unique_lock threadLock {m_mutex};
-		m_barFill = symbol;
-	}
-
-	void ProgressBar::FillRemainder(const std::string& symbol)
-	{
-		std::unique_lock threadLock {m_mutex};
-		m_barRemainder = symbol;
-	}
-
-	void ProgressBar::OutputProgress(std::ostream& os)
-	{
-		std::unique_lock threadLock {m_mutex};
-		// Check The Progress Status And Output The Updated Visual Progress Indicator As Well As
-		// The Updated Percentage Completed And The Status Message Corresponding To The Process
-
-		float i                     = 0.0f;
-		float completedRatio        = ((m_progress / m_totalWork));
-		const float finshedProgress = (completedRatio * m_barWidth);
-		int percentage              = static_cast<int>(completedRatio * 100.0f);
-
-		if(m_progress > m_totalWork) {
-			return;
-		}
-		os << "\r" << std::flush;
-		os << percentage << "%";
-		os << " [";
-		for(i; i < m_barWidth; ++i) {
-			(i <= finshedProgress) ? (os << m_barFill) : (os << m_barRemainder);
-		}
-		os << "]";
-		os << " [" << m_progress << "/" << m_totalWork << "] ";
-		os << " " << m_status;
-	}
-
 
 } // namespace serenity

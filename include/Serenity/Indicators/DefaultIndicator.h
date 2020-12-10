@@ -22,11 +22,8 @@ namespace serenity {
 		void FillRemainder(const std::string& symbol) override;
 
 	      private:
-		std::mutex m_mutex;
-		std::string m_barFill {"#"};
-		std::string m_barRemainder {"-"};
-		float m_barWidth {50.0f};
-		// ProgressBar* m_instance;
+		std::string m_barFill;
+		std::string m_barRemainder;
 	};
 
 

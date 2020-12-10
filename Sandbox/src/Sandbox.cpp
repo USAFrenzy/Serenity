@@ -75,11 +75,9 @@ int main( )
 	msgLog.Log("**********************************************************************************");
 	float simulatedWork = 1;
 	float simulatedEnd  = 500;
-	serenity::ProgressBar logProgress;
+	serenity::DefaultBar logProgress;
 	logProgress.SetStatus("Writing For Loop To MessageLog.txt");
 
-
-	std::cout << "First Version:\n";
 	for(simulatedWork; simulatedWork <= simulatedEnd; ++simulatedWork) {
 		logProgress.UpdateProgress(simulatedWork, simulatedEnd);
 		std::this_thread::sleep_for(std::chrono::milliseconds(50));
@@ -92,10 +90,6 @@ int main( )
 	//manager.RegisterObserver(logProgress);
 
 	msgLog.Close( ); /****************************************************************************/
-
-	// This Section Is For Testing The Derived Class
-	serenity::DefaultBar bar;
-
 
 	// This Next One, I Would Like For Debugging Purposes: Print Out That Logger's Info In Full
 	// std::cout << log << std::endl;
