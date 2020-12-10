@@ -90,15 +90,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Serenity\src\Indicators\DefaultIndicator.cpp" />
+    <ClCompile Include="Serenity\src\Indicators\ProgressBar.cpp" />
+    <ClCompile Include="Serenity\src\Indicators\ProgressManager.cpp" />
     <ClCompile Include="Serenity\src\Logger.cpp" />
-    <ClCompile Include="Serenity\src\ProgressBar.cpp" />
-    <ClCompile Include="Serenity\src\ProgressManager.cpp" />
+    <ClCompile Include="Serenity\src\Sinks\DefaultSink.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Serenity\Indicators\DefaultIndicator.h" />
     <ClInclude Include="include\Serenity\Indicators\ProgressBar.h" />
     <ClInclude Include="include\Serenity\Indicators\ProgressManager.h" />
     <ClInclude Include="include\Serenity\Logger.h" />
     <ClInclude Include="include\Serenity\SharedData.h" />
+    <ClInclude Include="include\Serenity\Sinks\DefaultSink.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

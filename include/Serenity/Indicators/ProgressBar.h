@@ -1,18 +1,19 @@
 #pragma once
 
 #include <iostream>
-#include <mutex> // For ProgressBar Class
-#include <vector>
+#include <mutex>  // For Thread-Safety In ProgressBar Class
+#include <vector> // Strictly For Indicator Handle Storage (May Just Create A Streamlined Vector Class For This)
+
+//! Note: Right Now, This Is Suuuppperrr Messy And Unorganized
+// ToDo:  Look A ProgressManager.h Note
 
 namespace serenity {
 
-	// ToDo:  Look A ProgressManager.h Note
+	namespace indicator_handle {
+		static std::vector<ProgressBar> m_managerHandle;
+	} // namespace indicator_handle
 
 	//!? FIXME!!!
-	//! Note: Right Now, This Is Suuuppperrr Messy And Unorganized
-	//!                              Current Issue:
-	//! -> Instantiation Time Unknown Size For RegisterObserver() In m_managerHandle Size
-	//? Might Be Able To Pass A Solid Reference To The Base Class Or Maybe Just Perform A Move Op?
 	class ProgressBar
 	{
 	      public:
@@ -26,19 +27,19 @@ namespace serenity {
 
 		// Todo: Once This Is FLushed Out, Get Rid Of totalWork Param As It's Only Used For Simulating
 		// Workload
-		void virtual UpdateProgress(float updateValue, float totalWork, std::ostream& os = std::cout);
+		virtual void UpdateProgress(float updateValue, float totalWork, std::ostream& os = std::cout);
 
 		// void RegisterObserver( ) override;
 
-		void OutputProgress(std::ostream& os = std::cout);
+		virtual void OutputProgress(std::ostream& os = std::cout);
 
 		void SetWorkload(float totalWorkload);
 
 		void SetBarWidth(float width);
 
-		void FillBar(const std::string& symbol);
+		virtual void FillBar(const std::string& symbol);
 
-		void FillRemainder(const std::string& symbol);
+		virtual void FillRemainder(const std::string& symbol);
 
 		void SetStatus(const std::string& statusMessage);
 		static std::vector<ProgressBar> GetHandle( );
@@ -53,7 +54,5 @@ namespace serenity {
 		float m_totalWork {0.0f};
 		// ProgressBar* m_instance;
 	};
-	namespace indicator_handle {
-		static std::vector<ProgressBar> m_managerHandle;
-	}
+
 } // namespace serenity

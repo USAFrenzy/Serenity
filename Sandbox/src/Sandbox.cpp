@@ -4,6 +4,7 @@
 
 #include <Serenity/Logger.h>
 #include <Serenity/Indicators/ProgressManager.h>
+#include <Serenity/Indicators/DefaultIndicator.h>
 
 //! Note: Take This .clang-format File And Upload For Use In Projects...Ironed
 //! Out The Kinks
@@ -91,6 +92,10 @@ int main( )
 	//manager.RegisterObserver(logProgress);
 
 	msgLog.Close( ); /****************************************************************************/
+
+	// This Section Is For Testing The Derived Class
+	serenity::DefaultBar bar;
+
 
 	// This Next One, I Would Like For Debugging Purposes: Print Out That Logger's Info In Full
 	// std::cout << log << std::endl;
