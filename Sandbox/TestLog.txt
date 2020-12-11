@@ -36,3 +36,11 @@ Test Logger: [47mConsole Message Flags: White Background
 Test Logger: [33m[1mConsole Message Flags: Bold Yellow
 Test Logger: [31m[1mConsole Message Flags: Bold Red
 Test Logger: **********************************************************************************
+Test Logger: Testing The Register Observer Func
+Test Logger: Handle Vector Size: 0
+Test Logger: Registered One Indicator
+Test Logger: Handle Vector Size: 1
+Test Logger: Testing The Unregister Observer Func
+Test Logger: Handle Vector Size: 1
+Test Logger: Unregistered One Indicator
+Test Logger: Handle Vector Size: 0

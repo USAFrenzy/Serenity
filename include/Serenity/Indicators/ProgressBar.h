@@ -17,7 +17,7 @@ namespace serenity {
 
 		ProgressBar(ProgressBar& copy);
 
-		virtual ~ProgressBar( ) {};
+		virtual ~ProgressBar( ) { };
 
 		void Progress(float progressValue);
 
@@ -25,7 +25,8 @@ namespace serenity {
 		// Workload
 		virtual void UpdateProgress(float updateValue, float totalWork, std::ostream& os = std::cout);
 
-		// void RegisterObserver( );
+		void RegisterObserver( );
+		void UnregisterObserver( );
 
 		virtual void OutputProgress(std::ostream& os = std::cout);
 
@@ -39,7 +40,7 @@ namespace serenity {
 
 		void SetStatus(const std::string& statusMessage);
 
-		static std::vector<ProgressBar> GetHandle( );
+		static std::vector<ProgressBar*> GetHandle( );
 
 	      protected:
 		std::mutex m_mutex;
@@ -49,11 +50,12 @@ namespace serenity {
 		float m_barWidth;
 		float m_progress;
 		float m_totalWork;
-		// ProgressBar* m_instance;
+		int m_index;
 	};
 
 	namespace indicator_handle {
-		static std::vector<ProgressBar> m_managerHandle;
+		static std::vector<ProgressBar*> m_managerHandle;
+		static int m_handleIndex {0};
 	} // namespace indicator_handle
 
 } // namespace serenity

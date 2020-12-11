@@ -12,7 +12,8 @@ namespace serenity {
 	    m_barWidth(50.0f),
 	    m_progress(0.0f),
 	    m_status(""),
-	    m_totalWork(0.0f)
+	    m_totalWork(0.0f),
+	    m_index(0)
 	{
 		// RegisterObserver( );
 	}
@@ -23,18 +24,43 @@ namespace serenity {
 	    m_barWidth(copy.m_barWidth),
 	    m_progress(copy.m_progress),
 	    m_status(copy.m_status),
-	    m_totalWork(copy.m_totalWork)
+	    m_totalWork(copy.m_totalWork),
+	    m_index(copy.m_index)
 	{
 		// RegisterObserver( );
 	}
 
-	// void ProgressBar::RegisterObserver( ) override
-	//{
-	//	ProgressBar* object = new ProgressBar( );
-	//	auto m_managerHandle     = & GetManagerHandle( );
-	//	m_instance          = object;
-	//	m_managerHandle->emplace_back(&object);
-	//}
+	// ToDo: #################################################################################################
+	// ToDo: #                 Figure This Register/Unregister Business Out...                               #
+	// ToDo: #################################################################################################
+	//?                      Possible solution for Register/Unregister Functions:
+	//? Have a member variable int index that is assigned from an increment of a local static index total in
+	//? RegisterObserver(). In UnregisterObserver(), If The index that was unregistered isn't the highest index
+	//? number, then iterate through all indices and decrement them by one in a way that keeps the position
+	//? order in tact via an iterator that takes the member index value as an argument? Should do some more
+	//? container research to see if there's a better and more efficient way of doing this
+
+	void ProgressBar::RegisterObserver( )
+	{
+		// This Works To Register An Indicator Object
+		indicator_handle::m_managerHandle.emplace_back(this);
+		//? Some Sort Of static index total Is Incremented here and the instance member index = the
+		//? incremented static variable
+		this->m_index = indicator_handle::m_handleIndex++;
+	}
+
+	void ProgressBar::UnregisterObserver( )
+	{
+		int index = this->m_index;
+		indicator_handle::m_managerHandle.erase(indicator_handle::m_managerHandle.begin( ) + index);
+		indicator_handle::m_handleIndex--; // After Deletion, Decrement The Total Index Reference
+		// Still Need A Way To Iterate Through The Handle Vector And Decrement The Index Values
+		//? Might Work As Something Like This:
+		for(auto element : indicator_handle::m_managerHandle) {
+			element->m_index--;
+		}
+	}
+	// ToDo: #################################################################################################
 
 	void ProgressBar::Progress(float progressValue)
 	{
@@ -68,7 +94,7 @@ namespace serenity {
 		m_status = statusMessage;
 	}
 
-	std::vector<ProgressBar> ProgressBar::GetHandle( )
+	std::vector<ProgressBar*> ProgressBar::GetHandle( )
 	{
 		return indicator_handle::m_managerHandle;
 	}

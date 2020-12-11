@@ -19,9 +19,9 @@ namespace serenity {
 
 	void DefaultBar::UpdateProgress(float updateValue, float totalWork, std::ostream& os)
 	{
-		ProgressBar::SetWorkload(totalWork);
-		ProgressBar::Progress(updateValue);
-		DefaultBar::OutputProgress(os);
+		SetWorkload(totalWork);
+		Progress(updateValue);
+		OutputProgress(os);
 	}
 
 	void DefaultBar::OutputProgress(std::ostream& os)

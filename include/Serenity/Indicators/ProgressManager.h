@@ -52,7 +52,7 @@ namespace serenity {
 		//	void virtual UpdateProgress(float updateValue, float totalWork, std::ostream& os = std::cout);
 
 	      private:
-		std::vector<ProgressBar> &m_progressBars{indicator_handle::m_managerHandle};
+		std::vector<ProgressBar*> &m_progressBars{indicator_handle::m_managerHandle};
 		int m_index {0};
 	};
 	// #########################################################################################################

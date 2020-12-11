@@ -83,13 +83,27 @@ int main( )
 		std::this_thread::sleep_for(std::chrono::milliseconds(50));
 		msgLog.Log("Simulated Work Message: " + std::to_string(static_cast<int>(simulatedWork)));
 	}
-	std::cout << "\n\n**********************************************************************************\n";
 	msgLog.Log("**********************************************************************************");
-
-	//serenity::ProgressBarManager manager;
-	//manager.RegisterObserver(logProgress);
-
 	msgLog.Close( ); /****************************************************************************/
+
+	std::cout << "\n\nSwitching Back To Testlog.txt\n\n";
+	log.Open( ); /****************************************************************************/
+	log.Log("Testing The Register Observer Func");
+	std::vector<serenity::ProgressBar*> indicatorHandle = logProgress.GetHandle( );
+	log.Log("Handle Vector Size: " + std::to_string(indicatorHandle.size( )));
+	logProgress.RegisterObserver( );
+	log.Log("Registered One Indicator");
+	indicatorHandle = logProgress.GetHandle( ); // Just Updating indicatorHandle Here After Registering
+	log.Log("Handle Vector Size: " + std::to_string(indicatorHandle.size( )));
+	log.Log("Testing The Unregister Observer Func");
+	log.Log("Handle Vector Size: " + std::to_string(indicatorHandle.size( )));
+	logProgress.UnregisterObserver( );
+	log.Log("Unregistered One Indicator");
+	indicatorHandle = logProgress.GetHandle( ); // Updating indicatorHandle Here After Unregistering
+	log.Log("Handle Vector Size: " + std::to_string(indicatorHandle.size( )));
+	log.Close( ); /****************************************************************************/
+
+	std::cout << "\n\n**********************************************************************************\n";
 
 	// This Next One, I Would Like For Debugging Purposes: Print Out That Logger's Info In Full
 	// std::cout << log << std::endl;
