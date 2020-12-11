@@ -9,11 +9,11 @@
 //! Note: Take This .clang-format File And Upload For Use In Projects...Ironed
 //! Out The Kinks
 
-// ToDo:  Look A ProgressManager.h Note
+// ToDo:  Look At ProgressManager.h Note
 
 // This Is What I'd Like To Eventually Accomplish Here...
 /*
-        Logger log; OR Logger("LoggerName");    
+        Logger log; OR Logger("LoggerName"); -> Difference Of Setting Up A Default Logger Or Custom Logger    
         log.setlevel(LogLevel::lvl); OR [as a global setting] SetLevel(LogLevel::lvl)
         log.setpattern("Formatting String"); OR [as a global setting] SetPattern("Formatting String")    
         log.LogOutput(LogOutput::o/p) OR [as a global setting] LogOutput(LogOutput::o/p);
@@ -46,6 +46,7 @@ int main( )
 
 
 	// ToDo: Fix The Reset Flag
+	// ToDo: Handle Color Output Text In Library Function Rather Than Explicitly Like Below
 	//?      Possibly Implement Operator Overloading Here For Inc/Dec?
 
 	auto handle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -91,13 +92,13 @@ int main( )
 	log.Log("Testing The Register Observer Func");
 	std::vector<serenity::ProgressBar*> indicatorHandle = logProgress.GetHandle( );
 	log.Log("Handle Vector Size: " + std::to_string(indicatorHandle.size( )));
-	logProgress.RegisterObserver( );
+	logProgress.RegisterIndicator( );
 	log.Log("Registered One Indicator");
 	indicatorHandle = logProgress.GetHandle( ); // Just Updating indicatorHandle Here After Registering
 	log.Log("Handle Vector Size: " + std::to_string(indicatorHandle.size( )));
 	log.Log("Testing The Unregister Observer Func");
 	log.Log("Handle Vector Size: " + std::to_string(indicatorHandle.size( )));
-	logProgress.UnregisterObserver( );
+	logProgress.UnregisterIndicator( );
 	log.Log("Unregistered One Indicator");
 	indicatorHandle = logProgress.GetHandle( ); // Updating indicatorHandle Here After Unregistering
 	log.Log("Handle Vector Size: " + std::to_string(indicatorHandle.size( )));

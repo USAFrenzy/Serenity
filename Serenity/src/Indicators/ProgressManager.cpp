@@ -12,7 +12,7 @@ namespace serenity {
 
 	//? No Way To Search For And Unregister An Instance Either ->
 	//?  Maybe Look Into Templating/Reference Wrapping?
-	void ProgressBarManager::RegisterObserver(ProgressBar& indicator)
+	void ProgressBarManager::RegisterIndicator(ProgressBar& indicator)
 	{
 		// ToDo: Figure Out What The Whole "error C2558: class 'serenity::ProgressBar': no copy
 		// ToDo: constructor available or copy constructor is declared 'explicit' " Is About
@@ -20,7 +20,7 @@ namespace serenity {
 		// m_progressBars.emplace_back(indicator);
 	}
 
-	void ProgressBarManager::UnregisterObserver( )
+	void ProgressBarManager::UnregisterIndicator( )
 	{
 		// ToDo: Figure Out What The Whole "error C2558: class 'serenity::ProgressBar': no copy
 		// ToDo: constructor available or copy constructor is declared 'explicit' " Is About

@@ -25,8 +25,8 @@ namespace serenity {
 		// Workload
 		virtual void UpdateProgress(float updateValue, float totalWork, std::ostream& os = std::cout);
 
-		void RegisterObserver( );
-		void UnregisterObserver( );
+		void RegisterIndicator( );
+		void UnregisterIndicator( );
 
 		virtual void OutputProgress(std::ostream& os = std::cout);
 

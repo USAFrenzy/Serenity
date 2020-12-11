@@ -15,7 +15,7 @@ namespace serenity {
 	    m_totalWork(0.0f),
 	    m_index(0)
 	{
-		// RegisterObserver( );
+		// RegisterIndicator( );
 	}
 
 	ProgressBar::ProgressBar(ProgressBar& copy)
@@ -27,7 +27,7 @@ namespace serenity {
 	    m_totalWork(copy.m_totalWork),
 	    m_index(copy.m_index)
 	{
-		// RegisterObserver( );
+		// RegisterIndicator( );
 	}
 
 	// ToDo: #################################################################################################
@@ -35,12 +35,17 @@ namespace serenity {
 	// ToDo: #################################################################################################
 	//?                      Possible solution for Register/Unregister Functions:
 	//? Have a member variable int index that is assigned from an increment of a local static index total in
-	//? RegisterObserver(). In UnregisterObserver(), If The index that was unregistered isn't the highest index
+	//? RegisterIndicator(). In UnregisterIndicator(), If The index that was unregistered isn't the highest index
 	//? number, then iterate through all indices and decrement them by one in a way that keeps the position
 	//? order in tact via an iterator that takes the member index value as an argument? Should do some more
 	//? container research to see if there's a better and more efficient way of doing this
 
-	void ProgressBar::RegisterObserver( )
+	// May Add To Ctor For Automatic Registration, Otherwise, Registration To The Manager "Observer" Would Have
+	// To Be Manual. Need To Think On Whether I Want Automatically Or Manually Added "Listeners"
+	//? -> One Pro To Automatic Registration Would Be That There Would Be Less Copying => Could Just Use Move
+	//?    Semantics To Move This Base Class Vector Handle To The Manager Vector Reference When Manager Object
+	//?    Is Instantiated?
+	void ProgressBar::RegisterIndicator( )
 	{
 		// This Works To Register An Indicator Object
 		indicator_handle::m_managerHandle.emplace_back(this);
@@ -49,7 +54,7 @@ namespace serenity {
 		this->m_index = indicator_handle::m_handleIndex++;
 	}
 
-	void ProgressBar::UnregisterObserver( )
+	void ProgressBar::UnregisterIndicator( )
 	{
 		int index = this->m_index;
 		indicator_handle::m_managerHandle.erase(indicator_handle::m_managerHandle.begin( ) + index);

@@ -10,7 +10,7 @@
     ProgressBar class be a base class that all styles of progress bars inherit from and then have them
     be registered in the base class by some function that determines that if that style's vector isn't empty,
     create a vector of pointers which can then be referenced by some function here that sorts through them?
-    This Way, A progress object can call RegisterObserver and this will create a pointer to that progress object
+    This Way, A progress object can call RegisterIndicator and this will create a pointer to that progress object
     and push this pointer into a vector of pointers for that style which is then referenced here. This would
     allow control on whether a single progress object should be updated or whether we want to update all progress
     objects at once i.e. :
@@ -42,8 +42,8 @@ namespace serenity {
 
 		~ProgressBarManager( );
 
-		void RegisterObserver(ProgressBar& indicator);
-		void UnregisterObserver( );
+		void RegisterIndicator(ProgressBar& indicator);
+		void UnregisterIndicator( );
 
 		int GetIndex( );
 
