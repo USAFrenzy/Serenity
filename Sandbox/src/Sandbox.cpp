@@ -91,7 +91,7 @@ int main( )
 	std::cout << "\n\nSwitching Back To Testlog.txt\n\n";
 	log.Open( ); /****************************************************************************/
 	log.Log("Testing The Register Observer Func");
-	std::vector<Subscriber*> indicatorHandle = logProgress.GetHandle( );
+	serenity::ManagerHandle indicatorHandle = logProgress.GetHandle( );
 	log.Log("Handle Vector Size: " + std::to_string(logProgress.HandleRef( )));
 	logProgress.RegisterIndicator(&manager);
 	log.Log("Registered One Indicator");

@@ -9,6 +9,7 @@
 // ToDo:  Look At ProgressManager.h Note
 
 namespace serenity {
+	using ManagerHandle = std::vector<Subscriber*>;
 
 	//!? FIXME!!!
 	class ProgressBar : public Notifier
@@ -42,8 +43,7 @@ namespace serenity {
 		virtual void FillRemainder(const std::string& symbol);
 
 		void SetStatus(const std::string& statusMessage);
-
-		std::vector<Subscriber*> GetHandle( );
+		ManagerHandle GetHandle( );
 
 		void UpdateHandle( );
 
