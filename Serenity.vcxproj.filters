@@ -23,7 +23,7 @@
     <ClCompile Include="Serenity\src\Indicators\ProgressBar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Serenity\src\Indicators\ProgressManager.cpp">
+    <ClCompile Include="Serenity\src\Indicators\IndicatorManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -37,13 +37,16 @@
     <ClInclude Include="include\Serenity\Indicators\ProgressBar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Serenity\Indicators\ProgressManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\Serenity\Sinks\DefaultSink.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Serenity\Indicators\DefaultIndicator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Serenity\Indicators\ObserverInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Serenity\Indicators\IndicatorManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

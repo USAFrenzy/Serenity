@@ -3,7 +3,7 @@
 #include <thread>
 
 #include <Serenity/Logger.h>
-#include <Serenity/Indicators/ProgressManager.h>
+#include <Serenity/Indicators/IndicatorManager.h>
 #include <Serenity/Indicators/DefaultIndicator.h>
 
 //! Note: Take This .clang-format File And Upload For Use In Projects...Ironed
@@ -77,6 +77,7 @@ int main( )
 	float simulatedWork = 1;
 	float simulatedEnd  = 500;
 	serenity::DefaultBar logProgress;
+	serenity::IndicatorManager manager;
 	logProgress.SetStatus("Writing For Loop To MessageLog.txt");
 
 	for(simulatedWork; simulatedWork <= simulatedEnd; ++simulatedWork) {
@@ -90,18 +91,16 @@ int main( )
 	std::cout << "\n\nSwitching Back To Testlog.txt\n\n";
 	log.Open( ); /****************************************************************************/
 	log.Log("Testing The Register Observer Func");
-	std::vector<serenity::ProgressBar*> indicatorHandle = logProgress.GetHandle( );
-	log.Log("Handle Vector Size: " + std::to_string(indicatorHandle.size( )));
-	logProgress.RegisterIndicator( );
+	std::vector<Subscriber*> indicatorHandle = logProgress.GetHandle( );
+	log.Log("Handle Vector Size: " + std::to_string(logProgress.HandleRef( )));
+	logProgress.RegisterIndicator(&manager);
 	log.Log("Registered One Indicator");
-	indicatorHandle = logProgress.GetHandle( ); // Just Updating indicatorHandle Here After Registering
-	log.Log("Handle Vector Size: " + std::to_string(indicatorHandle.size( )));
+	log.Log("Handle Vector Size: " + std::to_string(logProgress.HandleRef( )));
 	log.Log("Testing The Unregister Observer Func");
-	log.Log("Handle Vector Size: " + std::to_string(indicatorHandle.size( )));
-	logProgress.UnregisterIndicator( );
+	log.Log("Handle Vector Size: " + std::to_string(logProgress.HandleRef( )));
+	logProgress.UnregisterIndicator(&manager);
 	log.Log("Unregistered One Indicator");
-	indicatorHandle = logProgress.GetHandle( ); // Updating indicatorHandle Here After Unregistering
-	log.Log("Handle Vector Size: " + std::to_string(indicatorHandle.size( )));
+	log.Log("Handle Vector Size: " + std::to_string(logProgress.HandleRef( )));
 	log.Close( ); /****************************************************************************/
 
 	std::cout << "\n\n**********************************************************************************\n";

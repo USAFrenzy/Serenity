@@ -207,10 +207,6 @@ namespace serenity {
 			}
 
 		      public:
-			void SetLogColor(LogColor color)
-			{
-				m_msgColor = LogColorToColorCode(color);
-			}
 			LogColor GetLogColor( )
 			{
 				return LogColorFromColorCode(m_msgColor);
@@ -219,13 +215,22 @@ namespace serenity {
 			{
 				return LogColorToStr(GetLogColor( ));
 			}
+
+			// ToDo: #############################################################
+			// ToDo: #                          FixMe                            #
+			// ToDo: #############################################################
+			void SetLogColor(LogColor color)
+			{
+				m_msgColor = LogColorToColorCode(color);
+			}
+
 			std::string UseMsgColor( )
 			{
 				return m_msgColor;
 			}
-			//! This Is A Quick Hack
-			// ToDo: FixMe
+
 			void LogResetColor( ) { }
+			// ToDo: ###########################################################
 
 		      private:
 			std::string m_msgColor;

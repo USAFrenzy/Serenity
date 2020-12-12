@@ -4,13 +4,14 @@
 #include <mutex>  // For Thread-Safety In ProgressBar Class
 #include <vector> // Strictly For Indicator Handle Storage (May Just Create A Streamlined Vector Class For This)
 
-//! Note: Right Now, This Is Suuuppperrr Messy And Unorganized
-// ToDo:  Look A ProgressManager.h Note
+#include <Serenity/Indicators/ObserverInterface.h>
+
+// ToDo:  Look At ProgressManager.h Note
 
 namespace serenity {
 
 	//!? FIXME!!!
-	class ProgressBar
+	class ProgressBar : public Notifier
 	{
 	      public:
 		ProgressBar( );
@@ -21,12 +22,14 @@ namespace serenity {
 
 		void Progress(float progressValue);
 
-		// Todo: Once This Is FLushed Out, Get Rid Of totalWork Param As It's Only Used For Simulating
-		// Workload
+		// ToDo: Once This Is FLushed Out, Get Rid Of totalWork Param As It's Only Used For Simulating
+		// ToDo: Workload ORRRRR Template This Function So That The updateValue And totalWork Params Can Be
+		// ToDo: Substituted In For Whatever Use Case And Keep The Parameters As Is
 		virtual void UpdateProgress(float updateValue, float totalWork, std::ostream& os = std::cout);
 
-		void RegisterIndicator( );
-		void UnregisterIndicator( );
+		void RegisterIndicator(Subscriber* managerListener) override;
+		void UnregisterIndicator(Subscriber* managerListener) override;
+		void NotifySubscriber( ) override;
 
 		virtual void OutputProgress(std::ostream& os = std::cout);
 
@@ -40,7 +43,11 @@ namespace serenity {
 
 		void SetStatus(const std::string& statusMessage);
 
-		static std::vector<ProgressBar*> GetHandle( );
+		std::vector<Subscriber*> GetHandle( );
+
+		void UpdateHandle( );
+
+		static int HandleRef( );
 
 	      protected:
 		std::mutex m_mutex;
@@ -50,12 +57,12 @@ namespace serenity {
 		float m_barWidth;
 		float m_progress;
 		float m_totalWork;
-		int m_index;
+		std::vector<Subscriber*> managerSubscribers;
 	};
 
 	namespace indicator_handle {
-		static std::vector<ProgressBar*> m_managerHandle;
-		static int m_handleIndex {0};
+		static std::vector<Subscriber*> m_managerHandle;
+		static int m_refCounter;
 	} // namespace indicator_handle
 
 } // namespace serenity

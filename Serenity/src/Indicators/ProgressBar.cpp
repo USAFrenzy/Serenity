@@ -7,13 +7,7 @@
 namespace serenity {
 
 	ProgressBar::ProgressBar( )
-	  : m_barFill(""),
-	    m_barRemainder(""),
-	    m_barWidth(50.0f),
-	    m_progress(0.0f),
-	    m_status(""),
-	    m_totalWork(0.0f),
-	    m_index(0)
+	  : m_barFill(""), m_barRemainder(""), m_barWidth(50.0f), m_progress(0.0f), m_status(""), m_totalWork(0.0f)
 	{
 		// RegisterIndicator( );
 	}
@@ -24,47 +18,48 @@ namespace serenity {
 	    m_barWidth(copy.m_barWidth),
 	    m_progress(copy.m_progress),
 	    m_status(copy.m_status),
-	    m_totalWork(copy.m_totalWork),
-	    m_index(copy.m_index)
+	    m_totalWork(copy.m_totalWork)
 	{
-		// RegisterIndicator( );
 	}
-
-	// ToDo: #################################################################################################
-	// ToDo: #                 Figure This Register/Unregister Business Out...                               #
-	// ToDo: #################################################################################################
-	//?                      Possible solution for Register/Unregister Functions:
-	//? Have a member variable int index that is assigned from an increment of a local static index total in
-	//? RegisterIndicator(). In UnregisterIndicator(), If The index that was unregistered isn't the highest index
-	//? number, then iterate through all indices and decrement them by one in a way that keeps the position
-	//? order in tact via an iterator that takes the member index value as an argument? Should do some more
-	//? container research to see if there's a better and more efficient way of doing this
 
 	// May Add To Ctor For Automatic Registration, Otherwise, Registration To The Manager "Observer" Would Have
 	// To Be Manual. Need To Think On Whether I Want Automatically Or Manually Added "Listeners"
 	//? -> One Pro To Automatic Registration Would Be That There Would Be Less Copying => Could Just Use Move
 	//?    Semantics To Move This Base Class Vector Handle To The Manager Vector Reference When Manager Object
 	//?    Is Instantiated?
-	void ProgressBar::RegisterIndicator( )
+	void ProgressBar::RegisterIndicator(Subscriber* managerListener)
 	{
 		// This Works To Register An Indicator Object
-		indicator_handle::m_managerHandle.emplace_back(this);
-		//? Some Sort Of static index total Is Incremented here and the instance member index = the
-		//? incremented static variable
-		this->m_index = indicator_handle::m_handleIndex++;
+		managerSubscribers.emplace_back(managerListener);
+		indicator_handle::m_refCounter++;
+		UpdateHandle( );
 	}
 
-	void ProgressBar::UnregisterIndicator( )
+	// Searches Through The Subscriber Vector For The Listener Object And If The Listener Object Has Been
+	// Found, Removes It From The Subscriber Vector
+	void ProgressBar::UnregisterIndicator(Subscriber* managerListener)
 	{
-		int index = this->m_index;
-		indicator_handle::m_managerHandle.erase(indicator_handle::m_managerHandle.begin( ) + index);
-		indicator_handle::m_handleIndex--; // After Deletion, Decrement The Total Index Reference
-		// Still Need A Way To Iterate Through The Handle Vector And Decrement The Index Values
-		//? Might Work As Something Like This:
-		for(auto element : indicator_handle::m_managerHandle) {
-			element->m_index--;
+		std::vector<Subscriber*>::iterator iteratorIndex =
+		  std::find(managerSubscribers.begin( ), managerSubscribers.end( ), managerListener);
+
+		if(iteratorIndex != managerSubscribers.end( )) {
+			managerSubscribers.erase(iteratorIndex);
+		}
+		// After Deletion, Decrement The Total Index Reference And Update The Handle
+		indicator_handle::m_refCounter--;
+		UpdateHandle( );
+	}
+
+	void ProgressBar::NotifySubscriber( )
+	{
+		// UpdateHandle() May Possibly Be Unnecessary Here -> Don't Have A Test Laid Out For It Yet
+		UpdateHandle( );
+		for(Subscriber* listener : managerSubscribers) {
+			std::ostream& os = std::cout;
+			listener->Update(m_progress, m_totalWork, os);
 		}
 	}
+
 	// ToDo: #################################################################################################
 
 	void ProgressBar::Progress(float progressValue)
@@ -99,9 +94,19 @@ namespace serenity {
 		m_status = statusMessage;
 	}
 
-	std::vector<ProgressBar*> ProgressBar::GetHandle( )
+	std::vector<Subscriber*> ProgressBar::GetHandle( )
 	{
 		return indicator_handle::m_managerHandle;
+	}
+
+	void ProgressBar::UpdateHandle( )
+	{
+		indicator_handle::m_managerHandle = managerSubscribers;
+	}
+
+	int ProgressBar::HandleRef( )
+	{
+		return indicator_handle::m_refCounter;
 	}
 
 } // namespace serenity

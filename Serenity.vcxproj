@@ -92,14 +92,15 @@
   <ItemGroup>
     <ClCompile Include="Serenity\src\Indicators\DefaultIndicator.cpp" />
     <ClCompile Include="Serenity\src\Indicators\ProgressBar.cpp" />
-    <ClCompile Include="Serenity\src\Indicators\ProgressManager.cpp" />
+    <ClCompile Include="Serenity\src\Indicators\IndicatorManager.cpp" />
     <ClCompile Include="Serenity\src\Logger.cpp" />
     <ClCompile Include="Serenity\src\Sinks\DefaultSink.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Serenity\Indicators\DefaultIndicator.h" />
+    <ClInclude Include="include\Serenity\Indicators\ObserverInterface.h" />
     <ClInclude Include="include\Serenity\Indicators\ProgressBar.h" />
-    <ClInclude Include="include\Serenity\Indicators\ProgressManager.h" />
+    <ClInclude Include="include\Serenity\Indicators\IndicatorManager.h" />
     <ClInclude Include="include\Serenity\Logger.h" />
     <ClInclude Include="include\Serenity\SharedData.h" />
     <ClInclude Include="include\Serenity\Sinks\DefaultSink.h" />

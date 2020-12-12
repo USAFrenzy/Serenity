@@ -99,6 +99,7 @@ namespace serenity {
 			default: std::cout << "Unable To Log Messages" << std::endl; break;
 		}
 	}
+
 	// Independently Sets The Logger's Log Level
 	void Logger::SetLogLevel(LogLevel logLevel)
 	{

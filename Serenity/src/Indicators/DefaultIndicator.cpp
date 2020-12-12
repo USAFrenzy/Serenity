@@ -3,15 +3,10 @@
 
 namespace serenity {
 
-	DefaultBar::DefaultBar( )
-	  : m_barFill("#"),
-	    m_barRemainder("-")
-	{
-	}
+	DefaultBar::DefaultBar( ) : m_barFill("#"), m_barRemainder("-") { }
 
 	DefaultBar::DefaultBar(DefaultBar& instance)
-	  : m_barFill(instance.m_barFill),
-	    m_barRemainder(instance.m_barRemainder)
+	  : m_barFill(instance.m_barFill), m_barRemainder(instance.m_barRemainder)
 	{
 	}
 
@@ -19,6 +14,9 @@ namespace serenity {
 
 	void DefaultBar::UpdateProgress(float updateValue, float totalWork, std::ostream& os)
 	{
+		if(managerSubscribers.size( ) != 0) {
+			NotifySubscriber( );
+		}
 		SetWorkload(totalWork);
 		Progress(updateValue);
 		OutputProgress(os);
@@ -60,6 +58,4 @@ namespace serenity {
 		std::unique_lock threadLock {m_mutex};
 		m_barRemainder = symbol;
 	}
-
-
 } // namespace serenity
