@@ -57,7 +57,7 @@ namespace serenity {
 		float m_barWidth;
 		float m_progress;
 		float m_totalWork;
-		std::vector<Subscriber*> managerSubscribers;
+		ManagerHandle managerSubscribers;
 	};
 
 	namespace indicator_handle {

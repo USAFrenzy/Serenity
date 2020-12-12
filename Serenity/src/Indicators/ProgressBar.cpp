@@ -39,7 +39,7 @@ namespace serenity {
 	// Found, Removes It From The Subscriber Vector
 	void ProgressBar::UnregisterIndicator(Subscriber* managerListener)
 	{
-		std::vector<Subscriber*>::iterator iteratorIndex =
+		ManagerHandle::iterator iteratorIndex =
 		  std::find(managerSubscribers.begin( ), managerSubscribers.end( ), managerListener);
 
 		if(iteratorIndex != managerSubscribers.end( )) {
@@ -94,7 +94,7 @@ namespace serenity {
 		m_status = statusMessage;
 	}
 
-	std::vector<Subscriber*> ProgressBar::GetHandle( )
+	ManagerHandle ProgressBar::GetHandle( )
 	{
 		return indicator_handle::m_managerHandle;
 	}
