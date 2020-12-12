@@ -61,7 +61,7 @@ namespace serenity {
 	};
 
 	namespace indicator_handle {
-		static std::vector<Subscriber*> m_managerHandle;
+		static ManagerHandle m_managerHandle;
 		static int m_refCounter;
 	} // namespace indicator_handle
 
