@@ -12,7 +12,7 @@ class Notifier
 {
       public:
 	virtual ~Notifier( ) { };
-	virtual void RegisterIndicator(Subscriber *managerListener)   = 0;
-	virtual void UnregisterIndicator(Subscriber *managerListener) = 0;
+	virtual void RegisterIndicator()   = 0;
+	virtual void UnregisterIndicator() = 0;
 	virtual void NotifySubscriber( )                             = 0;
 };

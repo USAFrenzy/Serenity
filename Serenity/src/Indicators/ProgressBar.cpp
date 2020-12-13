@@ -9,7 +9,7 @@ namespace serenity {
 	ProgressBar::ProgressBar( )
 	  : m_barFill(""), m_barRemainder(""), m_barWidth(50.0f), m_progress(0.0f), m_status(""), m_totalWork(0.0f)
 	{
-		 //RegisterIndicator( );
+		// RegisterIndicator( );
 	}
 
 	ProgressBar::ProgressBar(ProgressBar& copy)
@@ -27,21 +27,21 @@ namespace serenity {
 	//? -> One Pro To Automatic Registration Would Be That There Would Be Less Copying => Could Just Use Move
 	//?    Semantics To Move This Base Class Vector Handle To The Manager Vector Reference When Manager Object
 	//?    Is Instantiated?
-	void ProgressBar::RegisterIndicator(Subscriber* managerListener)
+	void ProgressBar::RegisterIndicator( )
 	{
-		managerSubscribers.emplace_back(managerListener);
+		managedIndicators.emplace_back(this);
 		indicator_handle::m_refCounter++;
 		UpdateManagerHandle( );
 	}
 
 	// Searches Through The Subscriber Vector For The Listener Object And If The Listener Object Has Been
 	// Found, Removes It From The Subscriber Vector
-	void ProgressBar::UnregisterIndicator(Subscriber* managerListener)
+	void ProgressBar::UnregisterIndicator( )
 	{
-		ManagerHandle::iterator iteratorIndex =
-		  std::find(managerSubscribers.begin( ), managerSubscribers.end( ), managerListener);
-		if(iteratorIndex != managerSubscribers.end( )) {
-			managerSubscribers.erase(iteratorIndex);
+		indicator_handle::ManagerHandle::iterator iteratorIndex =
+		  std::find(managedIndicators.begin( ), managedIndicators.end( ), this);
+		if(iteratorIndex != managedIndicators.end( )) {
+			managedIndicators.erase(iteratorIndex);
 		}
 		indicator_handle::m_refCounter--;
 		UpdateManagerHandle( );
@@ -51,10 +51,7 @@ namespace serenity {
 	{
 		// UpdateManagerHandle() May Possibly Be Unnecessary Here -> Don't Have A Test Laid Out For It Yet
 		UpdateManagerHandle( );
-		for(Subscriber* listener : managerSubscribers) {
-			std::ostream& os = std::cout;
-			listener->Update(m_progress, m_totalWork, os);
-		}
+		// Was Initially thinking Of having the subscriber's update() method called here
 	}
 
 	void ProgressBar::Progress(float progressValue)
@@ -89,14 +86,14 @@ namespace serenity {
 		m_status = statusMessage;
 	}
 
-	ManagerHandle ProgressBar::GetManagerHandle( )
+	std::vector<ProgressBar*> ProgressBar::GetManagerHandle( )
 	{
 		return indicator_handle::m_managerHandle;
 	}
 
 	void ProgressBar::UpdateManagerHandle( )
 	{
-		indicator_handle::m_managerHandle = managerSubscribers;
+		indicator_handle::m_managerHandle = managedIndicators;
 	}
 
 	int ProgressBar::ManagerRefCount( )

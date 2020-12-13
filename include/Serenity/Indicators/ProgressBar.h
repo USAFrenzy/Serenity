@@ -9,7 +9,6 @@
 // ToDo:  Look At ProgressManager.h Note
 
 namespace serenity {
-	using ManagerHandle = std::vector<Subscriber*>;
 
 	//!? FIXME!!!
 	class ProgressBar : public Notifier
@@ -28,8 +27,8 @@ namespace serenity {
 		// ToDo: Substituted In For Whatever Use Case And Keep The Parameters As Is
 		virtual void UpdateProgress(float updateValue, float totalWork, std::ostream& os = std::cout);
 
-		void RegisterIndicator(Subscriber* managerListener) override;
-		void UnregisterIndicator(Subscriber* managerListener) override;
+		void RegisterIndicator( ) override;
+		void UnregisterIndicator( ) override;
 		void NotifySubscriber( ) override;
 
 		virtual void OutputProgress(std::ostream& os = std::cout);
@@ -45,10 +44,12 @@ namespace serenity {
 		void SetStatus(const std::string& statusMessage);
 
 		static int ManagerRefCount( );
-		
-		ManagerHandle GetManagerHandle( );
+
+		std::vector<ProgressBar*> GetManagerHandle( );
 
 		void UpdateManagerHandle( );
+
+		inline static std::vector<ProgressBar*> managedIndicators;
 
 	      protected:
 		std::mutex m_mutex;
@@ -58,11 +59,12 @@ namespace serenity {
 		float m_barWidth;
 		float m_progress;
 		float m_totalWork;
-		ManagerHandle managerSubscribers;
 	};
 
 	namespace indicator_handle {
-		static ManagerHandle m_managerHandle;
+		using ManagerHandle = std::vector<ProgressBar*>;
+
+		static ManagerHandle m_managerHandle {ProgressBar::managedIndicators};
 		static int m_refCounter;
 	} // namespace indicator_handle
 

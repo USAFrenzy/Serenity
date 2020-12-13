@@ -42,6 +42,6 @@ namespace serenity {
 		void Update(float updateValue, float totalWork, std::ostream &os = std::cout) override;
 
 	      private:
-		std::vector<Subscriber *>*m_progressBars;
+		indicator_handle::ManagerHandle *m_progressBars;
 	};
 } // namespace serenity

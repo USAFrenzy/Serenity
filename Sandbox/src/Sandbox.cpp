@@ -91,14 +91,14 @@ int main( )
 	std::cout << "\n\nSwitching Back To Testlog.txt\n\n";
 	log.Open( ); /****************************************************************************/
 	log.Log("Testing The Register Observer Func");
-	serenity::ManagerHandle indicatorHandle = logProgress.GetManagerHandle( );
+	serenity::indicator_handle::ManagerHandle indicatorHandle = logProgress.GetManagerHandle( );
 	log.Log("Handle Vector Size: " + std::to_string(logProgress.ManagerRefCount( )));
-	logProgress.RegisterIndicator(&manager);
+	logProgress.RegisterIndicator();
 	log.Log("Registered One Indicator");
 	log.Log("Handle Vector Size: " + std::to_string(logProgress.ManagerRefCount( )));
 	log.Log("Testing The Unregister Observer Func");
 	log.Log("Handle Vector Size: " + std::to_string(logProgress.ManagerRefCount( )));
-	logProgress.UnregisterIndicator(&manager);
+	logProgress.UnregisterIndicator();
 	log.Log("Unregistered One Indicator");
 	log.Log("Handle Vector Size: " + std::to_string(logProgress.ManagerRefCount( )));
 	log.Close( ); /****************************************************************************/

@@ -14,7 +14,7 @@ namespace serenity {
 
 	void DefaultBar::UpdateProgress(float updateValue, float totalWork, std::ostream& os)
 	{
-		if(managerSubscribers.size( ) != 0) {
+		if(managedIndicators.size( ) != 0) {
 			NotifySubscriber( );
 		}
 		SetWorkload(totalWork);
