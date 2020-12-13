@@ -2,7 +2,7 @@
 
 This Is More Practice Than Anything Else As Well As A Learning Project As A Home-brewed Logging Library.
 
- In Redemption And For Use In Future Projects.The Intended Use For This Eventual Library Is To Substitute spdlog (Albeit, This Will Probably Never Match That Lib's Speed) 
+The Intended Use For This Eventual Library Is To Substitute spdlog In Redemption And For Use In Future Projects. (Albeit, This Will Probably Never Match That Lib's Speed) 
 
 
 ****************************************************************************
@@ -22,8 +22,8 @@ This Is More Practice Than Anything Else As Well As A Learning Project As A Home
 - [ ]
 
 ### Example:
-    Instance Oriented                          Global Oriented                        Default Init Oriented
 ````c++
+* Instance Oriented *                      * Global Oriented *                    * Default Init Oriented *
 Logger foo("bar");                         SetLevel(LogLevel::baz);               Init();
 foo.SetLevel(LogLevel::baz);               SetPattern("^[%H%M%S]^v");             Logger foo("bar");
 foo.SetPattern("^[%H%M%S]^v");             LogOutput(LogOutput::bar);
@@ -40,7 +40,7 @@ foo.Register();
 Expected Usage | Current Usage
 ------------ | -------------
 ````Logger.Register();```` |````Logger.Register(Subscriber& manager)````
-````Logger log(ìLoggerNameî);```` OR ````Logger("LoggerName");```` | ````Logger log(ìLoggerNameî)````
+````Logger log(‚ÄúLoggerName‚Äù);```` OR ````Logger("LoggerName");```` | ````Logger log(‚ÄúLoggerName‚Äù)````
 ````log.SetLevel(LogLevel::lvl);```` OR ````SetLevel(LogLevel::lvl)```` | ````log.SetLevel(LogLevel::lvl);````  
 ````log.SetPattern("fmtStr"); OR SetPattern("fmtStr")````  | ------------------N/A---------------
 ````log.LogOutput(LogOutput::op)```` OR  ````LogOutput(LogOutput::op);```` | ````log.Init(fileName, LogOutput::op);````
