@@ -22,7 +22,7 @@ The Intended Use For This Eventual Library Is To Substitute spdlog In Redemption
 
 ### Example:
 ````c++
-<p> <span style="color:green">* Instance Oriented *                      * Global Oriented *                    * Default Init Oriented *</span> </p>
+* Instance Oriented *                      * Global Oriented *                    * Default Init Oriented *
 Logger foo("bar");                         SetLevel(LogLevel::baz);               Init();
 foo.SetLevel(LogLevel::baz);               SetPattern("^[%H%M%S]^v");             Logger foo("bar");
 foo.SetPattern("^[%H%M%S]^v");             LogOutput(LogOutput::bar);
