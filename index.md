@@ -14,7 +14,7 @@ The Intended Use For This Eventual Library Is To Substitute spdlog In Redemption
 ### *Current* Logger Specific Example:
 ````c++
 * Default Init Oriented *
-Init();
+Logger::Init();
 Logger foo("bar");
 ````
 
