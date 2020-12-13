@@ -36,7 +36,8 @@ namespace helper_color {
 
 	inline FILE* GetStdStream(const std::ostream& stream);
 	inline bool isColored(std::ostream& stream);
-	inline bool is_atty(const std::ostream& stream);
+	// Basically isatty posix function warpper for validating output stream from the <io.h> header
+	inline bool isCharDevice(const std::ostream& stream);
 
 #if defined(SERENITY_WINDOWS)
 	//? background = -1?
