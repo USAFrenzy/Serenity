@@ -14,7 +14,7 @@ This Is More Practice Than Anything Else As Well As A Learning Project As A Home
 
 ## Current Goals                                                   
 - [ ] Get From Current Usage Syntax To Expected Usage Syntax 
-- [X] Have The Registration Of A Logger Grab The Manager Handle And Emplace Itself Into The Manager Vector Via The Handle
+- [X] Have The Registration Of A Logger Grab The Manager Handle And Insert Itself Into The Manager Via A Handle
 - [ ]
 - [ ]
 - [ ]
