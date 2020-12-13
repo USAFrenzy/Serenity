@@ -12,11 +12,3 @@ The Intended Use For This Eventual Library Is To Substitute spdlog In Redemption
 ### [Future Site](https://usafrenzy.github.io/Serenity/)
 ****************************************************************************
 
-## Current Goals                                                   
-- [ ] Get From Current Usage Syntax To Expected Usage Syntax 
-- [X] Have The Registration Of A Logger Grab The Manager Handle And Insert Itself Into The Manager Via A Handle
-- [ ]
-- [ ]
-- [ ]
-- [ ]
-- [ ]
