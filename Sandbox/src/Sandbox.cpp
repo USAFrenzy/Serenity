@@ -58,10 +58,10 @@ int main( )
 	GetConsoleScreenBufferInfo(handle, &csbiInfo);
 	wOldColorAttrs = csbiInfo.wAttributes;
 
-	for(int color = 1; color < 27; color++) {
+	for(int color = 1; color <= 19; color++) {
 		MsgDetails::LogColor temp = static_cast<MsgDetails::LogColor>(color);
 		log.SetLogColor(temp);
-		log.Log(log.UseMsgColor( ) + "Console Message Flags: " + log.PrintMsgColor( ));
+		log.Log(log.UseMsgColor( ) + "Console Message Flags: " + log.PrintColorAsText( ));
 		SetConsoleTextAttribute(handle, wOldColorAttrs);
 		//log.SetLogColor( MsgDetails::LogColor::reset);
 	}
@@ -91,16 +91,16 @@ int main( )
 	std::cout << "\n\nSwitching Back To Testlog.txt\n\n";
 	log.Open( ); /****************************************************************************/
 	log.Log("Testing The Register Observer Func");
-	serenity::ManagerHandle indicatorHandle = logProgress.GetHandle( );
-	log.Log("Handle Vector Size: " + std::to_string(logProgress.HandleRef( )));
+	serenity::ManagerHandle indicatorHandle = logProgress.GetManagerHandle( );
+	log.Log("Handle Vector Size: " + std::to_string(logProgress.ManagerRefCount( )));
 	logProgress.RegisterIndicator(&manager);
 	log.Log("Registered One Indicator");
-	log.Log("Handle Vector Size: " + std::to_string(logProgress.HandleRef( )));
+	log.Log("Handle Vector Size: " + std::to_string(logProgress.ManagerRefCount( )));
 	log.Log("Testing The Unregister Observer Func");
-	log.Log("Handle Vector Size: " + std::to_string(logProgress.HandleRef( )));
+	log.Log("Handle Vector Size: " + std::to_string(logProgress.ManagerRefCount( )));
 	logProgress.UnregisterIndicator(&manager);
 	log.Log("Unregistered One Indicator");
-	log.Log("Handle Vector Size: " + std::to_string(logProgress.HandleRef( )));
+	log.Log("Handle Vector Size: " + std::to_string(logProgress.ManagerRefCount( )));
 	log.Close( ); /****************************************************************************/
 
 	std::cout << "\n\n**********************************************************************************\n";

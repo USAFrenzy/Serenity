@@ -9,32 +9,25 @@ Test Logger: DISABLED
 Test Logger: **********************************************************************************
 Test Logger: Testing Message Flag Switches:
 Test Logger: **********************************************************************************
-Test Logger: [mConsole Message Flags: Reset
-Test Logger: [1mConsole Message Flags: Bold
-Test Logger: [2mConsole Message Flags: Dark
-Test Logger: [4mConsole Message Flags: Underline
-Test Logger: [5mConsole Message Flags: Blink
-Test Logger: [7mConsole Message Flags: Reverse
-Test Logger: [8mConsole Message Flags: Concealed
-Test Logger: [KConsole Message Flags: Clear-line
-Test Logger: [30mConsole Message Flags: Black
-Test Logger: [31mConsole Message Flags: Red
-Test Logger: [32mConsole Message Flags: Green
-Test Logger: [33mConsole Message Flags: Yellow
-Test Logger: [34mConsole Message Flags: Blue
-Test Logger: [35mConsole Message Flags: Magenta
-Test Logger: [36mConsole Message Flags: Cyan
-Test Logger: [37mConsole Message Flags: White
-Test Logger: [40mConsole Message Flags: Black Background
-Test Logger: [41mConsole Message Flags: Red Background
-Test Logger: [42mConsole Message Flags: Green Background
-Test Logger: [43mConsole Message Flags: Yellow Background
-Test Logger: [44mConsole Message Flags: Blue Background
-Test Logger: [45mConsole Message Flags: Magenta Background
-Test Logger: [46mConsole Message Flags: Cyan Background
-Test Logger: [47mConsole Message Flags: White Background
-Test Logger: [33m[1mConsole Message Flags: Bold Yellow
-Test Logger: [31m[1mConsole Message Flags: Bold Red
+Test Logger: [This Is A PlaceHolder For Color Fmt]  Console Message Flags: Black
+Test Logger: [This Is A PlaceHolder For Color Fmt]  Console Message Flags: Red
+Test Logger: [This Is A PlaceHolder For Color Fmt]  Console Message Flags: Green
+Test Logger: [This Is A PlaceHolder For Color Fmt]  Console Message Flags: Yellow
+Test Logger: [This Is A PlaceHolder For Color Fmt]  Console Message Flags: Blue
+Test Logger: [This Is A PlaceHolder For Color Fmt]  Console Message Flags: Magenta
+Test Logger: [This Is A PlaceHolder For Color Fmt]  Console Message Flags: Cyan
+Test Logger: [This Is A PlaceHolder For Color Fmt]  Console Message Flags: White
+Test Logger: [This Is A PlaceHolder For Color Fmt]  Console Message Flags: Black Background
+Test Logger: [This Is A PlaceHolder For Color Fmt]  Console Message Flags: Red Background
+Test Logger: [This Is A PlaceHolder For Color Fmt]  Console Message Flags: Green Background
+Test Logger: [This Is A PlaceHolder For Color Fmt]  Console Message Flags: Yellow Background
+Test Logger: [This Is A PlaceHolder For Color Fmt]  Console Message Flags: Blue Background
+Test Logger: [This Is A PlaceHolder For Color Fmt]  Console Message Flags: Magenta Background
+Test Logger: [This Is A PlaceHolder For Color Fmt]  Console Message Flags: Cyan Background
+Test Logger: [This Is A PlaceHolder For Color Fmt]  Console Message Flags: White Background
+Test Logger: [This Is A PlaceHolder For Color Fmt]  Console Message Flags: Bold Yellow
+Test Logger: [This Is A PlaceHolder For Color Fmt]  Console Message Flags: Bold Red
+Test Logger: [This Is A PlaceHolder For Color Fmt]  Console Message Flags: Black
 Test Logger: **********************************************************************************
 Test Logger: Testing The Register Observer Func
 Test Logger: Handle Vector Size: 0

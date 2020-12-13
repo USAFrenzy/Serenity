@@ -22,6 +22,8 @@ namespace serenity {
 	namespace details {
 
 		namespace logger {
+			//? With All The Calls To Output Stream, Might Be Beneficial To Make Some Sort Of Filter
+			//? Function That Sets The O/P Stream Handle Based On LogOutput
 
 			enum class LogLevel {
 				trace   = SERENITY_TRACE,
@@ -32,7 +34,6 @@ namespace serenity {
 				fatal   = SERENITY_FATAL,
 				off     = SERENITY_DISABLED
 			};
-
 			enum class LogOutput {
 				console = LOG_TO_CONSOLE,
 				file    = LOG_TO_FILE,
@@ -55,10 +56,13 @@ namespace serenity {
 		// ToDo: thread to current thread and output to log using Log() if multi-threading
 		//?                         Maybe still use buffer if no MT?
 
+		// ToDo: Rename Things To Make More Sense Here And Break Some Code Out Into Separate Files
+		//? For Instance, Might Be Neater To Put All Enums In Their Own "Enums.h" Header File And Such
+
 		struct MsgDetails
 		{
 		      public:
-			enum class LogColor {
+			enum class LogStyle {
 				begin = 0,
 				reset,
 				bold,
@@ -68,6 +72,11 @@ namespace serenity {
 				reverse,
 				concealed,
 				clearline,
+				end
+			};
+
+			enum class LogColor {
+				begin = 0,
 				black,
 				red,
 				green,
@@ -90,18 +99,29 @@ namespace serenity {
 			};
 
 		      protected:
+			std::string LogStyleToCode(LogStyle style)
+			{
+				std::map<LogStyle, std::string> logStyleMap = {
+				  {LogStyle::reset, "\033[m"},
+				  {LogStyle::bold, "\033[1m"},
+				  {LogStyle::dark, "\033[2m"},
+				  {LogStyle::underline, "\033[4m"},
+				  {LogStyle::blink, "\033[5m"},
+				  {LogStyle::reverse, "\033[7m"},
+				  {LogStyle::concealed, "\033[8m"},
+				  {LogStyle::clearline, "\033[K"},
+				};
+				std::string resultString = "DEFAULT";
+				auto iterator            = logStyleMap.find(style);
+				if(iterator != logStyleMap.end( )) {
+					resultString = iterator->second;
+				}
+				return resultString;
+			}
+
 			std::string LogColorToColorCode(LogColor color)
 			{
 				std::map<LogColor, std::string> logColorMap = {
-
-				  {LogColor::reset, "\033[m"},
-				  {LogColor::bold, "\033[1m"},
-				  {LogColor::dark, "\033[2m"},
-				  {LogColor::underline, "\033[4m"},
-				  {LogColor::blink, "\033[5m"},
-				  {LogColor::reverse, "\033[7m"},
-				  {LogColor::concealed, "\033[8m"},
-				  {LogColor::clearline, "\033[K"},
 				  {LogColor::black, "\033[30m"},
 				  {LogColor::red, "\033[31m"},
 				  {LogColor::green, "\033[32m"},
@@ -127,20 +147,31 @@ namespace serenity {
 				}
 				return resultString;
 			}
+			LogStyle LogStyleFromCode(std::string styleStr)
+			{
+				std::map<std::string, LogStyle> logStyleString = {
+				  {"\033[m", LogStyle::reset},
+				  {"\033[1m", LogStyle::bold},
+				  {"\033[2m", LogStyle::dark},
+				  {"\033[4m", LogStyle::underline},
+				  {"\033[5m", LogStyle::blink},
+				  {"\033[7m", LogStyle::reverse},
+				  {"\033[8m", LogStyle::concealed},
+				  {"\033[K", LogStyle::clearline},
+				};
+				LogStyle resultString = LogStyle::reset;
+				auto iterator         = logStyleString.find(styleStr);
+				if(iterator != logStyleString.end( )) {
+					resultString = iterator->second;
+				}
+				return resultString;
+			}
 
 			LogColor LogColorFromColorCode(std::string colorStr)
 			{
 				std::map<std::string, LogColor> logColorString =
 
 				  {
-				    {"\033[m", LogColor::reset},
-				    {"\033[1m", LogColor::bold},
-				    {"\033[2m", LogColor::dark},
-				    {"\033[4m", LogColor::underline},
-				    {"\033[5m", LogColor::blink},
-				    {"\033[7m", LogColor::reverse},
-				    {"\033[8m", LogColor::concealed},
-				    {"\033[K", LogColor::clearline},
 				    {"\033[30m", LogColor::black},
 				    {"\033[31m", LogColor::red},
 				    {"\033[32m", LogColor::green},
@@ -160,9 +191,29 @@ namespace serenity {
 				    {"\033[33m\033[1m", LogColor::boldYellow},
 				    {"\033[31m\033[1m", LogColor::boldRed},
 				  };
-				LogColor resultString = LogColor::reset;
+				LogColor resultString = static_cast<LogColor>(LogStyle::reset);
 				auto iterator         = logColorString.find(colorStr);
 				if(iterator != logColorString.end( )) {
+					resultString = iterator->second;
+				}
+				return resultString;
+			}
+
+			std::string LogStyleToString(LogStyle style)
+			{
+				std::map<LogStyle, std::string> styleString = {
+				  {LogStyle::reset, "Reset"},
+				  {LogStyle::bold, "Bold"},
+				  {LogStyle::dark, "Dark"},
+				  {LogStyle::underline, "Underline"},
+				  {LogStyle::blink, "Blink"},
+				  {LogStyle::reverse, "Reverse"},
+				  {LogStyle::concealed, "Concealed"},
+				  {LogStyle::clearline, "Clear-line"},
+				};
+				std::string resultString = "DEFAULT";
+				auto iterator            = styleString.find(style);
+				if(iterator != styleString.end( )) {
 					resultString = iterator->second;
 				}
 				return resultString;
@@ -171,15 +222,6 @@ namespace serenity {
 			std::string LogColorToStr(LogColor color)
 			{
 				std::map<LogColor, std::string> colorStr = {
-
-				  {LogColor::reset, "Reset"},
-				  {LogColor::bold, "Bold"},
-				  {LogColor::dark, "Dark"},
-				  {LogColor::underline, "Underline"},
-				  {LogColor::blink, "Blink"},
-				  {LogColor::reverse, "Reverse"},
-				  {LogColor::concealed, "Concealed"},
-				  {LogColor::clearline, "Clear-line"},
 				  {LogColor::black, "Black"},
 				  {LogColor::red, "Red"},
 				  {LogColor::green, "Green"},
@@ -207,34 +249,56 @@ namespace serenity {
 			}
 
 		      public:
-			LogColor GetLogColor( )
+			LogColor GetColor( )
 			{
 				return LogColorFromColorCode(m_msgColor);
 			}
-			std::string PrintMsgColor( )
+			std::string PrintColorAsText( )
 			{
-				return LogColorToStr(GetLogColor( ));
+				return LogColorToStr(GetColor( ));
 			}
 
-			// ToDo: #############################################################
-			// ToDo: #                          FixMe                            #
-			// ToDo: #############################################################
-			void SetLogColor(LogColor color)
+			// ToDo: ################################################################################
+			// ToDo: #                                   FixMe                                      #
+			// ToDo: ################################################################################
+
+
+			inline void SetLogColor(LogColor color)
 			{
 				m_msgColor = LogColorToColorCode(color);
 			}
 
 			std::string UseMsgColor( )
 			{
-				return m_msgColor;
+				// ToDo: FLush Out With Color Options, Create The TextColor Enum Which Will
+				// ToDo: Handle Whether To Output The Formatted String With The Color Code For
+				// ToDo: Mac/Lin Or Use Win's Color Defines
+
+				// std::ostream &os;
+				/* switch(GetColor( )) {
+					case LogColor::black:
+						{
+							os << TextColor::black;
+						} break;
+		*/
+				std::string returnStr = "[This Is A PlaceHolder For Color Fmt]  ";
+				return returnStr;
+				//}
 			}
 
 			void LogResetColor( ) { }
-			// ToDo: ###########################################################
 
 		      private:
 			std::string m_msgColor;
 		};
+
+		// ToDo: Look At UseMsgColor() Note Above ^^^
+		enum class TextColor {
+
+
+		}; // enum TextColor
+
+		// ToDo: ################################################################################
 
 
 	} // namespace details

@@ -9,7 +9,7 @@ namespace serenity {
 	ProgressBar::ProgressBar( )
 	  : m_barFill(""), m_barRemainder(""), m_barWidth(50.0f), m_progress(0.0f), m_status(""), m_totalWork(0.0f)
 	{
-		// RegisterIndicator( );
+		 //RegisterIndicator( );
 	}
 
 	ProgressBar::ProgressBar(ProgressBar& copy)
@@ -29,10 +29,9 @@ namespace serenity {
 	//?    Is Instantiated?
 	void ProgressBar::RegisterIndicator(Subscriber* managerListener)
 	{
-		// This Works To Register An Indicator Object
 		managerSubscribers.emplace_back(managerListener);
 		indicator_handle::m_refCounter++;
-		UpdateHandle( );
+		UpdateManagerHandle( );
 	}
 
 	// Searches Through The Subscriber Vector For The Listener Object And If The Listener Object Has Been
@@ -41,26 +40,22 @@ namespace serenity {
 	{
 		ManagerHandle::iterator iteratorIndex =
 		  std::find(managerSubscribers.begin( ), managerSubscribers.end( ), managerListener);
-
 		if(iteratorIndex != managerSubscribers.end( )) {
 			managerSubscribers.erase(iteratorIndex);
 		}
-		// After Deletion, Decrement The Total Index Reference And Update The Handle
 		indicator_handle::m_refCounter--;
-		UpdateHandle( );
+		UpdateManagerHandle( );
 	}
 
 	void ProgressBar::NotifySubscriber( )
 	{
-		// UpdateHandle() May Possibly Be Unnecessary Here -> Don't Have A Test Laid Out For It Yet
-		UpdateHandle( );
+		// UpdateManagerHandle() May Possibly Be Unnecessary Here -> Don't Have A Test Laid Out For It Yet
+		UpdateManagerHandle( );
 		for(Subscriber* listener : managerSubscribers) {
 			std::ostream& os = std::cout;
 			listener->Update(m_progress, m_totalWork, os);
 		}
 	}
-
-	// ToDo: #################################################################################################
 
 	void ProgressBar::Progress(float progressValue)
 	{
@@ -94,17 +89,17 @@ namespace serenity {
 		m_status = statusMessage;
 	}
 
-	ManagerHandle ProgressBar::GetHandle( )
+	ManagerHandle ProgressBar::GetManagerHandle( )
 	{
 		return indicator_handle::m_managerHandle;
 	}
 
-	void ProgressBar::UpdateHandle( )
+	void ProgressBar::UpdateManagerHandle( )
 	{
 		indicator_handle::m_managerHandle = managerSubscribers;
 	}
 
-	int ProgressBar::HandleRef( )
+	int ProgressBar::ManagerRefCount( )
 	{
 		return indicator_handle::m_refCounter;
 	}

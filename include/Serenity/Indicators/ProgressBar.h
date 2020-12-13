@@ -43,11 +43,12 @@ namespace serenity {
 		virtual void FillRemainder(const std::string& symbol);
 
 		void SetStatus(const std::string& statusMessage);
-		ManagerHandle GetHandle( );
 
-		void UpdateHandle( );
+		static int ManagerRefCount( );
+		
+		ManagerHandle GetManagerHandle( );
 
-		static int HandleRef( );
+		void UpdateManagerHandle( );
 
 	      protected:
 		std::mutex m_mutex;
