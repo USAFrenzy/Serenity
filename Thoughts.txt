@@ -1,0 +1,20 @@
+#####################################################################################################################################################
+		        Expected Usage				                           Current Usage
+#####################################################################################################################################################
+Logger.Register();                                                                 Logger.Register(Subscriber& manager)
+Logger log(“LoggerName”); OR Logger("LoggerName");                                 Logger log(“LoggerName”)
+log.SetLevel(LogLevel::lvl); OR SetLevel(LogLevel::lvl)                            log.SetLevel(LogLevel::lvl);  
+log.SetPattern("fmtStr"); OR SetPattern("fmtStr")                                  ------------------N/A---------------
+log.LogOutput(LogOutput::op) OR  LogOutput(LogOutput::op);                         log.Init(fileName, LogOutput::op);
+                                                                                       -> To Be Fair, I Still Like Having A Default Init Function...
+log.SetStyle(LoggerStyle::style); OR SetStyle(LoggerStyle::style);                 ------------------N/A---------------
+                                                                            
+                                 Goals                                                   
+- [ ] Get From Current Usage Syntax To Expected Usage Syntax 
+- [X] Have The Registration Of A Logger Grab The Manager Handle And Emplace Itself Into The Manager Vector Via The Handle
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+

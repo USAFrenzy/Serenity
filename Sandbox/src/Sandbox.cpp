@@ -3,7 +3,7 @@
 #include <process.h>     // for system
 #include <processenv.h>  // for GetStdHandle
 #include <WinBase.h>     // for STD_OUTPUT_HANDLE
-#include <xstring>       // for string
+#include <string>       // IWYU pragma: keep
 
 #include <Serenity/Indicators/DefaultIndicator.h>
 #include <Serenity/Indicators/IndicatorManager.h>
@@ -14,19 +14,6 @@
 //! Out The Kinks
 
 // ToDo:  Look At ProgressManager.h Note
-
-// This Is What I'd Like To Eventually Accomplish Here...
-/*
-        Logger log; OR Logger("LoggerName"); -> Difference Of Setting Up A Default Logger Or Custom Logger    
-        log.setlevel(LogLevel::lvl); OR [as a global setting] SetLevel(LogLevel::lvl)
-        log.setpattern("Formatting String"); OR [as a global setting] SetPattern("Formatting String")    
-        log.LogOutput(LogOutput::o/p) OR [as a global setting] LogOutput(LogOutput::o/p);
-        log.SetStyle(LoggerStyle::style); OR [as a global setting] SetStyle(LoggerStyle::style); // JSON, YAML, etc...
-                           Now I'd Also Like To Bind Different Sink Types Together 
-       i.e. Being Whether It's Solely A File/Console O/P Or Both, Colored Text Or Not, Rotating Files Or Not, File Size, etc
-
-    */
-
 
 #define Testing 1
 
