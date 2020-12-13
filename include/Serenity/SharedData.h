@@ -1,8 +1,8 @@
 #pragma once
 
 #include <iostream>
-#include <map>
-#include <string>
+#include <map>     // IWYU pragma: keep
+#include <xstring> // for string
 
 constexpr int SERENITY_TRACE    = 0;
 constexpr int SERENITY_INFO     = 1;

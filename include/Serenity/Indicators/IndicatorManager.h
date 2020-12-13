@@ -1,10 +1,9 @@
 #pragma once
-
-#include <iostream>
-#include <vector>
+// IWYU pragma: no_include "iosfwd"
 
 #include <Serenity/Indicators/ObserverInterface.h>
-#include <Serenity/Indicators/ProgressBar.h>
+#include <Serenity/Indicators/ProgressBar.h> // IWYU pragma: keep
+#include <iostream> // for cout
 
 /*
     Might be worth looking into doing something along the lines of having the current

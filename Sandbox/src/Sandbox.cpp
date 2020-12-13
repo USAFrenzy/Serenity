@@ -1,10 +1,14 @@
-#include <Windows.h> // For Resetting The Console Color For Now
-#include <iostream>
-#include <thread>
+#include <consoleapi2.h> // for GetConsoleScreenBufferInfo, SetConsoleTextAttribute, CONSOLE_SCREEN_BUFFER_INFO
+#include <minwindef.h>   // for WORD
+#include <process.h>     // for system
+#include <processenv.h>  // for GetStdHandle
+#include <WinBase.h>     // for STD_OUTPUT_HANDLE
+#include <xstring>       // for string
 
-#include <Serenity/Logger.h>
-#include <Serenity/Indicators/IndicatorManager.h>
 #include <Serenity/Indicators/DefaultIndicator.h>
+#include <Serenity/Indicators/IndicatorManager.h>
+#include <Serenity/Logger.h>
+#include <Serenity/SharedData.h> // for LogLevel, LogOutput, MsgDetails, MsgDetails::LogColor, LogOutput::all, LogOutput::file, SERENITY_DISABLED, SERENITY_TRACE
 
 //! Note: Take This .clang-format File And Upload For Use In Projects...Ironed
 //! Out The Kinks
@@ -93,12 +97,12 @@ int main( )
 	log.Log("Testing The Register Observer Func");
 	serenity::indicator_handle::ManagerHandle indicatorHandle = logProgress.GetManagerHandle( );
 	log.Log("Handle Vector Size: " + std::to_string(logProgress.ManagerRefCount( )));
-	logProgress.RegisterIndicator();
+	logProgress.RegisterIndicator( );
 	log.Log("Registered One Indicator");
 	log.Log("Handle Vector Size: " + std::to_string(logProgress.ManagerRefCount( )));
 	log.Log("Testing The Unregister Observer Func");
 	log.Log("Handle Vector Size: " + std::to_string(logProgress.ManagerRefCount( )));
-	logProgress.UnregisterIndicator();
+	logProgress.UnregisterIndicator( );
 	log.Log("Unregistered One Indicator");
 	log.Log("Handle Vector Size: " + std::to_string(logProgress.ManagerRefCount( )));
 	log.Close( ); /****************************************************************************/

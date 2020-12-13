@@ -1,10 +1,16 @@
 #pragma once
 
+// IWYU pragma: no_include "iosfwd"
+// IWYU pragma: no_include "xstring"
+
 #include <iostream>
-#include <mutex>  // For Thread-Safety In ProgressBar Class
-#include <vector> // Strictly For Indicator Handle Storage (May Just Create A Streamlined Vector Class For This)
+// For Thread-Safety In ProgressBar Class
+#include <mutex>
+// Strictly For Indicator Handle Storage (May Just Create A Streamlined Vector Class For This)
+#include <vector> // IWYU pragma: keep
 
 #include <Serenity/Indicators/ObserverInterface.h>
+
 
 // ToDo:  Look At ProgressManager.h Note
 

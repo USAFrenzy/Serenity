@@ -1,6 +1,10 @@
 #pragma once
+// IWYU pragma: no_include "iosfwd"
+// IWYU pragma: no_include "iostream"
+// IWYU pragma: no_include "xstring"
 
-#include <Serenity/Indicators/ProgressBar.h>
+#include <Serenity/Indicators/ProgressBar.h> 
+
 
 namespace serenity {
 

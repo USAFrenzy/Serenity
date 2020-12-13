@@ -1,3 +1,7 @@
+// IWYU pragma: no_include "iosfwd"
+// IWYU pragma: no_include "vcruntime_new.h"
+// IWYU pragma: no_include "Serenity/Indicators/ProgressBar.h"
+
 #include <Serenity/Indicators/IndicatorManager.h>
 
 
