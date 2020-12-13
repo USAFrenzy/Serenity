@@ -13,14 +13,29 @@ The Intended Use For This Eventual Library Is To Substitute spdlog In Redemption
 
 ### *Current* Logger Specific Example:
 ````c++
-* Instance Oriented *                      * Global Oriented *                    * Default Init Oriented *
-Logger foo("bar");                         SetLevel(LogLevel::baz);               Init();
-foo.SetLevel(LogLevel::baz);               SetPattern("^[%H%M%S]^v");             Logger foo("bar");
-foo.SetPattern("^[%H%M%S]^v");             LogOutput(LogOutput::bar);
-foo.LogOutput(LogOutput::bar);             SetFormat(LoggerFormat::bar);
-foo.SetFormat(LoggerFormat::bar);          Logger("foo");
-foo.Register();                                                  
+* Default Init Oriented *
+Init();
+Logger foo("bar");
 ````
+
+````c++
+* Instance Oriented *                      
+Logger foo("bar");
+foo.SetLevel(LogLevel::baz);
+foo.SetPattern("^[%H%M%S]^v");
+foo.LogOutput(LogOutput::bar);
+foo.SetFormat(LoggerFormat::bar);
+foo.Register();
+````
+
+````c++
+* Global Oriented * 
+SetLevel(LogLevel::baz);
+SetPattern("^[%H%M%S]^v");
+LogOutput(LogOutput::bar);
+SetFormat(LoggerFormat::bar);
+Logger("foo");
+```` 
 
 ###############################################
 ### [Future Examples Placeholder]
