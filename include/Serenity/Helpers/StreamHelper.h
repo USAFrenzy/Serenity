@@ -6,7 +6,8 @@
 #include <iostream>
 
 namespace serenity {
-	namespace stream_helper {
+
+	namespace helper_stream {
 
 		// iword index allocation set to the colorIndex variable
 		static int colorIndex = std::ios_base::xalloc( );
@@ -95,16 +96,17 @@ namespace serenity {
 		// That
 
 		// Sets The Stream To Be Colored By Setting The Streams iword Index Flag To A Long 0
-		inline std::ostream& colored(std::ostream& stream)
+		inline void colored(std::ostream& stream)
 		{
 			stream.iword(colorIndex) = 0L;
 		}
 		// Sets The Stream To Be UnColored By Setting The Streams iword Index Flag To A Long 1 (Default
 		// Behavior)
-		inline std::ostream& uncolored(std::ostream& stream)
+		inline void uncolored(std::ostream& stream)
 		{
 			stream.iword(colorIndex) = 1L;
 		}
 
-	} // namespace stream_helper
+	} // namespace helper_stream
+
 } // namespace serenity

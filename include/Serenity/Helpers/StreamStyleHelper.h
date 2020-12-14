@@ -1,8 +1,8 @@
 #pragma once
 
-#include <Serenity/Helpers/StreamHelper.h>
 #include <Serenity/SharedData.h>
-
+#include <Serenity/Helpers/Utilities.h>
+#include <Serenity/Helpers/StreamHelper.h>
 
 
 namespace serenity {
@@ -11,23 +11,23 @@ namespace serenity {
 
 		inline std::ostream& reset(std::ostream& stream)
 		{
-			if(stream_helper::colored(stream)) {
+			if(helper_stream::isColored(stream)) {
 				switch(operatingSystem) {
 					case OpSystem::Windows:
 						{
-							stream_helper::windowAttributes(stream, -1, -1);
+							helper_stream::windowAttributes(stream, -1, -1);
 						}
 						break;
 					case OpSystem::Mac:
 						{
-							stream
-							  << LogStyleToCode(details::MsgDetails::LogStyle::reset);
+							stream << serenity::utilities::LogStyleToCode(
+							  details::MsgDetails::LogStyle::reset);
 						}
 						break;
 					case OpSystem::Linux:
 						{
-							stream
-							  << LogStyleToCode(details::MsgDetails::LogStyle::reset);
+							stream << serenity::utilities::LogStyleToCode(
+							  details::MsgDetails::LogStyle::reset);
 						}
 						break;
 				}
@@ -37,23 +37,23 @@ namespace serenity {
 
 		inline std::ostream& bold(std::ostream& stream)
 		{
-			if(stream_helper::colored(stream)) {
+			if(helper_stream::isColored(stream)) {
 				switch(operatingSystem) {
 					case OpSystem::Windows:
 						{
-							stream_helper::windowAttributes(stream, -1, -1);
+							helper_stream::windowAttributes(stream, -1, -1);
 						}
 						break;
 					case OpSystem::Mac:
 						{
-							stream
-							  << LogStyleToCode(details::MsgDetails::LogStyle::bold);
+							stream << serenity::utilities::LogStyleToCode(
+							  details::MsgDetails::LogStyle::bold);
 						}
 						break;
 					case OpSystem::Linux:
 						{
-							stream
-							  << LogStyleToCode(details::MsgDetails::LogStyle::bold);
+							stream << serenity::utilities::LogStyleToCode(
+							  details::MsgDetails::LogStyle::bold);
 						}
 						break;
 				}
@@ -63,23 +63,23 @@ namespace serenity {
 
 		inline std::ostream& dark(std::ostream& stream)
 		{
-			if(stream_helper::colored(stream)) {
+			if(helper_stream::isColored(stream)) {
 				switch(operatingSystem) {
 					case OpSystem::Windows:
 						{
-							stream_helper::windowAttributes(stream, -1, -1);
+							helper_stream::windowAttributes(stream, -1, -1);
 						}
 						break;
 					case OpSystem::Mac:
 						{
-							stream
-							  << LogStyleToCode(details::MsgDetails::LogStyle::dark);
+							stream << serenity::utilities::LogStyleToCode(
+							  details::MsgDetails::LogStyle::dark);
 						}
 						break;
 					case OpSystem::Linux:
 						{
-							stream
-							  << LogStyleToCode(details::MsgDetails::LogStyle::dark);
+							stream << serenity::utilities::LogStyleToCode(
+							  details::MsgDetails::LogStyle::dark);
 						}
 						break;
 				}
@@ -89,22 +89,22 @@ namespace serenity {
 
 		inline std::ostream& underline(std::ostream& stream)
 		{
-			if(stream_helper::colored(stream)) {
+			if(helper_stream::isColored(stream)) {
 				switch(operatingSystem) {
 					case OpSystem::Windows:
 						{
-							stream_helper::windowAttributes(stream, -1, -1);
+							helper_stream::windowAttributes(stream, -1, -1);
 						}
 						break;
 					case OpSystem::Mac:
 						{
-							stream << LogStyleToCode(
+							stream << serenity::utilities::LogStyleToCode(
 							  details::MsgDetails::LogStyle::underline);
 						}
 						break;
 					case OpSystem::Linux:
 						{
-							stream << LogStyleToCode(
+							stream << serenity::utilities::LogStyleToCode(
 							  details::MsgDetails::LogStyle::underline);
 						}
 						break;
@@ -115,23 +115,23 @@ namespace serenity {
 
 		inline std::ostream& blink(std::ostream& stream)
 		{
-			if(stream_helper::colored(stream)) {
+			if(helper_stream::isColored(stream)) {
 				switch(operatingSystem) {
 					case OpSystem::Windows:
 						{
-							stream_helper::windowAttributes(stream, -1, -1);
+							helper_stream::windowAttributes(stream, -1, -1);
 						}
 						break;
 					case OpSystem::Mac:
 						{
-							stream
-							  << LogStyleToCode(details::MsgDetails::LogStyle::blink);
+							stream << serenity::utilities::LogStyleToCode(
+							  details::MsgDetails::LogStyle::blink);
 						}
 						break;
 					case OpSystem::Linux:
 						{
-							stream
-							  << LogStyleToCode(details::MsgDetails::LogStyle::blink);
+							stream << serenity::utilities::LogStyleToCode(
+							  details::MsgDetails::LogStyle::blink);
 						}
 						break;
 				}
@@ -141,22 +141,22 @@ namespace serenity {
 
 		inline std::ostream& reverse(std::ostream& stream)
 		{
-			if(stream_helper::colored(stream)) {
+			if(helper_stream::isColored(stream)) {
 				switch(operatingSystem) {
 					case OpSystem::Windows:
 						{
-							stream_helper::windowAttributes(stream, -1, -1);
+							helper_stream::windowAttributes(stream, -1, -1);
 						}
 						break;
 					case OpSystem::Mac:
 						{
-							stream << LogStyleToCode(
+							stream << serenity::utilities::LogStyleToCode(
 							  details::MsgDetails::LogStyle::reverse);
 						}
 						break;
 					case OpSystem::Linux:
 						{
-							stream << LogStyleToCode(
+							stream << serenity::utilities::LogStyleToCode(
 							  details::MsgDetails::LogStyle::reverse);
 						}
 						break;
@@ -167,22 +167,22 @@ namespace serenity {
 
 		inline std::ostream& concealed(std::ostream& stream)
 		{
-			if(stream_helper::colored(stream)) {
+			if(helper_stream::isColored(stream)) {
 				switch(operatingSystem) {
 					case OpSystem::Windows:
 						{
-							stream_helper::windowAttributes(stream, -1, -1);
+							helper_stream::windowAttributes(stream, -1, -1);
 						}
 						break;
 					case OpSystem::Mac:
 						{
-							stream << LogStyleToCode(
+							stream << serenity::utilities::LogStyleToCode(
 							  details::MsgDetails::LogStyle::concealed);
 						}
 						break;
 					case OpSystem::Linux:
 						{
-							stream << LogStyleToCode(
+							stream << serenity::utilities::LogStyleToCode(
 							  details::MsgDetails::LogStyle::concealed);
 						}
 						break;
@@ -193,22 +193,22 @@ namespace serenity {
 
 		inline std::ostream& clearline(std::ostream& stream)
 		{
-			if(stream_helper::colored(stream)) {
+			if(helper_stream::isColored(stream)) {
 				switch(operatingSystem) {
 					case OpSystem::Windows:
 						{
-							stream_helper::windowAttributes(stream, -1, -1);
+							helper_stream::windowAttributes(stream, -1, -1);
 						}
 						break;
 					case OpSystem::Mac:
 						{
-							stream << LogStyleToCode(
+							stream << serenity::utilities::LogStyleToCode(
 							  details::MsgDetails::LogStyle::clearline);
 						}
 						break;
 					case OpSystem::Linux:
 						{
-							stream << LogStyleToCode(
+							stream << serenity::utilities::LogStyleToCode(
 							  details::MsgDetails::LogStyle::clearline);
 						}
 						break;

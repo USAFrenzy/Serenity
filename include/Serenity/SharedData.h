@@ -59,8 +59,10 @@ namespace serenity {
 		// ToDo: Rename Things To Make More Sense Here And Break Some Code Out Into Separate Files
 		//? For Instance, Might Be Neater To Put All Enums In Their Own "Enums.h" Header File And Such
 
+		// Probably Don't Need These As Static Variables
 		static std::string m_msgColor;
 		static std::string m_msgStyle;
+
 		struct MsgDetails
 		{
 			enum class LogStyle {
@@ -98,6 +100,9 @@ namespace serenity {
 				boldRed,
 				end
 			};
+
+			// Probably Don't Need These As Static Functions
+
 			static std::string GetMsgColor( )
 			{
 				return m_msgColor;

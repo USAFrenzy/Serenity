@@ -1,9 +1,17 @@
 #pragma once
 
 #include <Serenity/SharedData.h>
+
 #include <fstream>
 
+
 namespace serenity {
+	// fwd declaration
+	namespace helper_ostream {
+		enum class InterfaceType : unsigned int;
+	}
+
+
 	class Logger
 	{
 	      public:
@@ -13,6 +21,8 @@ namespace serenity {
 		void Open( );
 		void Close( );
 		std::string LogLevelToString(details::logger::LogLevel s_level);
+		void SetLoggerOstream(serenity::helper_ostream::InterfaceType osInterface);
+		std::ostream *const GetLoggerOstream( );
 		virtual ~Logger( ) = default;
 
 		//! Note: This Can Be Thrown In A log message standalone file; that way
@@ -32,6 +42,7 @@ namespace serenity {
 		std::fstream m_file;
 		details::logger::LogOutput m_output;
 		bool m_isFileOpen {false};
+		serenity::helper_ostream::InterfaceType m_ostream;
 	};
 
 } // namespace serenity

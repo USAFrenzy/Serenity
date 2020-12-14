@@ -1,10 +1,11 @@
 
-#include <Serenity/Indicators/IndicatorManager.h>
+#include <Serenity/Helpers/Utilities.h>
+
 #include <Serenity/Logger.h>
+#include <Serenity/Indicators/IndicatorManager.h>
 #include <Serenity/Indicators/DefaultIndicator.h>
 
-#include <string>    // IWYU pragma: keep
-
+#include <string> // IWYU pragma: keep
 
 
 //! Note: Take This .clang-format File And Upload For Use In Projects...Ironed
@@ -50,10 +51,12 @@ int main( )
     #                                    Logger Log Color Testing Section                                     #
     ###########################################################################################################
     */
-
 	// ToDo: Fix The Reset Flag
 	// ToDo: Handle Color Output Text In Library Function Rather Than Explicitly Like Below
 	//?      Possibly Implement Operator Overloading Here For Inc/Dec?
+
+
+
 	log.Open( );
 	auto handle = GetStdHandle(STD_OUTPUT_HANDLE);
 	log.Log("Testing Message Flag Switches:");
@@ -63,14 +66,19 @@ int main( )
 	CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
 	GetConsoleScreenBufferInfo(handle, &csbiInfo);
 	wOldColorAttrs = csbiInfo.wAttributes;
-
-	for(int color = 1; color < 19; color++) {
+	// ToDo: Currently Hacked The Utility Functions For Color Functions Until Wrapped Into Log() Function (Rather Broken ATM - only prints Black Flag)
+	serenity::utilities logHelp;
+	std::ostream& os = std::cout;
+	for(int color = 1; color < 19; ++color) {
 		MsgDetails::LogColor temp = static_cast<MsgDetails::LogColor>(color);
-		//log.SetLogColor(temp);
-		//log.Log(log.UseMsgColor( ) + "Console Message Flags: " + log.PrintColorAsText( ));
-		SetConsoleTextAttribute(handle, wOldColorAttrs);
-		//log.SetLogColor( MsgDetails::LogColor::reset);
+		logHelp.SetLogColor(temp);
+		// ToDo: Removed UseMsgColor() -> Need To Make A Wrapper For It In The Log() Function To Automatically Use The Set Color
+		log.Log( // Placeholder For UseMsgColor() [ WIP On Intended UseMsgColor Functionalty]
+		  "Console Message Flags: " + logHelp.LogColorToStr(temp));
+		//	logHelp.SetLogStyle(MsgDetails::LogStyle::reset);
+		//		SetConsoleTextAttribute(handle, wOldColorAttrs);
 	}
+
 	log.Log("**********************************************************************************");
 	log.Close( );
 	// ####################################### End Of Section ##################################################

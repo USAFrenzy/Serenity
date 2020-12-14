@@ -98,10 +98,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Serenity\Helpers\MessageHelper.h" />
+    <ClInclude Include="include\Serenity\Helpers\OstreamHelper.h" />
     <ClInclude Include="include\Serenity\Helpers\PlatformHelper.h" />
     <ClInclude Include="include\Serenity\Helpers\StreamColorHelper.h" />
     <ClInclude Include="include\Serenity\Helpers\StreamHelper.h" />
     <ClInclude Include="include\Serenity\Helpers\StreamStyleHelper.h" />
+    <ClInclude Include="include\Serenity\Helpers\Utilities.h" />
     <ClInclude Include="include\Serenity\Indicators\DefaultIndicator.h" />
     <ClInclude Include="include\Serenity\Indicators\ObserverInterface.h" />
     <ClInclude Include="include\Serenity\Indicators\ProgressBar.h" />
