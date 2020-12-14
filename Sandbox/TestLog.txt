@@ -27,13 +27,4 @@ Test Logger: [This Is A PlaceHolder For Color Fmt]  Console Message Flags: Cyan 
 Test Logger: [This Is A PlaceHolder For Color Fmt]  Console Message Flags: White Background
 Test Logger: [This Is A PlaceHolder For Color Fmt]  Console Message Flags: Bold Yellow
 Test Logger: [This Is A PlaceHolder For Color Fmt]  Console Message Flags: Bold Red
-Test Logger: [This Is A PlaceHolder For Color Fmt]  Console Message Flags: Black
 Test Logger: **********************************************************************************
-Test Logger: Testing The Register Observer Func
-Test Logger: Handle Vector Size: 0
-Test Logger: Registered One Indicator
-Test Logger: Handle Vector Size: 1
-Test Logger: Testing The Unregister Observer Func
-Test Logger: Handle Vector Size: 1
-Test Logger: Unregistered One Indicator
-Test Logger: Handle Vector Size: 0

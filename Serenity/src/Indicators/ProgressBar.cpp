@@ -92,12 +92,13 @@ namespace serenity {
 
 	std::vector<ProgressBar*> ProgressBar::GetManagerHandle( )
 	{
+		UpdateManagerHandle( );
 		return indicator_handle::m_managerHandle;
 	}
 
 	void ProgressBar::UpdateManagerHandle( )
 	{
-		indicator_handle::m_managerHandle = managedIndicators;
+		indicator_handle::m_managerHandle = *&managedIndicators;
 	}
 
 	int ProgressBar::ManagerRefCount( )

@@ -10,12 +10,12 @@
 
 namespace serenity {
 
-	IndicatorManager::IndicatorManager( ) : m_progressBars(&indicator_handle::m_managerHandle) { }
+	IndicatorManager::IndicatorManager( ) : m_progressBars(indicator_handle::m_managerHandle) { }
 
 	IndicatorManager::~IndicatorManager( )
 	{
 		// This May Be Unnecessary
-		for(auto element : *m_progressBars) {
+		for(auto element : m_progressBars) {
 			delete element;
 		}
 	}

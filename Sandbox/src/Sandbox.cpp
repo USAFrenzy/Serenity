@@ -1,14 +1,11 @@
-#include <consoleapi2.h> // for GetConsoleScreenBufferInfo, SetConsoleTextAttribute, CONSOLE_SCREEN_BUFFER_INFO
-#include <minwindef.h>   // for WORD
-#include <process.h>     // for system
-#include <processenv.h>  // for GetStdHandle
-#include <WinBase.h>     // for STD_OUTPUT_HANDLE
-#include <string>        // IWYU pragma: keep
 
-#include <Serenity/Indicators/DefaultIndicator.h>
 #include <Serenity/Indicators/IndicatorManager.h>
 #include <Serenity/Logger.h>
-#include <Serenity/SharedData.h> // for LogLevel, LogOutput, MsgDetails, MsgDetails::LogColor, LogOutput::all, LogOutput::file, SERENITY_DISABLED, SERENITY_TRACE
+#include <Serenity/Indicators/DefaultIndicator.h>
+
+#include <string>    // IWYU pragma: keep
+
+
 
 //! Note: Take This .clang-format File And Upload For Use In Projects...Ironed
 //! Out The Kinks
@@ -67,10 +64,10 @@ int main( )
 	GetConsoleScreenBufferInfo(handle, &csbiInfo);
 	wOldColorAttrs = csbiInfo.wAttributes;
 
-	for(int color = 1; color <= 19; color++) {
+	for(int color = 1; color < 19; color++) {
 		MsgDetails::LogColor temp = static_cast<MsgDetails::LogColor>(color);
-		log.SetLogColor(temp);
-		log.Log(log.UseMsgColor( ) + "Console Message Flags: " + log.PrintColorAsText( ));
+		//log.SetLogColor(temp);
+		//log.Log(log.UseMsgColor( ) + "Console Message Flags: " + log.PrintColorAsText( ));
 		SetConsoleTextAttribute(handle, wOldColorAttrs);
 		//log.SetLogColor( MsgDetails::LogColor::reset);
 	}
@@ -111,19 +108,29 @@ int main( )
     ###########################################################################################################
     */
 
+	serenity::indicator_handle::ManagerHandle indicatorHandle = logProgress.GetManagerHandle( );
 	std::cout << "\n\nSwitching Back To Testlog.txt\n\n";
 	log.Open( );
-	log.Log("Testing The Register Observer Func");
-	serenity::indicator_handle::ManagerHandle indicatorHandle = logProgress.GetManagerHandle( );
-	log.Log("Handle Vector Size: " + std::to_string(logProgress.ManagerRefCount( )));
+	log.Log("Testing The Register Observer Func -> Initial Handle Reference Count: " +
+		std::to_string(logProgress.ManagerRefCount( )));
 	logProgress.RegisterIndicator( );
-	log.Log("Registered One Indicator");
-	log.Log("Handle Vector Size: " + std::to_string(logProgress.ManagerRefCount( )));
-	log.Log("Testing The Unregister Observer Func");
-	log.Log("Handle Vector Size: " + std::to_string(logProgress.ManagerRefCount( )));
+	log.Log("Registered One Indicator -> Handle Reference Count: " +
+		std::to_string(logProgress.ManagerRefCount( )));
+
+	// This Is Kind Of A Hacked Way Of Updating The Handle After Assignment
+	indicatorHandle = logProgress.GetManagerHandle( );
+
+	log.Log("Passed Handle Size For Comparison: " + std::to_string(indicatorHandle.size( )));
+	log.Log("Testing The Unregister Observer Func -> Initial Handle Reference Count: " +
+		std::to_string(logProgress.ManagerRefCount( )));
 	logProgress.UnregisterIndicator( );
-	log.Log("Unregistered One Indicator");
-	log.Log("Handle Vector Size: " + std::to_string(logProgress.ManagerRefCount( )));
+	log.Log("Unregistered One Indicator -> Handle Reference Count: " +
+		std::to_string(logProgress.ManagerRefCount( )));
+
+	// This Is Kind Of A Hacked Way Of Updating The Handle After Assignment
+	indicatorHandle = logProgress.GetManagerHandle( );
+
+	log.Log("Passed Handle Size For Comparison: " + std::to_string(indicatorHandle.size( )));
 	log.Close( );
 
 	std::cout << "\n\n**********************************************************************************\n";
@@ -132,7 +139,7 @@ int main( )
 
 	/*  
     ###########################################################################################################
-    #                       Misc Sandboxing And Wrapping Up  The Testing Section                              #
+    #                       Misc Sandbox And Wrapping Up  The Testing Section                              #
     ###########################################################################################################
     */
 
@@ -148,7 +155,7 @@ int main( )
 
 	/*  
     ###########################################################################################################
-    #                             Misc Sandboxing And Everything Else Section                                  #
+    #                             Misc Sandbox And Everything Else Section                                  #
     ###########################################################################################################
     */
 }

@@ -3,7 +3,6 @@
 
 #include <Serenity/Indicators/ObserverInterface.h>
 #include <Serenity/Indicators/ProgressBar.h> // IWYU pragma: keep
-#include <iostream> // for cout
 
 /*
     Might be worth looking into doing something along the lines of having the current
@@ -41,6 +40,6 @@ namespace serenity {
 		void Update(float updateValue, float totalWork, std::ostream &os = std::cout) override;
 
 	      private:
-		indicator_handle::ManagerHandle *m_progressBars;
+		indicator_handle::ManagerHandle m_progressBars;
 	};
 } // namespace serenity

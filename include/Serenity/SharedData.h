@@ -1,8 +1,9 @@
 #pragma once
 
 #include <iostream>
-#include <map>     // IWYU pragma: keep
-#include <xstring> // for string
+#include <map> // IWYU pragma: keep
+
+#include <Serenity/Helpers/PlatformHelper.h>
 
 constexpr int SERENITY_TRACE    = 0;
 constexpr int SERENITY_INFO     = 1;
@@ -34,15 +35,14 @@ namespace serenity {
 				fatal   = SERENITY_FATAL,
 				off     = SERENITY_DISABLED
 			};
+
 			enum class LogOutput {
 				console = LOG_TO_CONSOLE,
 				file    = LOG_TO_FILE,
 				all     = LOG_TO_ALL,
 				none    = LOG_TO_NONE
 			};
-
 		} // namespace logger
-		  // ########################################################################################
 
 		// Todo: Create Some Ways For Dump Logs, Crash Logs - In General, Some Way To
 		// Todo: Trace Logged Messages Before They Get To Log Texts
@@ -61,7 +61,6 @@ namespace serenity {
 
 		struct MsgDetails
 		{
-		      public:
 			enum class LogStyle {
 				begin = 0,
 				reset,
@@ -97,214 +96,204 @@ namespace serenity {
 				boldRed,
 				end
 			};
+			static std::string GetMsgColor( )
+			{
+				return m_msgColor;
+			}
+			static std::string GetMsgStyle( )
+			{
+				return m_msgStyle;
+			}
+			static void SetMsgColor(std::string color ) {m_msgColor = color; }
+			static void SetMsgStyle(std::string style) { m_msgStyle = style; }
 
 		      protected:
-			std::string LogStyleToCode(LogStyle style)
-			{
-				std::map<LogStyle, std::string> logStyleMap = {
-				  {LogStyle::reset, "\033[m"},
-				  {LogStyle::bold, "\033[1m"},
-				  {LogStyle::dark, "\033[2m"},
-				  {LogStyle::underline, "\033[4m"},
-				  {LogStyle::blink, "\033[5m"},
-				  {LogStyle::reverse, "\033[7m"},
-				  {LogStyle::concealed, "\033[8m"},
-				  {LogStyle::clearline, "\033[K"},
-				};
-				std::string resultString = "DEFAULT";
-				auto iterator            = logStyleMap.find(style);
-				if(iterator != logStyleMap.end( )) {
-					resultString = iterator->second;
-				}
-				return resultString;
-			}
-
-			std::string LogColorToColorCode(LogColor color)
-			{
-				std::map<LogColor, std::string> logColorMap = {
-				  {LogColor::black, "\033[30m"},
-				  {LogColor::red, "\033[31m"},
-				  {LogColor::green, "\033[32m"},
-				  {LogColor::yellow, "\033[33m"},
-				  {LogColor::blue, "\033[34m"},
-				  {LogColor::magenta, "\033[35m"},
-				  {LogColor::cyan, "\033[36m"},
-				  {LogColor::white, "\033[37m"},
-				  {LogColor::bgBlack, "\033[40m"},
-				  {LogColor::bgRed, "\033[41m"},
-				  {LogColor::bgGreen, "\033[42m"},
-				  {LogColor::bgYellow, "\033[43m"},
-				  {LogColor::bgBlue, "\033[44m"},
-				  {LogColor::bgMagenta, "\033[45m"},
-				  {LogColor::bgCyan, "\033[46m"},
-				  {LogColor::bgWhite, "\033[47m"},
-				  {LogColor::boldYellow, "\033[33m\033[1m"},
-				  {LogColor::boldRed, "\033[31m\033[1m"}};
-				std::string resultString = "DEFAULT";
-				auto iterator            = logColorMap.find(color);
-				if(iterator != logColorMap.end( )) {
-					resultString = iterator->second;
-				}
-				return resultString;
-			}
-			LogStyle LogStyleFromCode(std::string styleStr)
-			{
-				std::map<std::string, LogStyle> logStyleString = {
-				  {"\033[m", LogStyle::reset},
-				  {"\033[1m", LogStyle::bold},
-				  {"\033[2m", LogStyle::dark},
-				  {"\033[4m", LogStyle::underline},
-				  {"\033[5m", LogStyle::blink},
-				  {"\033[7m", LogStyle::reverse},
-				  {"\033[8m", LogStyle::concealed},
-				  {"\033[K", LogStyle::clearline},
-				};
-				LogStyle resultString = LogStyle::reset;
-				auto iterator         = logStyleString.find(styleStr);
-				if(iterator != logStyleString.end( )) {
-					resultString = iterator->second;
-				}
-				return resultString;
-			}
-
-			LogColor LogColorFromColorCode(std::string colorStr)
-			{
-				std::map<std::string, LogColor> logColorString =
-
-				  {
-				    {"\033[30m", LogColor::black},
-				    {"\033[31m", LogColor::red},
-				    {"\033[32m", LogColor::green},
-				    {"\033[33m", LogColor::yellow},
-				    {"\033[34m", LogColor::blue},
-				    {"\033[35m", LogColor::magenta},
-				    {"\033[36m", LogColor::cyan},
-				    {"\033[37m", LogColor::white},
-				    {"\033[40m", LogColor::bgBlack},
-				    {"\033[41m", LogColor::bgRed},
-				    {"\033[42m", LogColor::bgGreen},
-				    {"\033[43m", LogColor::bgYellow},
-				    {"\033[44m", LogColor::bgBlue},
-				    {"\033[45m", LogColor::bgMagenta},
-				    {"\033[46m", LogColor::bgCyan},
-				    {"\033[47m", LogColor::bgWhite},
-				    {"\033[33m\033[1m", LogColor::boldYellow},
-				    {"\033[31m\033[1m", LogColor::boldRed},
-				  };
-				LogColor resultString = static_cast<LogColor>(LogStyle::reset);
-				auto iterator         = logColorString.find(colorStr);
-				if(iterator != logColorString.end( )) {
-					resultString = iterator->second;
-				}
-				return resultString;
-			}
-
-			std::string LogStyleToString(LogStyle style)
-			{
-				std::map<LogStyle, std::string> styleString = {
-				  {LogStyle::reset, "Reset"},
-				  {LogStyle::bold, "Bold"},
-				  {LogStyle::dark, "Dark"},
-				  {LogStyle::underline, "Underline"},
-				  {LogStyle::blink, "Blink"},
-				  {LogStyle::reverse, "Reverse"},
-				  {LogStyle::concealed, "Concealed"},
-				  {LogStyle::clearline, "Clear-line"},
-				};
-				std::string resultString = "DEFAULT";
-				auto iterator            = styleString.find(style);
-				if(iterator != styleString.end( )) {
-					resultString = iterator->second;
-				}
-				return resultString;
-			}
-
-			std::string LogColorToStr(LogColor color)
-			{
-				std::map<LogColor, std::string> colorStr = {
-				  {LogColor::black, "Black"},
-				  {LogColor::red, "Red"},
-				  {LogColor::green, "Green"},
-				  {LogColor::yellow, "Yellow"},
-				  {LogColor::blue, "Blue"},
-				  {LogColor::magenta, "Magenta"},
-				  {LogColor::cyan, "Cyan"},
-				  {LogColor::white, "White"},
-				  {LogColor::bgBlack, "Black Background"},
-				  {LogColor::bgRed, "Red Background"},
-				  {LogColor::bgGreen, "Green Background"},
-				  {LogColor::bgYellow, "Yellow Background"},
-				  {LogColor::bgBlue, "Blue Background"},
-				  {LogColor::bgMagenta, "Magenta Background"},
-				  {LogColor::bgCyan, "Cyan Background"},
-				  {LogColor::bgWhite, "White Background"},
-				  {LogColor::boldYellow, "Bold Yellow"},
-				  {LogColor::boldRed, "Bold Red"}};
-				std::string resultString = "DEFAULT";
-				auto iterator            = colorStr.find(color);
-				if(iterator != colorStr.end( )) {
-					resultString = iterator->second;
-				}
-				return resultString;
-			}
-
-		      public:
-			LogColor GetColor( )
-			{
-				return LogColorFromColorCode(m_msgColor);
-			}
-			std::string PrintColorAsText( )
-			{
-				return LogColorToStr(GetColor( ));
-			}
-
-			// ToDo: ################################################################################
-			// ToDo: #                                   FixMe                                      #
-			// ToDo: ################################################################################
-
-
-			inline void SetLogColor(LogColor color)
-			{
-				m_msgColor = LogColorToColorCode(color);
-			}
-
-			std::string UseMsgColor( )
-			{
-				// ToDo: FLush Out With Color Options, Create The TextColor Enum Which Will
-				// ToDo: Handle Whether To Output The Formatted String With The Color Code For
-				// ToDo: Mac/Lin Or Use Win's Color Defines
-
-				// std::ostream &os;
-				/* switch(GetColor( )) {
-					case LogColor::black:
-						{
-							os << TextColor::black;
-						} break;
-		*/
-				std::string returnStr = "[This Is A PlaceHolder For Color Fmt]  ";
-				return returnStr;
-				//}
-			}
-
-			void LogResetColor( ) { }
-
-		      private:
-			std::string m_msgColor;
+			static std::string m_msgColor;
+			static std::string m_msgStyle;
 		};
-
-		// ToDo: Look At UseMsgColor() Note Above ^^^
-		enum class TextColor {
-
-
-		}; // enum TextColor
-
-		// ToDo: ################################################################################
-
-
 	} // namespace details
-	  // ****************************************************************************************
+
 	struct utilities
 	{
 	}; // struct utilities
-	   // ****************************************************************************************
+
+
+	std::string LogStyleToString(details::MsgDetails::LogStyle style)
+	{
+		std::map<details::MsgDetails::LogStyle, std::string> styleString = {
+		  {details::MsgDetails::LogStyle::reset, "Reset"},
+		  {details::MsgDetails::LogStyle::bold, "Bold"},
+		  {details::MsgDetails::LogStyle::dark, "Dark"},
+		  {details::MsgDetails::LogStyle::underline, "Underline"},
+		  {details::MsgDetails::LogStyle::blink, "Blink"},
+		  {details::MsgDetails::LogStyle::reverse, "Reverse"},
+		  {details::MsgDetails::LogStyle::concealed, "Concealed"},
+		  {details::MsgDetails::LogStyle::clearline, "Clear-line"},
+		};
+		std::string resultString = "DEFAULT";
+		auto iterator            = styleString.find(style);
+		if(iterator != styleString.end( )) {
+			resultString = iterator->second;
+		}
+		return resultString;
+	}
+
+	std::string LogStyleToCode(details::MsgDetails::LogStyle style)
+	{
+		std::map<details::MsgDetails::LogStyle, std::string> logStyleMap = {
+		  {details::MsgDetails::LogStyle::reset, "\033[m"},
+		  {details::MsgDetails::LogStyle::bold, "\033[1m"},
+		  {details::MsgDetails::LogStyle::dark, "\033[2m"},
+		  {details::MsgDetails::LogStyle::underline, "\033[4m"},
+		  {details::MsgDetails::LogStyle::blink, "\033[5m"},
+		  {details::MsgDetails::LogStyle::reverse, "\033[7m"},
+		  {details::MsgDetails::LogStyle::concealed, "\033[8m"},
+		  {details::MsgDetails::LogStyle::clearline, "\033[K"},
+		};
+		std::string resultString = "DEFAULT";
+		auto iterator            = logStyleMap.find(style);
+		if(iterator != logStyleMap.end( )) {
+			resultString = iterator->second;
+		}
+		return resultString;
+	}
+
+	auto LogStyleFromCode(std::string styleStr)
+	{
+		std::map<std::string, details::MsgDetails::LogStyle> logStyleString = {
+		  {"\033[m", details::MsgDetails::LogStyle::reset},
+		  {"\033[1m", details::MsgDetails::LogStyle::bold},
+		  {"\033[2m", details::MsgDetails::LogStyle::dark},
+		  {"\033[4m", details::MsgDetails::LogStyle::underline},
+		  {"\033[5m", details::MsgDetails::LogStyle::blink},
+		  {"\033[7m", details::MsgDetails::LogStyle::reverse},
+		  {"\033[8m", details::MsgDetails::LogStyle::concealed},
+		  {"\033[K", details::MsgDetails::LogStyle::clearline},
+		};
+		details::MsgDetails::LogStyle resultString = details::MsgDetails::LogStyle::reset;
+		auto iterator                              = logStyleString.find(styleStr);
+		if(iterator != logStyleString.end( )) {
+			resultString = iterator->second;
+		}
+		return resultString;
+	}
+
+	std::string LogColorToColorCode(details::MsgDetails::LogColor color)
+	{
+		std::map<details::MsgDetails::LogColor, std::string> logColorMap = {
+
+		  {details::MsgDetails::LogColor::black, "\033[30m"},
+		  {details::MsgDetails::LogColor::red, "\033[31m"},
+		  {details::MsgDetails::LogColor::green, "\033[32m"},
+		  {details::MsgDetails::LogColor::yellow, "\033[33m"},
+		  {details::MsgDetails::LogColor::blue, "\033[34m"},
+		  {details::MsgDetails::LogColor::magenta, "\033[35m"},
+		  {details::MsgDetails::LogColor::cyan, "\033[36m"},
+		  {details::MsgDetails::LogColor::white, "\033[37m"},
+		  {details::MsgDetails::LogColor::bgBlack, "\033[40m"},
+		  {details::MsgDetails::LogColor::bgRed, "\033[41m"},
+		  {details::MsgDetails::LogColor::bgGreen, "\033[42m"},
+		  {details::MsgDetails::LogColor::bgYellow, "\033[43m"},
+		  {details::MsgDetails::LogColor::bgBlue, "\033[44m"},
+		  {details::MsgDetails::LogColor::bgMagenta, "\033[45m"},
+		  {details::MsgDetails::LogColor::bgCyan, "\033[46m"},
+		  {details::MsgDetails::LogColor::bgWhite, "\033[47m"},
+		  {details::MsgDetails::LogColor::boldYellow, "\033[33m\033[1m"},
+		  {details::MsgDetails::LogColor::boldRed, "\033[31m\033[1m"}
+
+		};
+		std::string resultString = "DEFAULT";
+		auto iterator            = logColorMap.find(color);
+		if(iterator != logColorMap.end( )) {
+			resultString = iterator->second;
+		}
+		return resultString;
+	}
+	auto LogColorFromColorCode(std::string colorStr)
+	{
+		std::map<std::string, details::MsgDetails::LogColor> logColorString =
+
+		  {
+		    {"\033[30m", details::MsgDetails::LogColor::black},
+		    {"\033[31m", details::MsgDetails::LogColor::red},
+		    {"\033[32m", details::MsgDetails::LogColor::green},
+		    {"\033[33m", details::MsgDetails::LogColor::yellow},
+		    {"\033[34m", details::MsgDetails::LogColor::blue},
+		    {"\033[35m", details::MsgDetails::LogColor::magenta},
+		    {"\033[36m", details::MsgDetails::LogColor::cyan},
+		    {"\033[37m", details::MsgDetails::LogColor::white},
+		    {"\033[40m", details::MsgDetails::LogColor::bgBlack},
+		    {"\033[41m", details::MsgDetails::LogColor::bgRed},
+		    {"\033[42m", details::MsgDetails::LogColor::bgGreen},
+		    {"\033[43m", details::MsgDetails::LogColor::bgYellow},
+		    {"\033[44m", details::MsgDetails::LogColor::bgBlue},
+		    {"\033[45m", details::MsgDetails::LogColor::bgMagenta},
+		    {"\033[46m", details::MsgDetails::LogColor::bgCyan},
+		    {"\033[47m", details::MsgDetails::LogColor::bgWhite},
+		    {"\033[33m\033[1m", details::MsgDetails::LogColor::boldYellow},
+		    {"\033[31m\033[1m", details::MsgDetails::LogColor::boldRed},
+		  };
+		details::MsgDetails::LogColor resultString =
+		  static_cast<details::MsgDetails::LogColor>(details::MsgDetails::LogStyle::reset);
+		auto iterator = logColorString.find(colorStr);
+		if(iterator != logColorString.end( )) {
+			resultString = iterator->second;
+		}
+		return resultString;
+	}
+
+	std::string LogColorToStr(details::MsgDetails::LogColor color)
+	{
+		std::map<details::MsgDetails::LogColor, std::string> colorStr = {
+		  {details::MsgDetails::LogColor::black, "Black"},
+		  {details::MsgDetails::LogColor::red, "Red"},
+		  {details::MsgDetails::LogColor::green, "Green"},
+		  {details::MsgDetails::LogColor::yellow, "Yellow"},
+		  {details::MsgDetails::LogColor::blue, "Blue"},
+		  {details::MsgDetails::LogColor::magenta, "Magenta"},
+		  {details::MsgDetails::LogColor::cyan, "Cyan"},
+		  {details::MsgDetails::LogColor::white, "White"},
+		  {details::MsgDetails::LogColor::bgBlack, "Black Background"},
+		  {details::MsgDetails::LogColor::bgRed, "Red Background"},
+		  {details::MsgDetails::LogColor::bgGreen, "Green Background"},
+		  {details::MsgDetails::LogColor::bgYellow, "Yellow Background"},
+		  {details::MsgDetails::LogColor::bgBlue, "Blue Background"},
+		  {details::MsgDetails::LogColor::bgMagenta, "Magenta Background"},
+		  {details::MsgDetails::LogColor::bgCyan, "Cyan Background"},
+		  {details::MsgDetails::LogColor::bgWhite, "White Background"},
+		  {details::MsgDetails::LogColor::boldYellow, "Bold Yellow"},
+		  {details::MsgDetails::LogColor::boldRed, "Bold Red"}};
+		std::string resultString = "DEFAULT";
+		auto iterator            = colorStr.find(color);
+		if(iterator != colorStr.end( )) {
+			resultString = iterator->second;
+		}
+		return resultString;
+	}
+
+	auto GetColor( )
+	{
+		return LogColorFromColorCode(details::MsgDetails::GetMsgColor( ));
+	}
+
+	details::MsgDetails::LogStyle GetStyle( )
+	{
+		return LogStyleFromCode(details::MsgDetails::GetMsgStyle( ));
+	}
+
+	std::string PrintColorAsText( )
+	{
+		return LogColorToStr(GetColor( ));
+	}
+
+	inline void SetLogColor(details::MsgDetails::LogColor color)
+	{
+
+		details::MsgDetails::SetMsgColor(LogColorToStr(color));
+	}
+
+	inline void SetLogStyle(details::MsgDetails::LogStyle style)
+	{
+		details::MsgDetails::SetMsgStyle(LogStyleToString(style));
+	}
 } // namespace serenity

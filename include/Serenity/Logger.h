@@ -2,23 +2,17 @@
 
 #include <Serenity/SharedData.h>
 #include <fstream>
-#include <iomanip>
 
 namespace serenity {
-	class Logger : public details::MsgDetails, public serenity::utilities
+	class Logger
 	{
-
-	      private:
-		using LogLevel  = serenity::details::logger::LogLevel;
-		using LogOutput = serenity::details::logger::LogOutput;
-
 	      public:
 		Logger(std::string loggerName);
-		void Init(const std::string &fileName, const LogOutput output);
+		void Init(const std::string &fileName, const details::logger::LogOutput output);
 		void Flush( );
 		void Open( );
 		void Close( );
-		std::string LogLevelToString(serenity::details::logger::LogLevel s_level);
+		std::string LogLevelToString(details::logger::LogLevel s_level);
 		virtual ~Logger( ) = default;
 
 		//! Note: This Can Be Thrown In A log message standalone file; that way
@@ -28,15 +22,15 @@ namespace serenity {
 		//! formatString);
 
 		void Log(const std::string &message);
-		void SetLogLevel(serenity::details::logger::LogLevel logLevel);
+		void SetLogLevel(details::logger::LogLevel logLevel);
 		std::string GetLogLevel( );
 
-	      private:
+	      protected:
 		std::string m_loggerName;
-		LogLevel m_logLevel;
+		details::logger::LogLevel m_logLevel;
 		std::string m_fileName;
 		std::fstream m_file;
-		LogOutput m_output;
+		details::logger::LogOutput m_output;
 		bool m_isFileOpen {false};
 	};
 
