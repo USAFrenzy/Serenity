@@ -19,17 +19,13 @@ namespace serenity {
 		std::string LogLevelToString(details::logger::LogLevel s_level);
 		void SetLoggerOstream(serenity::helper_ostream::OstreamInterface::InterfaceType osInterface);
 		std::ostream *const GetLoggerOstream( );
+		void SetLogLevel(details::logger::LogLevel logLevel);
+		std::string GetLogLevel( );
 		virtual ~Logger( ) = default;
 
 		//! Note: This Can Be Thrown In A log message standalone file; that way
 		//! formatting can take place in a standalone file for the logged messages
-		//!                               Planned:
-		//! Log(const std::string &message, const LogOutput, std::string
-		//! formatString);
-
 		void Log(const std::string &message);
-		void SetLogLevel(details::logger::LogLevel logLevel);
-		std::string GetLogLevel( );
 
 	      protected:
 		std::string m_loggerName;
