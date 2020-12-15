@@ -1,8 +1,7 @@
 #pragma once
-// IWYU pragma: no_include "iosfwd"
 
 #include <Serenity/Indicators/ObserverInterface.h>
-#include <Serenity/Indicators/ProgressBar.h> // IWYU pragma: keep
+#include <Serenity/Indicators/ProgressBar.h>
 
 /*
     Might be worth looking into doing something along the lines of having the current

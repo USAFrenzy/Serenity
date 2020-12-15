@@ -21,5 +21,4 @@ constexpr OpSystem operatingSystem = OpSystem::Linux;
 	#include <Windows.h>
 #elif defined(SERENITY_MAC) || defined(SERENITY_LINUX)
 	#include <unistd.h>
-	#include <minwindef.h> // for HFILE
 #endif

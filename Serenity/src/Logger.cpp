@@ -1,18 +1,18 @@
-#include <Serenity/Logger.h>
-#include <Serenity/Helpers/MessageHelper.h>
-#include <Serenity/Helpers/OstreamHelper.h>
+
+#include <Serenity/Common/SharedData.h>
+#include <Serenity/Logger/Logger.h>
+
 #include <iostream>
 
 namespace serenity {
 
 	Logger::Logger(std::string loggerName)
 	  : m_loggerName(std::move(loggerName)),
-	    m_ostream(serenity::helper_ostream::InterfaceType::cout),
+	    m_ostream(serenity::helper_ostream::OstreamInterface::InterfaceType::cout),
 	    m_logLevel(details::logger::LogLevel::trace),
 	    m_output(details::logger::LogOutput::all)
 	{
-		serenity::helper_ostream::global_ostream =
-		  serenity::helper_ostream::InterfaceTypeToStr(this->m_ostream);
+		SetLoggerOstream(this->m_ostream);
 	}
 
 	void Logger::Init(const std::string &fileName, const details::logger::LogOutput output)
@@ -39,14 +39,19 @@ namespace serenity {
 	}
 
 	// Would Be Used For Either Setting ostream to cout, cerr, or clog
-	void Logger::SetLoggerOstream(serenity::helper_ostream::InterfaceType osInterface)
+	// ToDo: Should Look Into These Two (Set/Get)LoggerOstream Functions For Intended Implementation
+	void Logger::SetLoggerOstream(serenity::helper_ostream::OstreamInterface::InterfaceType osInterface)
 	{
-		serenity::helper_ostream::SetOstreamType(osInterface);
+		//!? Currently Can't Use As Is As It's A Non-static Method
+		// serenity::helper_ostream::OstreamInterface::SetOstreamType(osInterface);
 	}
 
 	std::ostream *const Logger::GetLoggerOstream( )
 	{
-		return serenity::helper_ostream::GetOstreamType( );
+		//!? Currently Can't Use As Is As It's A Non-static Method
+		// return serenity::helper_ostream::OstreamInterface::GetOstreamType( );
+		std::ostream &dummyOs {std::cout};
+		return &dummyOs;
 	}
 
 	void Logger::Close( )

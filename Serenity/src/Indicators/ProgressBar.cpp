@@ -1,12 +1,6 @@
-// IWYU pragma: no_include "iosfwd"
-// IWYU pragma: no_include "vector"
-// IWYU pragma: no_include "xstring"
-// IWYU pragma: no_include "xutility"
-
 #include <Serenity/Indicators/ProgressBar.h>
 
 // ToDo:  Look A ProgressManager.h Note
-
 
 namespace serenity {
 

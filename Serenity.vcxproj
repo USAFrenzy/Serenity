@@ -97,19 +97,14 @@
     <ClCompile Include="Serenity\src\Sinks\DefaultSink.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Serenity\Helpers\MessageHelper.h" />
-    <ClInclude Include="include\Serenity\Helpers\OstreamHelper.h" />
+    <ClInclude Include="include\Serenity\Common\SharedData.h" />
     <ClInclude Include="include\Serenity\Helpers\PlatformHelper.h" />
-    <ClInclude Include="include\Serenity\Helpers\StreamColorHelper.h" />
-    <ClInclude Include="include\Serenity\Helpers\StreamHelper.h" />
-    <ClInclude Include="include\Serenity\Helpers\StreamStyleHelper.h" />
     <ClInclude Include="include\Serenity\Helpers\Utilities.h" />
     <ClInclude Include="include\Serenity\Indicators\DefaultIndicator.h" />
     <ClInclude Include="include\Serenity\Indicators\ObserverInterface.h" />
     <ClInclude Include="include\Serenity\Indicators\ProgressBar.h" />
     <ClInclude Include="include\Serenity\Indicators\IndicatorManager.h" />
-    <ClInclude Include="include\Serenity\Logger.h" />
-    <ClInclude Include="include\Serenity\SharedData.h" />
+    <ClInclude Include="include\Serenity\Logger\Logger.h" />
     <ClInclude Include="include\Serenity\Sinks\DefaultSink.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

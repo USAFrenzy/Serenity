@@ -1,17 +1,21 @@
-
+#include <Serenity/Common/SharedData.h>
 #include <Serenity/Helpers/Utilities.h>
 
-#include <Serenity/Logger.h>
+#include <Serenity/Logger/Logger.h>
+
 #include <Serenity/Indicators/IndicatorManager.h>
 #include <Serenity/Indicators/DefaultIndicator.h>
 
-#include <string> // IWYU pragma: keep
+#include <string>
 
-
-//! Note: Take This .clang-format File And Upload For Use In Projects...Ironed
-//! Out The Kinks
-
-// ToDo:  Look At ProgressManager.h Note
+// ToDo: ##############################################################################################
+// ToDo: #                                          TODO                                              #
+// ToDo: ##############################################################################################
+// ToDo: # -> Fix The UseMsgColor() Implementation And How The Streams Will Interact With One Another #
+// ToDo: # -> Handle Color Output Text In Library Function Rather Than Explicitly                     #
+// ToDo: # -> Possibly Implement Operator Overloading Here For Inc/Dec                                #
+// ToDo: # -> In General: Look At ProgressManager.h Note                                              #
+// ToDo: ##############################################################################################
 
 #define Testing 1
 
@@ -19,21 +23,22 @@ int main( )
 {
 #if Testing
 	/*  
-    ###########################################################################################################
-    #                                 Logger Initialization Section                                           #
-    ###########################################################################################################
+                            ###########################################################################################################
+                            #                                 Logger Initialization Section                                           #
+                            ###########################################################################################################
     */
 	std::cout << "Testing Library Header Into Sandbox... \n";
 	std::cout << "Creating TestLog.txt\n\n";
 	serenity::Logger log("Test Logger");
 	log.Init("TestLog.txt", serenity::details::logger::LogOutput::all);
 
-	// ####################################### End Of Section ##################################################
-
+	/*
+                            ############################################# End Of Section ##############################################
+    */
 	/*  
-    ###########################################################################################################
-    #                                    Logger Log Level Testing Section                                     #
-    ###########################################################################################################
+                            ###########################################################################################################
+                            #                                    Logger Log Level Testing Section                                     #
+                            ###########################################################################################################
     */
 	log.Open( );
 	using serenity::details::logger::LogLevel;
@@ -44,50 +49,53 @@ int main( )
 	}
 	log.Log("**********************************************************************************");
 	log.Close( );
-	// ####################################### End Of Section ##################################################
+	/*
+                            ############################################# End Of Section ###############################################
 
+   */
 	/*  
-    ###########################################################################################################
-    #                                    Logger Log Color Testing Section                                     #
-    ###########################################################################################################
+                            ###########################################################################################################
+                            #                                    Logger Log Color Testing Section                                     #
+                            ###########################################################################################################
     */
-	// ToDo: Fix The Reset Flag
-	// ToDo: Handle Color Output Text In Library Function Rather Than Explicitly Like Below
-	//?      Possibly Implement Operator Overloading Here For Inc/Dec?
+	//!? ####################################################################################################################
+	//!? #                                                     BUG                                                          #
+	//!? ####################################################################################################################
+	//!? # Removed UseMsgColor() -> Currently Bugged Usage Where It Only Returns Black Foreground And Black Background Text #
+	//!? ####################################################################################################################
 
+	//! ##########################################################################################################################################
+	//! #                                             Intended Usage Of The Basic Log Function:                                                  #
+	//! ##########################################################################################################################################
+	//! Message To Buffer->Format Message Based On Args[like fmt](Color, Placement, etc...)->Color Stream->Formatted Message ->Reset Color Stream
 
+	//!  ##########################################################################################################################################
+	//!  #                                                               NOTE:                                                                    #
+	//!  #     Currently Hacked The Utility Functions In The Form Of 'logHelp' Variable For Color Functions Until Wrapped Into Log() Function     #
+	//!  ##########################################################################################################################################
 
 	log.Open( );
-	auto handle = GetStdHandle(STD_OUTPUT_HANDLE);
 	log.Log("Testing Message Flag Switches:");
 	log.Log("**********************************************************************************");
 	using serenity::details::MsgDetails;
-	WORD wOldColorAttrs;
-	CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
-	GetConsoleScreenBufferInfo(handle, &csbiInfo);
-	wOldColorAttrs = csbiInfo.wAttributes;
-	// ToDo: Currently Hacked The Utility Functions For Color Functions Until Wrapped Into Log() Function (Rather Broken ATM - only prints Black Flag)
+
 	serenity::utilities logHelp;
-	std::ostream& os = std::cout;
 	for(int color = 1; color < 19; ++color) {
 		MsgDetails::LogColor temp = static_cast<MsgDetails::LogColor>(color);
 		logHelp.SetLogColor(temp);
-		// ToDo: Removed UseMsgColor() -> Need To Make A Wrapper For It In The Log() Function To Automatically Use The Set Color
-		log.Log( // Placeholder For UseMsgColor() [ WIP On Intended UseMsgColor Functionalty]
-		  "Console Message Flags: " + logHelp.LogColorToStr(temp));
-		//	logHelp.SetLogStyle(MsgDetails::LogStyle::reset);
-		//		SetConsoleTextAttribute(handle, wOldColorAttrs);
+		log.Log("Console Message Flags: " + logHelp.LogColorToStr(temp));
+		logHelp.SetLogStyle(MsgDetails::LogStyle::reset);
 	}
 
 	log.Log("**********************************************************************************");
 	log.Close( );
-	// ####################################### End Of Section ##################################################
-
-
+	/*
+                            ############################################# End Of Section ##############################################
+    */
 	/*  
-    ###########################################################################################################
-    #                       Logger Logging And Progress Indication Testing Section                            #
-    ###########################################################################################################
+                            ###########################################################################################################
+                            #                       Logger Logging And Progress Indication Testing Section                            #
+                            ###########################################################################################################
     */
 
 	std::cout << "\nSwitching To MessageLog.txt\n";
@@ -108,12 +116,14 @@ int main( )
 	}
 	msgLog.Log("**********************************************************************************");
 	msgLog.Close( );
-	// ####################################### End Of Section ##################################################
+	/*
+                            ############################################# End Of Section ##############################################
+    */
 
 	/*  
-    ###########################################################################################################
-    #                           Logger Registration And Management Testing Section                            #
-    ###########################################################################################################
+                            ###########################################################################################################
+                            #                           Logger Registration And Management Testing Section                            #
+                            ###########################################################################################################
     */
 
 	serenity::indicator_handle::ManagerHandle indicatorHandle = logProgress.GetManagerHandle( );
@@ -142,13 +152,15 @@ int main( )
 	log.Close( );
 
 	std::cout << "\n\n**********************************************************************************\n";
-	// ####################################### End Of Section ##################################################
+	/*
+                            ############################################# End Of Section ##############################################
+    */
 
 
 	/*  
-    ###########################################################################################################
-    #                       Misc Sandbox And Wrapping Up  The Testing Section                              #
-    ###########################################################################################################
+                            ###########################################################################################################
+                            #                        Misc Sandbox For Testing And Wrapping Up The Testing Section                     #
+                            ###########################################################################################################
     */
 
 
@@ -158,12 +170,14 @@ int main( )
 	std::cout << "\n**********************************************************************************\n";
 	system("Pause");
 
-	// ####################################### End Of Section ##################################################
+	/*
+                            ############################################# End Of Section ##############################################
+    */
 #endif // Testing
 
 	/*  
-    ###########################################################################################################
-    #                             Misc Sandbox And Everything Else Section                                  #
-    ###########################################################################################################
+                            ###########################################################################################################
+                            #                             Misc Sandbox And Everything Else Section                                  #
+                            ###########################################################################################################
     */
 }

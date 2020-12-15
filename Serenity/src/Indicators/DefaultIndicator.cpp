@@ -1,9 +1,3 @@
-// IWYU pragma: no_include "Serenity/Indicators/ProgressBar.h"
-// IWYU pragma: no_include "iosfwd"
-// IWYU pragma: no_include "ostream"
-// IWYU pragma: no_include "xstring"
-// IWYU pragma: no_include "vector"
-
 #include <Serenity/Indicators/DefaultIndicator.h>
 
 

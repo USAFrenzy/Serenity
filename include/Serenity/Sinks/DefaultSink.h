@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Serenity/Logger.h>
+#include <Serenity/Logger/Logger.h>
 
 
 namespace serenity {
