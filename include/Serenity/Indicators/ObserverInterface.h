@@ -3,16 +3,16 @@
 #include <iostream>
 
 // Interface Classes That Will Hold Base Functions That The Manager & Indicators Will Inherit From
-class Subscriber
+class ISubscriber
 {
       public:
-	virtual ~Subscriber( ) { };
+	virtual ~ISubscriber( ) { };
 	virtual void Update(float updateValue, float totalWork, std::ostream &os) = 0;
 };
-class Notifier
+class INotifier
 {
       public:
-	virtual ~Notifier( ) { };
+	virtual ~INotifier( ) { };
 	virtual void RegisterIndicator( )   = 0;
 	virtual void UnregisterIndicator( ) = 0;
 	virtual void NotifySubscriber( )    = 0;

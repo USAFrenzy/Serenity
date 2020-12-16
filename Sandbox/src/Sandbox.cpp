@@ -8,22 +8,6 @@
 
 #include <string>
 
-// ToDo: ####################################################################################################################################
-// ToDo: #                                                            TODO                                                                  #
-// ToDo: ####################################################################################################################################
-// ToDo: # -> Fix The UseMsgColor() Implementation And How The Streams Will Interact With One Another                                       #
-// ToDo: # -> Handle Color Output Text In Library Function Rather Than Explicitly                                                           #
-// ToDo: # -> Possibly Implement Operator Overloading Here For Inc/Dec                                                                      #
-// ToDo: # -> In General: Look At ProgressManager.h Note                                                                                    #
-// ToDo: # -> Fashion An Init Funtion That Will Populate Default Variables For The Logger Environment                                       #
-// ToDo: #       -> Message Format, Logger Level Based Color Output, Logger Output (File Handle, File Paths, etc), Default Name, etc...     #
-// ToDo: # -> Fashion A Function That Filters Log Events Based On Current Log Level                                                         #
-// ToDo: #       -> similar to [for(int i = SERENITY_TRACE; i <= SERENITY_DISABLED; i++) {}]                                                #
-// ToDo: # -> Fashion The Progress Indicator's Class Function For Updating Based On Work Input Alone (Currently Hacked Simulated Work Load) #
-// ToDo: # -> Better Fashion The Way The Progress Indicator Manager Communicates With The Progress Indicator Classes                        #
-// ToDo: # -> Solely For Debugging: Implement A Function That Will Print All Of The Current Logger's Details                                #
-// ToDo: ####################################################################################################################################
-
 #define Testing 1
 
 int main( )

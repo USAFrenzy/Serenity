@@ -6,13 +6,10 @@
 #include <vector> // Strictly For Indicator Handle Storage (May Just Create A Streamlined Vector Class For This)
 #include <iostream>
 
-
-// ToDo:  Look At ProgressManager.h Note
-
 namespace serenity {
 
 	//!? FIXME!!!
-	class ProgressBar : public Notifier
+	class ProgressBar : public INotifier
 	{
 	      public:
 		ProgressBar( );
