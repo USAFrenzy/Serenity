@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Serenity/Indicators/ObserverInterface.h>
+#include <Serenity/Indicators/IndicatorInterfaces/ObserverInterface.h>
 #include <Serenity/Indicators/ProgressBar.h>
 
 // This Is A WIP For Progress Indicator

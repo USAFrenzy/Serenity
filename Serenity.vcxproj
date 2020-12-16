@@ -101,7 +101,11 @@
     <ClInclude Include="include\Serenity\Helpers\PlatformHelper.h" />
     <ClInclude Include="include\Serenity\Helpers\Utilities.h" />
     <ClInclude Include="include\Serenity\Indicators\DefaultIndicator.h" />
-    <ClInclude Include="include\Serenity\Indicators\ObserverInterface.h" />
+    <ClInclude Include="include\Serenity\Indicators\IndicatorAttributes\BlockAttribute.h" />
+    <ClInclude Include="include\Serenity\Indicators\IndicatorAttributes\DefaultAttribute.h" />
+    <ClInclude Include="include\Serenity\Indicators\IndicatorAttributes\MultiProcessAttribute.h" />
+    <ClInclude Include="include\Serenity\Indicators\IndicatorAttributes\SpinningAttribute.h" />
+    <ClInclude Include="include\Serenity\Indicators\IndicatorInterfaces\ObserverInterface.h" />
     <ClInclude Include="include\Serenity\Indicators\ProgressBar.h" />
     <ClInclude Include="include\Serenity\Indicators\IndicatorManager.h" />
     <ClInclude Include="include\Serenity\Logger\Logger.h" />

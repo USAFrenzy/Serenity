@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Serenity/Indicators/ObserverInterface.h>
+#include <Serenity/Indicators/IndicatorInterfaces/ObserverInterface.h>
 
 #include <mutex>  // For Thread-Safety In ProgressBar Class
 #include <vector> // Strictly For Indicator Handle Storage (May Just Create A Streamlined Vector Class For This)

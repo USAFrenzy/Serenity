@@ -33,6 +33,24 @@
     <Filter Include="Source Files\Logger">
       <UniqueIdentifier>{f2ea36d7-eb2b-4364-8285-eb8bbe4b0814}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Indicators\IndicatorInterfaces">
+      <UniqueIdentifier>{e3bf913d-616d-4b19-a0be-c82d0ca77126}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Indicators\IndicatorAttributes">
+      <UniqueIdentifier>{ebc1f05d-e479-4ea4-8491-857cc94e959c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Logger\LoggerAttributes">
+      <UniqueIdentifier>{696c4fa4-a852-43e3-b27e-7399b0cb9442}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Sink\SinkAttributes">
+      <UniqueIdentifier>{90f8d83b-8997-4751-9e0e-aad431306309}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Sink\SinkInterfaces">
+      <UniqueIdentifier>{84f3afb2-ba00-4747-8429-06bf06419f2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Logger\LoggerInterfaces">
+      <UniqueIdentifier>{12f588d0-42ac-43c1-8d97-0b0d482280c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Serenity\src\Indicators\DefaultIndicator.cpp">
@@ -64,9 +82,6 @@
     <ClInclude Include="include\Serenity\Indicators\IndicatorManager.h">
       <Filter>Header Files\Indicators</Filter>
     </ClInclude>
-    <ClInclude Include="include\Serenity\Indicators\ObserverInterface.h">
-      <Filter>Header Files\Indicators</Filter>
-    </ClInclude>
     <ClInclude Include="include\Serenity\Indicators\ProgressBar.h">
       <Filter>Header Files\Indicators</Filter>
     </ClInclude>
@@ -78,6 +93,21 @@
     </ClInclude>
     <ClInclude Include="include\Serenity\Common\SharedData.h">
       <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Serenity\Indicators\IndicatorInterfaces\ObserverInterface.h">
+      <Filter>Header Files\Indicators\IndicatorInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Serenity\Indicators\IndicatorAttributes\BlockAttribute.h">
+      <Filter>Header Files\Indicators\IndicatorAttributes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Serenity\Indicators\IndicatorAttributes\DefaultAttribute.h">
+      <Filter>Header Files\Indicators\IndicatorAttributes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Serenity\Indicators\IndicatorAttributes\MultiProcessAttribute.h">
+      <Filter>Header Files\Indicators\IndicatorAttributes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Serenity\Indicators\IndicatorAttributes\SpinningAttribute.h">
+      <Filter>Header Files\Indicators\IndicatorAttributes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

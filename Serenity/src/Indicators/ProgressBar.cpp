@@ -1,7 +1,5 @@
 #include <Serenity/Indicators/ProgressBar.h>
 
-// ToDo:  Look A ProgressManager.h Note
-
 namespace serenity {
 
 	ProgressBar::ProgressBar( )
