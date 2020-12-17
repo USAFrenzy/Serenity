@@ -1,3 +1,6 @@
+Test Logger: ##################################
+Test Logger: #  Iterating Through Log Levels  #
+Test Logger: ##################################
 Test Logger: Printing All Log Levels:
 Test Logger: TRACE
 Test Logger: INFO
@@ -6,9 +9,9 @@ Test Logger: DEBUG
 Test Logger: ERROR
 Test Logger: FATAL
 Test Logger: DISABLED
-Test Logger: **********************************************************************************
-Test Logger: Testing Message Flag Switches:
-Test Logger: **********************************************************************************
+Test Logger: ############################################
+Test Logger: # Iterating Through Message Flag Switches: #
+Test Logger: ############################################
 Test Logger: Console Message Flags: Black
 Test Logger: Console Message Flags: Red
 Test Logger: Console Message Flags: Green
@@ -27,10 +30,20 @@ Test Logger: Console Message Flags: Cyan Background
 Test Logger: Console Message Flags: White Background
 Test Logger: Console Message Flags: Bold Yellow
 Test Logger: Console Message Flags: Bold Red
-Test Logger: **********************************************************************************
+Test Logger: #############################################################################
+Test Logger: #                    Logger Registration And Management                     #
+Test Logger: #############################################################################
 Test Logger: Testing The Register Observer Func -> Initial Handle Reference Count: 0
 Test Logger: Registered One Indicator -> Handle Reference Count: 1
 Test Logger: Passed Handle Size For Comparison: 1
 Test Logger: Testing The Unregister Observer Func -> Initial Handle Reference Count: 1
 Test Logger: Unregistered One Indicator -> Handle Reference Count: 0
 Test Logger: Passed Handle Size For Comparison: 0
+Test Logger: ############################################################
+Test Logger: # Information On The Size Of The Current Classes In Bytes: #
+Test Logger: ############################################################
+Test Logger: Size of Progress Bar Class: 224 Bytes
+Test Logger: Size of Default Bar Class: 304 Bytes
+Test Logger: Size of the WIP Manager Class: 240 Bytes
+Test Logger: Size of Current Indicator Manager Class: 264 Bytes
+Test Logger: ############################################################

@@ -32,13 +32,15 @@ int main( )
                             ###########################################################################################################
     */
 	log.Open( );
+	log.Log("##################################");
+	log.Log("#  Iterating Through Log Levels  #");
+	log.Log("##################################");
 	using serenity::details::logger::LogLevel;
 	log.Log("Printing All Log Levels:");
 	for(int i = SERENITY_TRACE; i <= SERENITY_DISABLED; i++) {
 		log.SetLogLevel(( LogLevel ) i);
 		log.Log(log.GetLogLevel( ));
 	}
-	log.Log("**********************************************************************************");
 	log.Close( );
 	/*
                             ############################################# End Of Section ###############################################
@@ -66,8 +68,9 @@ int main( )
 	//!  ##########################################################################################################################################
 
 	log.Open( );
-	log.Log("Testing Message Flag Switches:");
-	log.Log("**********************************************************************************");
+	log.Log("############################################");
+	log.Log("# Iterating Through Message Flag Switches: #");
+	log.Log("############################################");
 	using serenity::details::MsgDetails;
 
 	serenity::utilities logHelp;
@@ -78,7 +81,6 @@ int main( )
 		logHelp.SetLogStyle(MsgDetails::LogStyle::reset);
 	}
 
-	log.Log("**********************************************************************************");
 	log.Close( );
 	/*
                             ############################################# End Of Section ##############################################
@@ -120,6 +122,9 @@ int main( )
 	serenity::indicator_handle::ManagerHandle indicatorHandle = logProgress.GetManagerHandle( );
 	std::cout << "\n\nSwitching Back To Testlog.txt\n\n";
 	log.Open( );
+	log.Log("#############################################################################");
+	log.Log("#                    Logger Registration And Management                     #");
+	log.Log("#############################################################################");
 	log.Log("Testing The Register Observer Func -> Initial Handle Reference Count: " +
 		std::to_string(logProgress.ManagerRefCount( )));
 	logProgress.RegisterIndicator( );
@@ -140,9 +145,12 @@ int main( )
 	indicatorHandle = logProgress.GetManagerHandle( );
 
 	log.Log("Passed Handle Size For Comparison: " + std::to_string(indicatorHandle.size( )));
+	std::cout << std::endl; // Just For Visual Clarity In Console O/P Nothing More And Nothing Less
 	log.Close( );
 
-	std::cout << "\n\n**********************************************************************************\n";
+	// This Next One, I Would Like For Debugging Purposes: Print Out That Logger's Info In Full
+	// std::cout << log << std::endl;
+
 	/*
                             ############################################# End Of Section ##############################################
     */
@@ -153,12 +161,21 @@ int main( )
                             #                        Misc Sandbox For Testing And Wrapping Up The Testing Section                     #
                             ###########################################################################################################
     */
+	log.Open( );
+	log.Log("############################################################");
+	log.Log("# Information On The Size Of The Current Classes In Bytes: #");
+	log.Log("############################################################");
+	log.Log("Size of Progress Bar Class: " + std::to_string(sizeof(serenity::ProgressBar)) + " Bytes");
+	log.Log("Size of Default Bar Class: " + std::to_string(sizeof(serenity::DefaultBar)) + " Bytes");
+	log.Log("Size of the WIP Manager Class: " + std::to_string(sizeof(serenity::Manager)) + " Bytes");
+	log.Log("Size of Current Indicator Manager Class: " + std::to_string(sizeof(serenity::IndicatorManager)) +
+		" Bytes");
+	log.Log("############################################################");
+	log.Close( );
 
-
-	// This Next One, I Would Like For Debugging Purposes: Print Out That Logger's Info In Full
-	// std::cout << log << std::endl;
-	std::cout << "\n\t\t\tFinished Testing Library Header...\n\n";
-	std::cout << "\n**********************************************************************************\n";
+	std::cout << "\n**********************************************************************************";
+	std::cout << "\n\n\t\t\tFinished Testing Library Header...\n\n";
+	std::cout << "**********************************************************************************\n";
 	system("Pause");
 
 	/*
