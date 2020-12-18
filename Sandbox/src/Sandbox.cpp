@@ -167,7 +167,7 @@ int main( )
 	log.Log("############################################################");
 	log.Log("Size of Progress Bar Class: " + std::to_string(sizeof(serenity::ProgressBar)) + " Bytes");
 	log.Log("Size of Default Bar Class: " + std::to_string(sizeof(serenity::DefaultBar)) + " Bytes");
-	log.Log("Size of the WIP Manager Class: " + std::to_string(sizeof(serenity::Manager)) + " Bytes");
+	log.Log("Size of the WIP Manager Class: " + std::to_string(sizeof(untested::manager::Manager)) + " Bytes");
 	log.Log("Size of Current Indicator Manager Class: " + std::to_string(sizeof(serenity::IndicatorManager)) +
 		" Bytes");
 	log.Log("############################################################");

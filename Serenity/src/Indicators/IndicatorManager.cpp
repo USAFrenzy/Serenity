@@ -16,6 +16,7 @@ namespace serenity {
 	// The References And Then Perform The Update Function For Each Indicator In That Handle
 	void IndicatorManager::Update(float updateValue, float totalWork, std::ostream& os)
 	{
+		// Sigh.. May actually keep this for the time being just to move forward with the program right now
 		m_progressBars = m_updater.GetManagerHandle( ); // ToDo: REMOVE ME!!!! THIS ISN'T WORTH 224 BYTES
 
 		for(auto indicator : m_progressBars) {
