@@ -16,7 +16,7 @@ namespace serenity {
 
 		ProgressBar(ProgressBar& copy);
 
-		virtual ~ProgressBar( ) { };
+		virtual ~ProgressBar( );
 
 		void Progress(float progressValue);
 
@@ -62,7 +62,7 @@ namespace serenity {
 	namespace indicator_handle {
 		using ManagerHandle = std::vector<ProgressBar*>;
 
-		static ManagerHandle m_managerHandle {ProgressBar::managedIndicators};
+		static ManagerHandle *m_managerHandle {&ProgressBar::managedIndicators};
 		static int m_refCounter;
 	} // namespace indicator_handle
 

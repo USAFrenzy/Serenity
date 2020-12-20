@@ -42,8 +42,8 @@ Test Logger: Passed Handle Size For Comparison: 0
 Test Logger: ############################################################
 Test Logger: # Information On The Size Of The Current Classes In Bytes: #
 Test Logger: ############################################################
-Test Logger: Size of Progress Bar Class: 200 Bytes
-Test Logger: Size of Default Bar Class: 264 Bytes
-Test Logger: Size of the WIP Manager Class: 224 Bytes
-Test Logger: Size of Current Indicator Manager Class: 232 Bytes
+Test Logger: Size of Progress Bar Class: 224 Bytes
+Test Logger: Size of Default Bar Class: 304 Bytes
+Test Logger: Size of the WIP Manager Class: 248 Bytes
+Test Logger: Size of Current Indicator Manager Class: 264 Bytes
 Test Logger: ############################################################

@@ -8,6 +8,22 @@
 
 #include <string>
 
+
+// Running Mem-Leak Detection (0 = OFF, 1 = ON)
+#define MEMLEAKDETECTION 1
+// Define And Includes For Running Mem-Leak Detection
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
+
+//!? #########################################################################################################################
+//!? #                                                     BUG                                                               #
+//!? #########################################################################################################################
+//!? # Program Has Some Memory Leakage - Memory spikes from 815ish to 920ish when program closes. Need To Look Into It       #
+//!? #########################################################################################################################
+
+
 #define Testing 1
 
 int main( )
@@ -97,7 +113,7 @@ int main( )
 	msgLog.Open( );
 	msgLog.Log("**********************************************************************************");
 	float simulatedWork = 1;
-	float simulatedEnd  = 500;
+	float simulatedEnd  = 100;
 	serenity::DefaultBar logProgress;
 	serenity::IndicatorManager manager;
 	logProgress.SetStatus("Writing For Loop To MessageLog.txt");
@@ -178,7 +194,7 @@ int main( )
 	std::cout << "**********************************************************************************\n";
 	system("Pause");
 
-	/*
+/*
                             ############################################# End Of Section ##############################################
     */
 #endif // Testing
@@ -188,4 +204,21 @@ int main( )
                             #                             Misc Sandbox And Everything Else Section                                  #
                             ###########################################################################################################
     */
+#if MEMLEAKDETECTION
+	serenity::Logger MemLog("MEMORY LOGGER");
+	MemLog.Init("Memory_Leak_Dump.txt", serenity::details::logger::LogOutput::file);
+	MemLog.Log("Dump Log:\n");
+	HANDLE memLog = CreateFile(L"Memory_Leak_Dump.txt",
+				   GENERIC_WRITE,
+				   FILE_SHARE_WRITE,
+				   NULL,
+				   CREATE_ALWAYS,
+				   FILE_ATTRIBUTE_NORMAL,
+				   NULL);
+
+	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);
+	_CrtSetReportFile(_CRT_WARN, memLog);
+	_CrtDumpMemoryLeaks( );
+
+#endif // MEMLEAKDETECTION
 }

@@ -18,6 +18,18 @@ namespace serenity {
 	{
 	}
 
+	ProgressBar::~ProgressBar( )
+	{
+		for(auto indicators : managedIndicators) {
+			delete indicators;
+		}
+		managedIndicators.clear( );
+		if(!managedIndicators.empty( )) {
+			std::cout << "Pointer Vector Not Empty - Memory Leak Possible!\n";
+		}
+	}
+
+
 	// May Add To Ctor For Automatic Registration, Otherwise, Registration To The Manager "Observer" Would Have
 	// To Be Manual. Need To Think On Whether I Want Automatically Or Manually Added "Listeners"
 	//? -> One Pro To Automatic Registration Would Be That There Would Be Less Copying => Could Just Use Move
@@ -85,12 +97,12 @@ namespace serenity {
 	std::vector<ProgressBar*> ProgressBar::GetManagerHandle( )
 	{
 		UpdateManagerHandle( );
-		return indicator_handle::m_managerHandle;
+		return *indicator_handle::m_managerHandle;
 	}
 
 	void ProgressBar::UpdateManagerHandle( )
 	{
-		indicator_handle::m_managerHandle = *&managedIndicators;
+		indicator_handle::m_managerHandle = &managedIndicators;
 	}
 
 	int ProgressBar::ManagerRefCount( )

@@ -2,7 +2,7 @@
 
 namespace serenity {
 
-	IndicatorManager::IndicatorManager( ) : m_progressBars(std::move(indicator_handle::m_managerHandle)) { }
+	IndicatorManager::IndicatorManager( ) : m_progressBars(*indicator_handle::m_managerHandle) { }
 
 	IndicatorManager::~IndicatorManager( )
 	{
