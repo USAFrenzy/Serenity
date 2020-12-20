@@ -15,7 +15,7 @@
 #define _CRTDBG_MAP_ALLOC
 #include <stdlib.h>
 #include <crtdbg.h>
-
+// TODO: Open Up Debugger And Set _crtBreakAlloc In The Watch Window To Find Leaks
 
 //!? #########################################################################################################################
 //!? #                                                     BUG                                                               #
@@ -205,9 +205,6 @@ int main( )
                             ###########################################################################################################
     */
 #if MEMLEAKDETECTION
-	serenity::Logger MemLog("MEMORY LOGGER");
-	MemLog.Init("Memory_Leak_Dump.txt", serenity::details::logger::LogOutput::file);
-	MemLog.Log("Dump Log:\n");
 	HANDLE memLog = CreateFile(L"Memory_Leak_Dump.txt",
 				   GENERIC_WRITE,
 				   FILE_SHARE_WRITE,
@@ -215,6 +212,11 @@ int main( )
 				   CREATE_ALWAYS,
 				   FILE_ATTRIBUTE_NORMAL,
 				   NULL);
+	#ifdef _DEBUG
+		#define new new(_NORMAL_BLOCK, __FILE__, __LINE__)
+	#else
+		#define new new
+	#endif
 
 	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);
 	_CrtSetReportFile(_CRT_WARN, memLog);
