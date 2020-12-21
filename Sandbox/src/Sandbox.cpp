@@ -8,22 +8,6 @@
 
 #include <string>
 
-
-// Running Mem-Leak Detection (0 = OFF, 1 = ON)
-#define MEMLEAKDETECTION 1
-// Define And Includes For Running Mem-Leak Detection
-#define _CRTDBG_MAP_ALLOC
-#include <stdlib.h>
-#include <crtdbg.h>
-// TODO: Open Up Debugger And Set _crtBreakAlloc In The Watch Window To Find Leaks
-
-//!? #########################################################################################################################
-//!? #                                                     BUG                                                               #
-//!? #########################################################################################################################
-//!? # Program Has Some Memory Leakage - Memory spikes from 815ish to 920ish when program closes. Need To Look Into It       #
-//!? #########################################################################################################################
-
-
 #define Testing 1
 
 int main( )
@@ -38,6 +22,9 @@ int main( )
 	std::cout << "Creating TestLog.txt\n\n";
 	serenity::Logger log("Test Logger");
 	log.Init("TestLog.txt", serenity::details::logger::LogOutput::all);
+	//
+	//
+
 
 	/*
                             ############################################# End Of Section ##############################################
@@ -89,13 +76,13 @@ int main( )
 	log.Log("############################################");
 	using serenity::details::MsgDetails;
 
-	serenity::utilities logHelp;
-	for(int color = 1; color < 19; ++color) {
-		MsgDetails::LogColor temp = static_cast<MsgDetails::LogColor>(color);
-		logHelp.SetLogColor(temp);
-		log.Log("Console Message Flags: " + logHelp.LogColorToStr(temp));
-		logHelp.SetLogStyle(MsgDetails::LogStyle::reset);
-	}
+	//serenity::utilities logHelp;
+	//for(int color = 1; color < 19; ++color) {
+	//	MsgDetails::LogColor temp = static_cast<MsgDetails::LogColor>(color);
+	//	logHelp.SetLogColor(temp);
+	//	log.Log("Console Message Flags: " + logHelp.LogColorToStr(temp));
+	//	logHelp.SetLogStyle(MsgDetails::LogStyle::reset);
+	//}
 
 	log.Close( );
 	/*
@@ -192,11 +179,17 @@ int main( )
 	std::cout << "\n**********************************************************************************";
 	std::cout << "\n\n\t\t\tFinished Testing Library Header...\n\n";
 	std::cout << "**********************************************************************************\n";
-	system("Pause");
 
+	// Just Pausing Agnostically and getting rid of the 'return type ignored' - nothing useful and will be discarded anyways
+	#if _DEBUG
+	int val = std::getchar( );
+	if(val) {
+		exit;
+	}
+	#endif
 /*
                             ############################################# End Of Section ##############################################
-    */
+*/
 #endif // Testing
 
 	/*  
@@ -204,23 +197,4 @@ int main( )
                             #                             Misc Sandbox And Everything Else Section                                  #
                             ###########################################################################################################
     */
-#if MEMLEAKDETECTION
-	HANDLE memLog = CreateFile(L"Memory_Leak_Dump.txt",
-				   GENERIC_WRITE,
-				   FILE_SHARE_WRITE,
-				   NULL,
-				   CREATE_ALWAYS,
-				   FILE_ATTRIBUTE_NORMAL,
-				   NULL);
-	#ifdef _DEBUG
-		#define new new(_NORMAL_BLOCK, __FILE__, __LINE__)
-	#else
-		#define new new
-	#endif
-
-	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);
-	_CrtSetReportFile(_CRT_WARN, memLog);
-	_CrtDumpMemoryLeaks( );
-
-#endif // MEMLEAKDETECTION
 }

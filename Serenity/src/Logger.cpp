@@ -12,7 +12,7 @@ namespace serenity {
 	    m_logLevel(details::logger::LogLevel::trace),
 	    m_output(details::logger::LogOutput::all)
 	{
-		SetLoggerOstream(this->m_ostream);
+		SetLoggerOstream(m_ostream);
 	}
 
 	void Logger::Init(const std::string &fileName, const details::logger::LogOutput output)
