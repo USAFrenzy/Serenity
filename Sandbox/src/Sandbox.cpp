@@ -76,13 +76,13 @@ int main( )
 	log.Log("############################################");
 	using serenity::details::MsgDetails;
 
-	//serenity::utilities logHelp;
-	//for(int color = 1; color < 19; ++color) {
-	//	MsgDetails::LogColor temp = static_cast<MsgDetails::LogColor>(color);
-	//	logHelp.SetLogColor(temp);
-	//	log.Log("Console Message Flags: " + logHelp.LogColorToStr(temp));
-	//	logHelp.SetLogStyle(MsgDetails::LogStyle::reset);
-	//}
+	serenity::utilities logHelp;
+	for(int color = 1; color < 19; ++color) {
+		MsgDetails::LogColor temp = static_cast<MsgDetails::LogColor>(color);
+		logHelp.SetLogColor(temp);
+		log.Log("Console Message Flags: " + logHelp.LogColorToStr(temp));
+		logHelp.SetLogStyle(MsgDetails::LogStyle::reset);
+	}
 
 	log.Close( );
 	/*
@@ -182,10 +182,7 @@ int main( )
 
 	// Just Pausing Agnostically and getting rid of the 'return type ignored' - nothing useful and will be discarded anyways
 	#if _DEBUG
-	int val = std::getchar( );
-	if(val) {
-		exit;
-	}
+	char val = std::getchar( );
 	#endif
 /*
                             ############################################# End Of Section ##############################################

@@ -12,6 +12,24 @@ Test Logger: DISABLED
 Test Logger: ############################################
 Test Logger: # Iterating Through Message Flag Switches: #
 Test Logger: ############################################
+Test Logger: Console Message Flags: Black
+Test Logger: Console Message Flags: Red
+Test Logger: Console Message Flags: Green
+Test Logger: Console Message Flags: Yellow
+Test Logger: Console Message Flags: Blue
+Test Logger: Console Message Flags: Magenta
+Test Logger: Console Message Flags: Cyan
+Test Logger: Console Message Flags: White
+Test Logger: Console Message Flags: Black Background
+Test Logger: Console Message Flags: Red Background
+Test Logger: Console Message Flags: Green Background
+Test Logger: Console Message Flags: Yellow Background
+Test Logger: Console Message Flags: Blue Background
+Test Logger: Console Message Flags: Magenta Background
+Test Logger: Console Message Flags: Cyan Background
+Test Logger: Console Message Flags: White Background
+Test Logger: Console Message Flags: Bold Yellow
+Test Logger: Console Message Flags: Bold Red
 Test Logger: #############################################################################
 Test Logger: #                    Logger Registration And Management                     #
 Test Logger: #############################################################################
