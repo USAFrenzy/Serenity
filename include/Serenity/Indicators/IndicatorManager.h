@@ -51,7 +51,6 @@ namespace untested {
 			virtual void NotifySubscriber( ) override { }
 			virtual std::vector<serenity::ProgressBar *> GetHandle( ) = 0;
 			virtual void UpdateHandle( ) { }
-			virtual void GetRefCount( ) { }
 		};
 
 	} // namespace manager_handler
@@ -76,42 +75,25 @@ namespace untested {
 		// & ISubscriber
 		{
 		      public:
-			Manager( ) { }
+			Manager( );
 
-			~Manager( ) { }
+			~Manager( );
 
-			void Update(float updateValue, float totalWork, std::ostream &os = std::cout) override { }
+			void Update(float updateValue, float totalWork, std::ostream &os) override;
 
-			void manager_handler::ManagerHandler::RegisterIndicator( )
-			{
-				serenity::ProgressBar::managedIndicators.emplace_back(this);
-				m_referenceCount++;
-			}
+			void manager_handler::ManagerHandler::RegisterIndicator( );
 
-			void manager_handler::ManagerHandler::UnregisterIndicator( )
-			{
-				std::vector<serenity::ProgressBar *>::iterator iteratorIndex =
-				  std::find(serenity::ProgressBar::managedIndicators.begin( ),
-					    serenity::ProgressBar::managedIndicators.end( ),
-					    this);
-				if(iteratorIndex != serenity::ProgressBar::managedIndicators.end( )) {
-					serenity::ProgressBar::managedIndicators.erase(iteratorIndex);
-				}
-				m_referenceCount--;
-			}
+			void manager_handler::ManagerHandler::UnregisterIndicator( );
 
-			std::vector<serenity::ProgressBar *> manager_handler::ManagerHandler::GetHandle( )
-			{
-				return serenity::ProgressBar::managedIndicators;
-			}
-			auto GetSize( )
-			{
-				return serenity::ProgressBar::managedIndicators.size( );
-			}
+			std::vector<serenity::ProgressBar *> manager_handler::ManagerHandler::GetHandle( );
 
-		      protected:
-			unsigned int m_referenceCount { };
+			size_t GetSize( );
+
+			int GetRefCount( );
 		};
 	} // namespace manager
-
 } // namespace untested
+
+namespace reference_counter {
+	static int m_referenceCount;
+} // namespace reference_counter

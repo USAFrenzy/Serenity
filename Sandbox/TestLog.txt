@@ -30,29 +30,102 @@ Test Logger: Console Message Flags: Cyan Background
 Test Logger: Console Message Flags: White Background
 Test Logger: Console Message Flags: Bold Yellow
 Test Logger: Console Message Flags: Bold Red
-Test Logger: #####################################################################################
-Test Logger: #                        Logger Registration And Management                         #
-Test Logger: #####################################################################################
-Test Logger: #######################################################################
-Test Logger: # Current manager's GetManagerHandle(), Register/Unregister Functions #
-Test Logger: #######################################################################
+Test Logger: ###############################################################################################
+Test Logger: #                          Logger Registration And Management                                 #
+Test Logger: ###############################################################################################
+Test Logger: 
+Test Logger: ########################################################################################
+Test Logger: # Current manager's GetManagerHandle(), GetManagerRef(), Register/Unregister Functions #
+Test Logger: ########################################################################################
 Test Logger: Testing The Register Observer Func -> Initial Handle Reference Count: 0
-Test Logger: Registered One Indicator -> Handle Reference Count: 0
+Test Logger: Registered One Indicator -> Handle Reference Count: 1
 Test Logger: Passed Handle Size For Comparison: 1
-Test Logger: Testing The Unregister Observer Func -> Initial Handle Reference Count: 0
+Test Logger: Testing The Unregister Observer Func -> Initial Handle Reference Count: 1
 Test Logger: Unregistered One Indicator -> Handle Reference Count: 0
 Test Logger: Passed Handle Size For Comparison: 0
-Test Logger: #######################################################################
-Test Logger: #     WIP manager's GetHandle(), Register/Unregister Functions        #
-Test Logger: #######################################################################
+Test Logger: 
+Test Logger: ########################################################################################
+Test Logger: #        WIP manager's GetHandle(), Register/Unregister, GetRefCount() Functions       #
+Test Logger: ########################################################################################
 Test Logger: Initial Handle Size: 0
+Test Logger: Initial Handle Reference Count: 1
 Test Logger: Handle Size After Registering One Indicator: 1
+Test Logger: Handle Reference Count After Registration: 1
 Test Logger: Handle Size After Unregistering One Indicator: 0
+Test Logger: Handle Reference Count After Unregistration: 0
+Test Logger: ########################################################################################
+Test Logger: #     Bulk Creation Of Indicators And Registering/Unregistering Them In A For Loop     #
+Test Logger: ########################################################################################
+Test Logger: 
+Test Logger: Initial Handle Size: 0
+Test Logger: Initial Handle Reference Count: 0
+Test Logger: 
+Test Logger: ###########################################
+Test Logger: #    Creating Indicators In A For Loop:   #
+Test Logger: ###########################################
+Test Logger: Indicator Number (1) Created
+Test Logger: Indicator Number (2) Created
+Test Logger: Indicator Number (3) Created
+Test Logger: Indicator Number (4) Created
+Test Logger: Indicator Number (5) Created
+Test Logger: Indicator Number (6) Created
+Test Logger: Indicator Number (7) Created
+Test Logger: Indicator Number (8) Created
+Test Logger: Indicator Number (9) Created
+Test Logger: Indicator Number (10) Created
+Test Logger: 
+Test Logger: ###########################################
+Test Logger: #  Registering Indicators In A For Loop:  #
+Test Logger: ###########################################
+Test Logger: Handle Size After Registering Indicator: 0
+Test Logger: Handle Reference Count After Registration: 0
+Test Logger: Handle Size After Registering Indicator: 1
+Test Logger: Handle Reference Count After Registration: 1
+Test Logger: Handle Size After Registering Indicator: 2
+Test Logger: Handle Reference Count After Registration: 2
+Test Logger: Handle Size After Registering Indicator: 3
+Test Logger: Handle Reference Count After Registration: 3
+Test Logger: Handle Size After Registering Indicator: 4
+Test Logger: Handle Reference Count After Registration: 4
+Test Logger: Handle Size After Registering Indicator: 5
+Test Logger: Handle Reference Count After Registration: 5
+Test Logger: Handle Size After Registering Indicator: 6
+Test Logger: Handle Reference Count After Registration: 6
+Test Logger: Handle Size After Registering Indicator: 7
+Test Logger: Handle Reference Count After Registration: 7
+Test Logger: Handle Size After Registering Indicator: 8
+Test Logger: Handle Reference Count After Registration: 8
+Test Logger: Handle Size After Registering Indicator: 9
+Test Logger: Handle Reference Count After Registration: 9
+Test Logger: 
+Test Logger: ###########################################
+Test Logger: # Unregistering Indicators In A For Loop: #
+Test Logger: ###########################################
+Test Logger: Handle Size After Unregistering Indicator: 9
+Test Logger: Handle Ref Count After Unregistration: 9
+Test Logger: Handle Size After Unregistering Indicator: 8
+Test Logger: Handle Ref Count After Unregistration: 8
+Test Logger: Handle Size After Unregistering Indicator: 7
+Test Logger: Handle Ref Count After Unregistration: 7
+Test Logger: Handle Size After Unregistering Indicator: 6
+Test Logger: Handle Ref Count After Unregistration: 6
+Test Logger: Handle Size After Unregistering Indicator: 5
+Test Logger: Handle Ref Count After Unregistration: 5
+Test Logger: Handle Size After Unregistering Indicator: 4
+Test Logger: Handle Ref Count After Unregistration: 4
+Test Logger: Handle Size After Unregistering Indicator: 3
+Test Logger: Handle Ref Count After Unregistration: 3
+Test Logger: Handle Size After Unregistering Indicator: 2
+Test Logger: Handle Ref Count After Unregistration: 2
+Test Logger: Handle Size After Unregistering Indicator: 1
+Test Logger: Handle Ref Count After Unregistration: 1
+Test Logger: Handle Size After Unregistering Indicator: 0
+Test Logger: Handle Ref Count After Unregistration: 0
 Test Logger: ############################################################
 Test Logger: # Information On The Size Of The Current Classes In Bytes: #
 Test Logger: ############################################################
 Test Logger: Size of Progress Bar Class: 224 Bytes
-Test Logger: Size of Default Bar Class: 320 Bytes
-Test Logger: Size of the WIP Manager Class: 240 Bytes
+Test Logger: Size of Default Bar Class: 312 Bytes
+Test Logger: Size of the WIP Manager Class: 232 Bytes
 Test Logger: Size of Current Indicator Manager Class: 488 Bytes
 Test Logger: ############################################################

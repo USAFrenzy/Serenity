@@ -16,7 +16,7 @@ namespace serenity {
 	{
 		if(managedIndicators.size( ) != 0) {
 			serenity::ProgressBar::UpdateManagerHandle( );
-			serenity::DefaultBar::NotifySubscriber( );
+			serenity::ProgressBar::NotifySubscriber( );
 		}
 		serenity::ProgressBar::SetWorkload(totalWork);
 		serenity::ProgressBar::Progress(updateValue);
