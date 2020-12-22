@@ -59,14 +59,14 @@
     <ClCompile Include="Serenity\src\Indicators\IndicatorManager.cpp">
       <Filter>Source Files\Indicators</Filter>
     </ClCompile>
-    <ClCompile Include="Serenity\src\Indicators\ProgressBar.cpp">
-      <Filter>Source Files\Indicators</Filter>
-    </ClCompile>
     <ClCompile Include="Serenity\src\Logger.cpp">
       <Filter>Source Files\Logger</Filter>
     </ClCompile>
     <ClCompile Include="Serenity\src\Sinks\DefaultSink.cpp">
       <Filter>Source Files\Sink</Filter>
+    </ClCompile>
+    <ClCompile Include="Serenity\src\Indicators\IProgress.cpp">
+      <Filter>Source Files\Indicators</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
