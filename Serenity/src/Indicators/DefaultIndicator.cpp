@@ -14,12 +14,11 @@ namespace serenity {
 
 	void DefaultBar::UpdateProgress(float updateValue, float totalWork, std::ostream& os)
 	{
-		if(managedIndicators.size( ) != 0) {
-			serenity::ProgressBar::UpdateManagerHandle( );
-			serenity::ProgressBar::NotifySubscriber( );
+		if(ProgressBar::managedIndicators.size( ) != 0) {
+			ProgressBar::NotifySubscriber( );
 		}
-		serenity::ProgressBar::SetWorkload(totalWork);
-		serenity::ProgressBar::Progress(updateValue);
+		ProgressBar::SetWorkload(totalWork);
+		ProgressBar::Progress(updateValue);
 		OutputProgress(os);
 	}
 
@@ -29,35 +28,34 @@ namespace serenity {
 		// Check The Progress Status And Output The Updated Visual Progress Indicator As Well As
 		// The Updated Percentage Completed And The Status Message Corresponding To The Process
 
-		float i              = 0.0f;
-		float completedRatio = ((serenity::ProgressBar::m_progress / serenity::ProgressBar::m_totalWork));
-		const float finshedProgress = (completedRatio * serenity::ProgressBar::m_barWidth);
+		float i                     = 0.0f;
+		float completedRatio        = ((ProgressBar::m_progress / ProgressBar::m_totalWork));
+		const float finshedProgress = (completedRatio * ProgressBar::m_barWidth);
 		int percentage              = static_cast<int>(completedRatio * 100.0f);
 
-		if(serenity::ProgressBar::m_progress > serenity::ProgressBar::m_totalWork) {
+		if(ProgressBar::m_progress > ProgressBar::m_totalWork) {
 			return;
 		}
 		os << "\r" << std::flush;
 		os << percentage << "%";
 		os << " [";
-		for(i; i < serenity::ProgressBar::m_barWidth; ++i) {
+		for(i; i < ProgressBar::m_barWidth; ++i) {
 			(i <= finshedProgress) ? (os << m_barFill) : (os << m_barRemainder);
 		}
 		os << "]";
-		os << " [" << serenity::ProgressBar::m_progress << "/" << serenity::ProgressBar::m_totalWork
-		   << "] ";
-		os << " " << serenity::ProgressBar::m_status;
+		os << " [" << ProgressBar::m_progress << "/" << ProgressBar::m_totalWork << "] ";
+		os << " " << ProgressBar::m_status;
 	}
 
 	void DefaultBar::FillBar(const std::string& symbol)
 	{
-		std::unique_lock threadLock {serenity::ProgressBar::m_mutex};
+		std::unique_lock threadLock {ProgressBar::m_mutex};
 		m_barFill = symbol;
 	}
 
 	void DefaultBar::FillRemainder(const std::string& symbol)
 	{
-		std::unique_lock threadLock {serenity::ProgressBar::m_mutex};
+		std::unique_lock threadLock {ProgressBar::m_mutex};
 		m_barRemainder = symbol;
 	}
 } // namespace serenity

@@ -102,7 +102,6 @@ int main( )
 	float simulatedWork = 1;
 	float simulatedEnd  = 100;
 	serenity::DefaultBar logProgress;
-	serenity::IndicatorManager manager;
 	logProgress.serenity::ProgressBar::SetStatus("Writing For Loop To MessageLog.txt");
 
 	for(simulatedWork; simulatedWork <= simulatedEnd; ++simulatedWork) {
@@ -121,54 +120,20 @@ int main( )
                             #                           Logger Registration And Management Testing Section                            #
                             ###########################################################################################################
     */
-
-	serenity::indicator_handle::ManagerHandle indicatorHandle =
-	  logProgress.serenity::ProgressBar::GetManagerHandle( );
 	std::cout << "\n\nSwitching Back To Testlog.txt\n\n";
 	log.Open( );
-	log.Log("###############################################################################################");
-	log.Log("#                          Logger Registration And Management                                 #");
-	log.Log("###############################################################################################");
-	log.Log(""); // Add A Newline
+	
 	log.Log("########################################################################################");
-	log.Log("# Current manager's GetManagerHandle(), GetManagerRef(), Register/Unregister Functions #");
+	log.Log("#    Now Current manager's GetHandle(), Register/Unregister, GetRefCount() Functions   #");
 	log.Log("########################################################################################");
-	log.Log("Testing The Register Observer Func -> Initial Handle Reference Count: " +
-		std::to_string(logProgress.ManagerRefCount( )));
-	logProgress.serenity::ProgressBar::RegisterIndicator( );
-	log.Log("Registered One Indicator -> Handle Reference Count: " +
-		std::to_string(logProgress.ManagerRefCount( )));
-
-	// This Is Kind Of A Hacked Way Of Updating The Handle After Assignment
-	indicatorHandle = logProgress.serenity::ProgressBar::GetManagerHandle( );
-
-	log.Log("Passed Handle Size For Comparison: " + std::to_string(indicatorHandle.size( )));
-	log.Log("Testing The Unregister Observer Func -> Initial Handle Reference Count: " +
-		std::to_string(logProgress.ManagerRefCount( )));
-	logProgress.serenity::ProgressBar::UnregisterIndicator( );
-	log.Log("Unregistered One Indicator -> Handle Reference Count: " +
-		std::to_string(logProgress.ManagerRefCount( )));
-
-	// This Is Kind Of A Hacked Way Of Updating The Handle After Assignment
-	indicatorHandle = logProgress.serenity::ProgressBar::GetManagerHandle( );
-
-	log.Log("Passed Handle Size For Comparison: " + std::to_string(indicatorHandle.size( )));
-	log.Log("");            // Add A Newline
-	std::cout << std::endl; // Just For Visual Clarity In Console O/P Nothing More And Nothing Less
-
-	// #############################################################################################################
-
-	log.Log("########################################################################################");
-	log.Log("#        WIP manager's GetHandle(), Register/Unregister, GetRefCount() Functions       #");
-	log.Log("########################################################################################");
-	untested::manager::Manager newHandle;
+	serenity::manager::Manager newHandle;
 	newHandle.GetHandle( );
 	log.Log("Initial Handle Size: " + std::to_string(newHandle.GetSize( )));
-	logProgress.untested::manager::Manager::RegisterIndicator( );
+	logProgress.RegisterIndicator( );
 	log.Log("Initial Handle Reference Count: " + std::to_string(newHandle.GetRefCount( )));
 	log.Log("Handle Size After Registering One Indicator: " + std::to_string(newHandle.GetSize( )));
 	log.Log("Handle Reference Count After Registration: " + std::to_string(newHandle.GetRefCount( )));
-	logProgress.untested::manager::Manager::UnregisterIndicator( );
+	logProgress.UnregisterIndicator( );
 	log.Log("Handle Size After Unregistering One Indicator: " + std::to_string(newHandle.GetSize( )));
 	log.Log("Handle Reference Count After Unregistration: " + std::to_string(newHandle.GetRefCount( )));
 	std::cout << std::endl; // Just For Visual Clarity In Console O/P Nothing More And Nothing Less
@@ -200,7 +165,7 @@ int main( )
 	log.Log("#  Registering Indicators In A For Loop:  #");
 	log.Log("###########################################");
 	for(int i = 0; i < tempIndicators.size( ); i++) {
-		tempIndicators [i]->untested::manager::Manager::RegisterIndicator( );
+		tempIndicators [i]->RegisterIndicator( );
 		log.Log("Handle Size After Registering Indicator: " + std::to_string(newHandle.GetSize( )));
 		log.Log("Handle Reference Count After Registration: " + std::to_string(newHandle.GetRefCount( )));
 	}
@@ -210,7 +175,7 @@ int main( )
 	log.Log("# Unregistering Indicators In A For Loop: #");
 	log.Log("###########################################");
 	for(int i = 0; i < tempIndicators.size( ); i++) {
-		tempIndicators [i]->untested::manager::Manager::UnregisterIndicator( );
+		tempIndicators [i]->UnregisterIndicator( );
 		log.Log("Handle Size After Unregistering Indicator: " + std::to_string(newHandle.GetSize( )));
 		log.Log("Handle Ref Count After Unregistration: " + std::to_string(newHandle.GetRefCount( )));
 	}
@@ -238,9 +203,7 @@ int main( )
 	log.Log("############################################################");
 	log.Log("Size of Progress Bar Class: " + std::to_string(sizeof(serenity::ProgressBar)) + " Bytes");
 	log.Log("Size of Default Bar Class: " + std::to_string(sizeof(serenity::DefaultBar)) + " Bytes");
-	log.Log("Size of the WIP Manager Class: " + std::to_string(sizeof(untested::manager::Manager)) + " Bytes");
-	log.Log("Size of Current Indicator Manager Class: " + std::to_string(sizeof(serenity::IndicatorManager)) +
-		" Bytes");
+	log.Log("Size of the Now Current Manager Class: " + std::to_string(sizeof(serenity::manager::Manager)) + " Bytes");
 	log.Log("############################################################");
 	log.Close( );
 

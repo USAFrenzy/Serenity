@@ -6,7 +6,7 @@
 namespace serenity {
 
 	// removed ProgressBar Inheritance: Manager implicitly Inherits from this class
-	class DefaultBar : public untested::manager::Manager
+	class DefaultBar : public manager::Manager
 	{
 	      public:
 		DefaultBar( );
@@ -15,7 +15,7 @@ namespace serenity {
 
 		~DefaultBar( );
 
-		void UpdateProgress(float updateValue, float totalWork, std::ostream& os = std::cout) override;
+		void UpdateProgress(float updateValue, float totalWork, std::ostream& os = std::cout);
 
 		void OutputProgress(std::ostream& os = std::cout) override;
 

@@ -35,30 +35,14 @@ namespace serenity {
 	//? -> One Pro To Automatic Registration Would Be That There Would Be Less Copying => Could Just Use Move
 	//?    Semantics To Move This Base Class Vector Handle To The Manager Vector Reference When Manager Object
 	//?    Is Instantiated?
-	void ProgressBar::RegisterIndicator( )
-	{
-		managedIndicators.emplace_back(this);
-		indicator_handle::m_refCounter++;
-		UpdateManagerHandle( );
-	}
+	void ProgressBar::RegisterIndicator( ) { }
 
 	// Searches Through The Subscriber Vector For The Listener Object And If The Listener Object Has Been
 	// Found, Removes It From The Subscriber Vector
-	void ProgressBar::UnregisterIndicator( )
-	{
-		indicator_handle::ManagerHandle::iterator iteratorIndex =
-		  std::find(managedIndicators.begin( ), managedIndicators.end( ), this);
-		if(iteratorIndex != managedIndicators.end( )) {
-			managedIndicators.erase(iteratorIndex);
-		}
-		indicator_handle::m_refCounter--;
-		UpdateManagerHandle( );
-	}
+	void ProgressBar::UnregisterIndicator( ) { }
 
 	void ProgressBar::NotifySubscriber( )
 	{
-		// UpdateManagerHandle() May Possibly Be Unnecessary Here -> Don't Have A Test Laid Out For It Yet
-		UpdateManagerHandle( );
 		// Was Initially thinking Of having the subscriber's update() method called here
 	}
 
@@ -93,21 +77,4 @@ namespace serenity {
 		std::unique_lock threadLock {m_mutex};
 		m_status = statusMessage;
 	}
-
-	std::vector<ProgressBar*> ProgressBar::GetManagerHandle( )
-	{
-		UpdateManagerHandle( );
-		return *indicator_handle::m_managerHandle;
-	}
-
-	void ProgressBar::UpdateManagerHandle( )
-	{
-		indicator_handle::m_managerHandle = &managedIndicators;
-	}
-
-	int ProgressBar::ManagerRefCount( )
-	{
-		return indicator_handle::m_refCounter;
-	}
-
 } // namespace serenity
