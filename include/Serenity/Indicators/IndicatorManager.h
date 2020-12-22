@@ -2,15 +2,20 @@
 
 #include <Serenity/Indicators/IndicatorInterfaces/ObserverInterface.h>
 #include <Serenity/Indicators/ProgressBar.h>
+#include <vector>
 
 // This Is A WIP For Progress Indicator
 namespace serenity {
-	class IndicatorManager : public ISubscriber
+	class IndicatorManager : public ISubscriber, public ProgressBar
 	{
 	      public:
 		IndicatorManager( );
 
 		~IndicatorManager( );
+
+		void RegisterIndicator( ) { }
+		void UnregisterIndicator( ) { }
+		void NotifySubscriber( ) { }
 
 		void Update(float updateValue, float totalWork, std::ostream &os = std::cout) override;
 
@@ -38,15 +43,13 @@ namespace untested {
 		*/
 		// Obviously Change Return Types When Implemented....
 		// UPDATE: Rolled Back A few steps to here... First way didn't work as planned
-		class ManagerHandler : public INotifier
+		class ManagerHandler : public serenity::ProgressBar
 		{
 		      public:
-			virtual void RegisterIndicator( ) override { }
-			virtual void UnregisterIndicator( ) override { }
+			virtual void RegisterIndicator( )   = 0;
+			virtual void UnregisterIndicator( ) = 0;
 			virtual void NotifySubscriber( ) override { }
-			virtual void GetHandle( )
-			{ /* Technically Should Return A ProgressBar Handle */
-			}
+			virtual std::vector<serenity::ProgressBar *> GetHandle( ) = 0;
 			virtual void UpdateHandle( ) { }
 			virtual void GetRefCount( ) { }
 		};
@@ -67,10 +70,10 @@ namespace untested {
 		// -> Inherit from the ISubscriber Interface in order to for this to be an observer/observable
 		// pattern
 		// Will Come up with the possible Pros and Cons tomorrow before I start flushing this idea out
-		class Manager :
-		  public manager_handler::ManagerHandler,
-		  public ISubscriber,
-		  public serenity::ProgressBar
+		class Manager : public manager_handler::ManagerHandler, public ISubscriber
+		// Inheritance:
+		// ManagerHandler->ProgressBar->INotifier
+		// & ISubscriber
 		{
 		      public:
 			Manager( ) { }
@@ -79,8 +82,34 @@ namespace untested {
 
 			void Update(float updateValue, float totalWork, std::ostream &os = std::cout) override { }
 
+			void manager_handler::ManagerHandler::RegisterIndicator( )
+			{
+				serenity::ProgressBar::managedIndicators.emplace_back(this);
+				m_referenceCount++;
+			}
+
+			void manager_handler::ManagerHandler::UnregisterIndicator( )
+			{
+				std::vector<serenity::ProgressBar *>::iterator iteratorIndex =
+				  std::find(serenity::ProgressBar::managedIndicators.begin( ),
+					    serenity::ProgressBar::managedIndicators.end( ),
+					    this);
+				if(iteratorIndex != serenity::ProgressBar::managedIndicators.end( )) {
+					serenity::ProgressBar::managedIndicators.erase(iteratorIndex);
+				}
+				m_referenceCount--;
+			}
+
+			std::vector<serenity::ProgressBar *> manager_handler::ManagerHandler::GetHandle( )
+			{
+				return serenity::ProgressBar::managedIndicators;
+			}
+			auto GetSize( )
+			{
+				return serenity::ProgressBar::managedIndicators.size( );
+			}
+
 		      protected:
-			// same function as the current m_progressBars variable above
 			unsigned int m_referenceCount { };
 		};
 	} // namespace manager

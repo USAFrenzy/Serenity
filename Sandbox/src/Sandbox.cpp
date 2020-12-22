@@ -122,12 +122,16 @@ int main( )
                             ###########################################################################################################
     */
 
-	serenity::indicator_handle::ManagerHandle indicatorHandle = logProgress.GetManagerHandle( );
+	serenity::indicator_handle::ManagerHandle indicatorHandle =
+	  logProgress.serenity::DefaultBar::GetManagerHandle( );
 	std::cout << "\n\nSwitching Back To Testlog.txt\n\n";
 	log.Open( );
-	log.Log("#############################################################################");
-	log.Log("#                    Logger Registration And Management                     #");
-	log.Log("#############################################################################");
+	log.Log("#####################################################################################");
+	log.Log("#                        Logger Registration And Management                         #");
+	log.Log("#####################################################################################");
+	log.Log("#######################################################################");
+	log.Log("# Current manager's GetManagerHandle(), Register/Unregister Functions #");
+	log.Log("#######################################################################");
 	log.Log("Testing The Register Observer Func -> Initial Handle Reference Count: " +
 		std::to_string(logProgress.ManagerRefCount( )));
 	logProgress.RegisterIndicator( );
@@ -149,8 +153,21 @@ int main( )
 
 	log.Log("Passed Handle Size For Comparison: " + std::to_string(indicatorHandle.size( )));
 	std::cout << std::endl; // Just For Visual Clarity In Console O/P Nothing More And Nothing Less
-	log.Close( );
 
+	// #############################################################################################################
+	log.Log("#######################################################################");
+	log.Log("#     WIP manager's GetHandle(), Register/Unregister Functions        #");
+	log.Log("#######################################################################");
+	untested::manager::Manager newHandle;
+	newHandle.GetHandle( );
+	log.Log("Initial Handle Size: " + std::to_string(newHandle.GetSize( )));
+	logProgress.untested::manager::Manager::RegisterIndicator( );
+	log.Log("Handle Size After Registering One Indicator: " + std::to_string(newHandle.GetSize( )));
+	logProgress.untested::manager::Manager::UnregisterIndicator( );
+	log.Log("Handle Size After Unregistering One Indicator: " + std::to_string(newHandle.GetSize( )));
+	std::cout << std::endl; // Just For Visual Clarity In Console O/P Nothing More And Nothing Less
+
+	log.Close( );
 	// This Next One, I Would Like For Debugging Purposes: Print Out That Logger's Info In Full
 	// std::cout << log << std::endl;
 
