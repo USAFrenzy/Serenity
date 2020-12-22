@@ -77,8 +77,6 @@ Test Logger:
 Test Logger: ###########################################
 Test Logger: #  Registering Indicators In A For Loop:  #
 Test Logger: ###########################################
-Test Logger: Handle Size After Registering Indicator: 0
-Test Logger: Handle Reference Count After Registration: 0
 Test Logger: Handle Size After Registering Indicator: 1
 Test Logger: Handle Reference Count After Registration: 1
 Test Logger: Handle Size After Registering Indicator: 2
@@ -97,6 +95,8 @@ Test Logger: Handle Size After Registering Indicator: 8
 Test Logger: Handle Reference Count After Registration: 8
 Test Logger: Handle Size After Registering Indicator: 9
 Test Logger: Handle Reference Count After Registration: 9
+Test Logger: Handle Size After Registering Indicator: 10
+Test Logger: Handle Reference Count After Registration: 10
 Test Logger: 
 Test Logger: ###########################################
 Test Logger: # Unregistering Indicators In A For Loop: #
