@@ -7,7 +7,7 @@ namespace serenity {
 	namespace manager {
 		class Manager : public manager_handler::ManagerHandler, public ISubscriber
 		// Inheritance:
-		// ManagerHandler->ProgressBar->INotifier
+		// ManagerHandler->IProgress->INotifier
 		// & ISubscriber
 		{
 		      public:
@@ -21,7 +21,7 @@ namespace serenity {
 
 			void manager_handler::ManagerHandler::UnregisterIndicator( );
 
-			std::vector<serenity::ProgressBar *> manager_handler::ManagerHandler::GetHandle( );
+			std::vector<serenity::IProgress *> manager_handler::ManagerHandler::GetHandle( );
 
 			size_t GetSize( );
 

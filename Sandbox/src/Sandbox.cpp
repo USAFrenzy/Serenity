@@ -102,7 +102,7 @@ int main( )
 	float simulatedWork = 1;
 	float simulatedEnd  = 100;
 	serenity::DefaultBar logProgress;
-	logProgress.serenity::ProgressBar::SetStatus("Writing For Loop To MessageLog.txt");
+	logProgress.serenity::IProgress::SetStatus("Writing For Loop To MessageLog.txt");
 
 	for(simulatedWork; simulatedWork <= simulatedEnd; ++simulatedWork) {
 		logProgress.UpdateProgress(simulatedWork, simulatedEnd);
@@ -201,7 +201,7 @@ int main( )
 	log.Log("############################################################");
 	log.Log("# Information On The Size Of The Current Classes In Bytes: #");
 	log.Log("############################################################");
-	log.Log("Size of Progress Bar Class: " + std::to_string(sizeof(serenity::ProgressBar)) + " Bytes");
+	log.Log("Size of Progress Bar Class: " + std::to_string(sizeof(serenity::IProgress)) + " Bytes");
 	log.Log("Size of Default Bar Class: " + std::to_string(sizeof(serenity::DefaultBar)) + " Bytes");
 	log.Log("Size of the Now Current Manager Class: " + std::to_string(sizeof(serenity::manager::Manager)) + " Bytes");
 	log.Log("############################################################");

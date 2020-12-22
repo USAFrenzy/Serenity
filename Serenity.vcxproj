@@ -107,8 +107,8 @@
     <ClInclude Include="include\Serenity\Indicators\IndicatorAttributes\SpinningAttribute.h" />
     <ClInclude Include="include\Serenity\Indicators\IndicatorInterfaces\IManagerHandler.h" />
     <ClInclude Include="include\Serenity\Indicators\IndicatorInterfaces\IObserver.h" />
+    <ClInclude Include="include\Serenity\Indicators\IndicatorInterfaces\IProgress.h" />
     <ClInclude Include="include\Serenity\Indicators\IndicatorManager.h" />
-    <ClInclude Include="include\Serenity\Indicators\ProgressBar.h" />
     <ClInclude Include="include\Serenity\Logger\Logger.h" />
     <ClInclude Include="include\Serenity\Sinks\DefaultSink.h" />
   </ItemGroup>

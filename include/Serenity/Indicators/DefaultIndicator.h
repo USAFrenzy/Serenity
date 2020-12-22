@@ -1,11 +1,11 @@
 #pragma once
 
-#include <Serenity/Indicators/ProgressBar.h>
+#include <Serenity/Indicators/IndicatorInterfaces/IProgress.h>
 #include <Serenity/Indicators/IndicatorManager.h>
 
 namespace serenity {
 
-	// removed ProgressBar Inheritance: Manager implicitly Inherits from this class
+	// removed IProgress Inheritance: Manager implicitly Inherits from this class
 	class DefaultBar : public manager::Manager
 	{
 	      public:

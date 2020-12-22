@@ -2,7 +2,7 @@
 
 #include <Serenity/Indicators/IndicatorInterfaces/IObserver.h>
 
-#include <mutex>  // For Thread-Safety In ProgressBar Class
+#include <mutex>  // For Thread-Safety In IProgress Class
 #include <vector> // Strictly For Indicator Handle Storage (May Just Create A Streamlined Vector Class For This)
 #include <iostream>
 
@@ -10,14 +10,14 @@ namespace serenity {
 
 	// Making This An Abstract Class That Inherits From The INotifier Interface
 	// This Is For An Attempt To Make All Underlying Derived Classes Be Of This Class Type
-	class ProgressBar : public INotifier
+	class IProgress : public INotifier
 	{
 	      public:
-		ProgressBar( );
+		IProgress( );
 
-		ProgressBar(ProgressBar& copy);
+		IProgress(IProgress& copy);
 
-		virtual ~ProgressBar( );
+		virtual ~IProgress( );
 
 		void Progress(float progressValue);
 
@@ -42,7 +42,7 @@ namespace serenity {
 
 		void SetStatus(const std::string& statusMessage);
 
-		inline static std::vector<ProgressBar*> managedIndicators;
+		inline static std::vector<IProgress*> managedIndicators;
 
 	      protected:
 		std::mutex m_mutex;

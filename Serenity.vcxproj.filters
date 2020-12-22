@@ -79,9 +79,6 @@
     <ClInclude Include="include\Serenity\Indicators\DefaultIndicator.h">
       <Filter>Header Files\Indicators</Filter>
     </ClInclude>
-    <ClInclude Include="include\Serenity\Indicators\ProgressBar.h">
-      <Filter>Header Files\Indicators</Filter>
-    </ClInclude>
     <ClInclude Include="include\Serenity\Sinks\DefaultSink.h">
       <Filter>Header Files\Sink</Filter>
     </ClInclude>
@@ -110,6 +107,9 @@
       <Filter>Header Files\Indicators</Filter>
     </ClInclude>
     <ClInclude Include="include\Serenity\Indicators\IndicatorInterfaces\IManagerHandler.h">
+      <Filter>Header Files\Indicators\IndicatorInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Serenity\Indicators\IndicatorInterfaces\IProgress.h">
       <Filter>Header Files\Indicators\IndicatorInterfaces</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,3 +1,4 @@
+#include <Serenity/Indicators/IndicatorInterfaces/IProgress.h>
 #include <Serenity/Indicators/IndicatorManager.h>
 
 namespace serenity {
@@ -10,30 +11,30 @@ namespace serenity {
 
 		void Manager::RegisterIndicator( )
 		{
-			serenity::ProgressBar::managedIndicators.emplace_back(this);
+			serenity::IProgress::managedIndicators.emplace_back(this);
 			reference_counter::m_referenceCount++;
 		}
 
 		void Manager::UnregisterIndicator( )
 		{
-			std::vector<serenity::ProgressBar *>::iterator iteratorIndex =
-			  std::find(serenity::ProgressBar::managedIndicators.begin( ),
-				    serenity::ProgressBar::managedIndicators.end( ),
+			std::vector<serenity::IProgress *>::iterator iteratorIndex =
+			  std::find(serenity::IProgress::managedIndicators.begin( ),
+				    serenity::IProgress::managedIndicators.end( ),
 				    this);
-			if(iteratorIndex != serenity::ProgressBar::managedIndicators.end( )) {
-				serenity::ProgressBar::managedIndicators.erase(iteratorIndex);
+			if(iteratorIndex != serenity::IProgress::managedIndicators.end( )) {
+				serenity::IProgress::managedIndicators.erase(iteratorIndex);
 			}
 			reference_counter::m_referenceCount--;
 		}
 
-		std::vector<serenity::ProgressBar *> Manager::GetHandle( )
+		std::vector<serenity::IProgress *> Manager::GetHandle( )
 		{
-			return serenity::ProgressBar::managedIndicators;
+			return serenity::IProgress::managedIndicators;
 		}
 
 		size_t Manager::GetSize( )
 		{
-			return serenity::ProgressBar::managedIndicators.size( );
+			return serenity::IProgress::managedIndicators.size( );
 		}
 
 		int Manager::GetRefCount( )
