@@ -110,7 +110,7 @@ Test Logger: Handle Ref Count After Unregistration: 0
 Test Logger: ############################################################
 Test Logger: # Information On The Size Of The Current Classes In Bytes: #
 Test Logger: ############################################################
-Test Logger: Size of Progress Bar Class: 224 Bytes
+Test Logger: Size of IProgress Class: 224 Bytes
 Test Logger: Size of Default Bar Class: 312 Bytes
 Test Logger: Size of the Now Current Manager Class: 232 Bytes
 Test Logger: ############################################################

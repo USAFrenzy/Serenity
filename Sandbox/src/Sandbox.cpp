@@ -8,6 +8,10 @@
 
 #include <string>
 
+// Okay, So In The Near Future When I Learn How To Actually Write Some Unit Tests Up, The Below 'Tests' Will Be Rewritten As Actual Unit Tests
+// And Moved Out Of The Sandbox Project And Into The Test Project. Also, If I Can Figure Out What/How Fuzz Testing Works Into Making Some Unit
+// Tests Up, That'd Be Cool =D At Least Then, This File Will Be The Fun Section Of Code Just Exemplifying The Library Instead
+
 #define Testing 1
 
 int main( )
@@ -122,7 +126,7 @@ int main( )
     */
 	std::cout << "\n\nSwitching Back To Testlog.txt\n\n";
 	log.Open( );
-	
+
 	log.Log("########################################################################################");
 	log.Log("#    Now Current manager's GetHandle(), Register/Unregister, GetRefCount() Functions   #");
 	log.Log("########################################################################################");
@@ -144,7 +148,7 @@ int main( )
 	log.Log("#     Bulk Creation Of Indicators And Registering/Unregistering Them In A For Loop     #");
 	log.Log("########################################################################################");
 	std::vector<serenity::DefaultBar*> tempIndicators;
-	tempIndicators.reserve(25);
+	tempIndicators.reserve(10);
 
 	log.Log("");
 	log.Log("Initial Handle Size: " + std::to_string(newHandle.GetSize( )));
@@ -179,11 +183,11 @@ int main( )
 		log.Log("Handle Size After Unregistering Indicator: " + std::to_string(newHandle.GetSize( )));
 		log.Log("Handle Ref Count After Unregistration: " + std::to_string(newHandle.GetRefCount( )));
 	}
-
 	tempIndicators.clear( );
-	std::cout << std::endl; // Just For Visual Clarity In Console O/P Nothing More And Nothing Less
 
 	log.Close( );
+
+	std::cout << std::endl; // Just For Visual Clarity In Console O/P Nothing More And Nothing Less
 	// This Next One, I Would Like For Debugging Purposes: Print Out That Logger's Info In Full
 	// std::cout << log << std::endl;
 
@@ -201,9 +205,10 @@ int main( )
 	log.Log("############################################################");
 	log.Log("# Information On The Size Of The Current Classes In Bytes: #");
 	log.Log("############################################################");
-	log.Log("Size of Progress Bar Class: " + std::to_string(sizeof(serenity::IProgress)) + " Bytes");
+	log.Log("Size of IProgress Class: " + std::to_string(sizeof(serenity::IProgress)) + " Bytes");
 	log.Log("Size of Default Bar Class: " + std::to_string(sizeof(serenity::DefaultBar)) + " Bytes");
-	log.Log("Size of the Now Current Manager Class: " + std::to_string(sizeof(serenity::manager::Manager)) + " Bytes");
+	log.Log("Size of the Now Current Manager Class: " + std::to_string(sizeof(serenity::manager::Manager)) +
+		" Bytes");
 	log.Log("############################################################");
 	log.Close( );
 
@@ -212,9 +217,7 @@ int main( )
 	std::cout << "**********************************************************************************\n";
 
 	// Just Pausing Agnostically and getting rid of the 'return type ignored' - nothing useful and will be discarded anyways
-	#if _DEBUG
 	char val = std::getchar( );
-	#endif
 /*
                             ############################################# End Of Section ##############################################
 */
