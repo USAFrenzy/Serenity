@@ -9,6 +9,6 @@ The Intended Use For This Eventual Library Is To Substitute spdlog In Redemption
 ## Links
 ### [ToDo List](https://github.com/USAFrenzy/Serenity/wiki/ToDo-List) 
 ### [Change Log](https://github.com/USAFrenzy/Serenity/wiki/Change-Log)
-### [Future Site](https://usafrenzy.github.io/Serenity/)
+### ~~[Future Site](https://usafrenzy.github.io/Serenity/)~~ (Not Exactly The Format I'd Want yet)
 ****************************************************************************
 
