@@ -20,9 +20,6 @@ namespace serenity {
 
 	IProgress::~IProgress( )
 	{
-		for(auto indicators : managedIndicators) {
-			delete indicators;
-		}
 		managedIndicators.clear( );
 		if(!managedIndicators.empty( )) {
 			std::cout << "Pointer Vector Not Empty - Memory Leak Possible!\n";
